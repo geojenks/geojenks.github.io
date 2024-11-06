@@ -17,7 +17,7 @@ BBC News
 BBC Local TV
 
 <video width="320" height="240" controls>
-  <source src="/files/video.mp4" type="video/mp4">
+  <source src="/files/BBC_Points_West_Braille-Tip.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
