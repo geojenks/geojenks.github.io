@@ -1,4 +1,6 @@
 ---
+layout: archive
+author_profile: true
 permalink: /
 title: "George Jenkinson"
 excerpt: "About me"
