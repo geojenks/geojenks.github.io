@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Rasika Bhalerao, Ph.D."
+title: "George Jenkinson"
 excerpt: "About me"
 author_profile: true
 redirect_from: 
