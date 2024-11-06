@@ -16,6 +16,11 @@ BBC News
 
 BBC Local TV
 
+<video width="320" height="240" controls>
+  <source src="/files/video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 https://github.com/user-attachments/assets/49976d13-89ba-4d95-9188-92d33a6bc439
 
 (drag and drop files in)
