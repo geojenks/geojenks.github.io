@@ -1,11 +1,14 @@
 # main links links
 main:
-  - title: "Teaching"
-    url: /teaching/    
+  - title: "AI Generated Art"
+    url: /AI_gen/    
     
   - title: "Media"
     url: /media/
 
+  - title: "Teaching"
+    url: /teaching/    
+    
   - title: "Projects"
     url: /projects/
     
