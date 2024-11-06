@@ -1,6 +1,4 @@
 ---
-layout: archive
-author_profile: true
 permalink: /
 title: "George Jenkinson"
 excerpt: "About me"
@@ -9,6 +7,8 @@ redirect_from:
   - about/
   - about.html
 ---
+
+{% include base_path %}
 
 Hello, I am a post doc researcher and teaching associate at the University of Bristol and the University of the West of England. I studied for my PhD under Antonia Tzemanaki and Andy Conn as part of the [dexterous manipulation](https://www.dexterousrobotlab.com/) and [soft lab](https://www.bristolroboticslab.com/soft-robotics) research groups.
 
