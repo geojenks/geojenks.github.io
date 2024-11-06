@@ -21,12 +21,6 @@ BBC Local TV
   Your browser does not support the video tag.
 </video>
 
-
-<video width="320" height="240" controls>
-  <source src="https://github.com/user-attachments/assets/49976d13-89ba-4d95-9188-92d33a6bc439" type="video/mp4">
-  yello
-</video>
-
 Somewhere on Earth - Braille-Tip, braille reading device
 
 
