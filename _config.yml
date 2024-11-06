@@ -6,14 +6,14 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-locale                   : "en-US"
-title                    : "Rasika Bhalerao, Ph.D."
+locale                   : "en-UK"
+title                    : "Dr. George Jenkinson"
 title_separator          : "-"
-name                     : &name "Rasika Bhalerao, Ph.D."
-description              : &description "I am an Assistant Teaching Professor at the Northeastern University Khoury College of Computer Sciences. She/her."
-url                      : https://rasikabh.github.io
+name                     : &name "Dr. George Jenkinson"
+description              : &description "I am a postgrad researcher"
+url                      : https://geojenks.github.io
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "rasikabh/rasikabh.github.io"
+repository               : "geojenks/geojenks.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
 words_per_minute         : 160
@@ -80,14 +80,14 @@ analytics:
 
 # Site Author
 author:
-  name             : "Rasika Bhalerao, Ph.D."
+  name             : "George Jenkinson"
   avatar           : "Bhalerao2021.jpeg"
-  bio              : "I am an Assistant Teaching Professor at the Northeastern University Khoury College of Computer Sciences. She/her"
-  location         : "rasikabh @ gmail.com"
-  employer         : "Northeastern University"
+  bio              : "I am a post doc"
+  location         : "george.jenkinson @ bristol.ac.uk"
+  employer         : "University of Bristol and University West of England"
   pubmed           :
-  googlescholar    : "https://scholar.google.com/citations?user=c1JotdAAAAAJ&hl=en"
-  researchgate     :  "https://www.researchgate.net/profile/Rasika_Bhalerao"
+  googlescholar    : "https://scholar.google.com/citations?user=sZlkcJIAAAAJ&hl=en"
+  researchgate     :  
   uri              :
   bitbucket        :
   codepen          :
@@ -95,20 +95,20 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : "rasikabh"
+  github           : "geojenks"
   google_plus      :
-  keybase          : "rasikabh"
+  keybase          : 
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         : "rasika-bhalerao-ph-d-8a827188"
+  linkedin         : "george-jenkinson-80536a109"
   orcid            :
   pinterest        :
   soundcloud       :
   stackoverflow    :
   steam            :
   tumblr           :
-  twitter          : "rasikabh"
+  twitter          : 
   vine             :
   weibo            :
   xing             :
