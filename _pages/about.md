@@ -16,8 +16,7 @@ My research focuses on tactile sensors and objects, with a view to enabling inte
 
 I teach across subjects as part of the School of Engineering Mathematics and Technology at the University of Bristol.
 
-<img src="/images/Jenkinson_github.jpeg" width="200">
-<img src="/images/Jenkinson_github_2.jpeg" width="200">
+<img src="/images/Jenkinson_github.jpeg" width="200"><img src="/images/Jenkinson_github_2.jpeg" width="200">
 
 [//]: <> (## News)
 
