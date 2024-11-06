@@ -5,9 +5,9 @@ permalink: publications/
 author_profile: true
 ---
 
-You can also find my articles on [my Google Scholar profile](https://scholar.google.com/citations?user=sZlkcJIAAAAJ&hl=en")
-
 {% include base_path %}
+
+You can also find my articles on [my Google Scholar profile](https://scholar.google.com/citations?user=sZlkcJIAAAAJ&hl=en")
 
 **GP Jenkinson**, AT Conn, A Tzemanaki ["Braille-Tip: Structured Small-Footprint Tactile Sensor for High Acuity Dynamic Tactile Tasks"](https://ieeexplore.ieee.org/abstract/document/10719951/) **10th IEEE RAS/EMBS International Conference for Biomedical Robotics and Biomechatronics (BioRob) 2024**
 
