@@ -10,7 +10,7 @@ locale                   : "en-UK"
 title                    : "Dr. George Jenkinson"
 title_separator          : "-"
 name                     : &name "Dr. George Jenkinson"
-description              : &description "I am a postgrad researcher"
+description              : &description "I am a post doctoral researcher"
 url                      : https://geojenks.github.io
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "geojenks/geojenks.github.io"
@@ -82,7 +82,7 @@ analytics:
 author:
   name             : "George Jenkinson"
   avatar           : "mugshot.jpg"
-  bio              : "I am a post doc"
+  bio              : "Post doctoral researcher in tactile robotics & AI"
   location         : "george.jenkinson @ bristol.ac.uk"
   employer         : "University of Bristol and <br> \t  University West of England"
   pubmed           :
