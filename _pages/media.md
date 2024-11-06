@@ -16,7 +16,9 @@ BBC News
 
 BBC Local TV
 
-[![Watch the video](/images/Jenkinson_github.jpeg)]("/files/BBC Points West Braille-Tip.mp4")
+https://github.com/user-attachments/assets/49976d13-89ba-4d95-9188-92d33a6bc439
+
+(drag and drop files in)
 
 Somewhere on Earth - Braille-Tip, braille reading device
 
