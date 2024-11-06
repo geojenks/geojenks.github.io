@@ -18,15 +18,9 @@ I teach across subjects as part of the School of Engineering Mathematics and Tec
 
 Alongside academia I explore nature, music, and follow any other pursuit that I find enriching.
 
-<img src="/images/Jenkinson_github.jpeg" style="height:170px;">
-<img src="/images/Jenkinson_github_2.jpeg" style="height:170px;">
+<img src="/images/Jenkinson_github.jpeg" style="height:350px;">
+<img src="/images/Jenkinson_github_2.jpeg" style="height:350px;">
 
-<table>
-  <tr>
-    <td><img src="/images/Jenkinson_github.jpeg" height="170"></td>
-    <td><img src="/images/Jenkinson_github_2.jpeg" height="170"></td>
-  </tr>
-</table>
 
 [//]: <> (## News)
 
