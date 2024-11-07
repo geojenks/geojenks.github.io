@@ -1,16 +1,20 @@
 # main links links
-main:
-  - title: "AI Generated Art"
-    url: /AI_gen/    
+main: 
     
   - title: "Media"
     url: /media/
 
   - title: "Teaching"
-    url: /teaching/    
+    url: /teaching/
     
   - title: "Projects"
     url: /projects/
     
   - title: "Publications"
-    url: /publications/ 
+    url: /publications/
+    
+  - title: "Writings"
+    url: /writings/
+    
+  - title: "AI Generated Art"
+    url: /AI_gen/
