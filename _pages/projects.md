@@ -22,6 +22,6 @@ Finished:
 Other Projects:
 
 I read about a game, crokinole, online, and saw that the boards were insanely expensive. So I gathered tongue and groove floorboard scrap wood, glued it together into a big block and jigsawed the basic circular shape and 2 sets of 12 pieces, pencilled on the boundaries and drilled out bolt holes and a central pocket. Quick enough to take with me and play on a trip in the afternoon. I'm currently drawing out dxf files to CNC route (or I guess route by hand if you're good) a set of modular boards from plywood. Will upload drawings as the project progresses.
+<img src="/images/crokinole.jpeg" style="height:450px;">
 
-![crokinole](https://github.com/user-attachments/assets/59f5e83a-0be9-4471-b2fa-f557a8c1dba4)
 
