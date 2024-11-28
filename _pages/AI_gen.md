@@ -18,7 +18,7 @@ Teaching Flux-dev-1 the french knot embroidery technique:
 
 <img src="/images/red_head.gif" style="height:350px;">
 <img src="/images/bear_house.gif" style="height:350px;">
-<img src="/images/sign_holder.gif" style="height:350px;">
+<img src="/images/sign_holder.gif" width="250" height="250">
 <img src="/images/work_lightning.gif" style="height:350px;">
 
 I followed [this walkthrough](https://www.stablediffusiontutorials.com/2024/08/flux-lora.html#downloading-the-models) for the guide to train a Lora.
