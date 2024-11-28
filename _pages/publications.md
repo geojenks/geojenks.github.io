@@ -11,7 +11,7 @@ You can also find my articles on [my Google Scholar profile](https://scholar.goo
 
 **GP Jenkinson**, AT Conn, A Tzemanaki ["Braille-Tip: Structured Small-Footprint Tactile Sensor for High Acuity Dynamic Tactile Tasks"](https://ieeexplore.ieee.org/abstract/document/10719951/) **10th IEEE RAS/EMBS International Conference for Biomedical Robotics and Biomechatronics (BioRob) 2024**
 
-**GP Jenkinson**, K Tiemann, A Papathanasiou, J Bewley, AT Conn, A Tzemanaki ["A robotIc Radial palpatIon mechaniSm for breast examination (IRIS)]"(https://ieeexplore.ieee.org/abstract/document/10309324/) **32nd IEEE International Conference on Robot and Human Interactive Communication (RO-MAN) 2023**
+**GP Jenkinson**, K Tiemann, A Papathanasiou, J Bewley, AT Conn, A Tzemanaki ["A robotIc Radial palpatIon mechaniSm for breast examination (IRIS)"](https://ieeexplore.ieee.org/abstract/document/10309324/) **32nd IEEE International Conference on Robot and Human Interactive Communication (RO-MAN) 2023**
 
 P Wharton\*, T Lung You\*, **GP Jenkinson**, RS Diteesawat, Nguyen HL, E-C Hall, M Garrad, AT Conn, J Rossiter ["Tetraflex: A multigait soft robot for object transportation in confined environments"](https://ieeexplore.ieee.org/abstract/document/10167730/) **IEEE Robotics and Automation Letters 8 2023**
 
