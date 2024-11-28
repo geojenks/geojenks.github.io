@@ -46,6 +46,6 @@ Somewhere on Earth E01 - ARTEMIS, breast cancer project
 
 BBC News
 
-ITV News
+https://www.bbc.co.uk/news/articles/cd6yexnwq5no
 
-The Independent
+https://www.bbc.co.uk/news/uk-england-bristol-66983232
