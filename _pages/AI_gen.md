@@ -16,6 +16,8 @@ As part of my projects working with embroidered artwork interpretation for visua
 
 Teaching Flux-dev-1 the french knot embroidery technique:
 
+<img src="/images/Jenkinson_github.jpeg" style="height:350px;">
+
 ![Red Head](/images/red_head.gif)
 ![Bear House](/images/bear_house.gif)
 ![Sign Holder](/images/sign_holder.gif)
