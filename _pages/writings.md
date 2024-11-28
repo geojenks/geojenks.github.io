@@ -20,7 +20,7 @@ Another Information Translation Era
 
 What are senses doing?
 
-#### Précis: Does understanding senses and how hey work enable us to examine the line between subjective and objective realities? A roundabout way of asking "if a tree falls in the woods, and there's nobody around to hear it, was it ever conscious?"
+#### Précis: Does understanding senses and how hey work enable us to examine the line between subjective and objective realities?
 
 The 'Great Flattening' of AI
 
