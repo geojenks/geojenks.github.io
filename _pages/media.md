@@ -48,8 +48,9 @@ Somewhere on Earth E01 - ARTEMIS, breast cancer project
 
 BBC News
 
+[Braille reading pen developed to 'bridge learning gap'](https://www.bbc.co.uk/news/articles/cd6yexnwq5no)
 <img src="https://ichef.bbci.co.uk/ace/standard/624/cpsprodpb/41ca/live/323b90f0-6ac9-11ef-a329-01e5398e96e2.jpg.webp" style="height:450px;">
-https://www.bbc.co.uk/news/articles/cd6yexnwq5no
 
-<img src="https://ichef.bbci.co.uk/ace/standard/624/cpsprodpb/41ca/live/323b90f0-6ac9-11ef-a329-01e5398e96e2.jpg.webp" style="height:450px;">
-https://www.bbc.co.uk/news/uk-england-bristol-66983232
+[Robot designed by Bristol Uni could diagnose breast cancer early](https://www.bbc.co.uk/news/uk-england-bristol-66983232)
+<img src="https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/B56A/production/_131324464_thumbnail_videocapture_20231003-193609.jpg.webp" style="height:450px;">
+
