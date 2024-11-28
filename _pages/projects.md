@@ -10,11 +10,13 @@ author_profile: true
 Academic Research:
 
 Ongoing:
+
 [Matching the Stitch](https://cfpr.uwe.ac.uk/matching-the-stitch/): Using segmentation, diffusion, and classification models to reverse-engineer embroidered artworks according to the techniques used to fabricate them.
 
 [An investigation of 3D technologies applied to historic textiles for improved understanding, conservation and engagement](https://gtr.ukri.org/projects?ref=AH%2FX006522%2F1): I joined the project to harness state-of-the-art AI technology to interpret embroidered artwork and produce items to aid in engagement particularly for visually impaired audiences.
 
 Finished:
+
 [Advanced Robotics breasT ExaMination Intelligent System (ARTEMIS)](https://www.imperial.ac.uk/engagement-and-simulation-science/our-work/projects/advanced-robotics-breast-examination-intelligent-system-artemis/): A large part of my PhD was centred around developing soft tactile sensors and a platform to mount them on for testing the feasibility of automated clinical breast examniations.
 
 Other Projects:
