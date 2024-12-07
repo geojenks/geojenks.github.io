@@ -8,7 +8,7 @@ author_profile: true
 
 {% include base_path %}
 
-Analagous to the explosion of "intelligence" in LLMs that seemed to be an emergent feature of word association, an understanding of mechanical and physical parameterisation seems to be a side product from training vision-based generative models which pixels go together well. I'm fascinated by interrogating whatever implicit knowledge of physical porperties and permanence that generative models have gleaned from this process.
+Analagous to the explosion of "intelligence" in LLMs that seemed to be an emergent feature of word association, an understanding of mechanical and physical parameterisation seems to be a side product of training vision-based generative models which pixels go together well. I'm fascinated by interrogating whatever implicit knowledge of physical porperties and permanence that generative models have gleaned from this process.
 
 Some selected AI generations from my work
 
