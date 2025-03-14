@@ -118,6 +118,10 @@ author:
 
 # Reading Files
 include:
+  - teaching/GBP  # Include the entire directory
+  - teaching/GBP/widget1.html
+  - teaching/GBP/index.bundle.js
+  - teaching/GBP/template.v2.js
   - .htaccess
   - _pages
   - keybase.txt
