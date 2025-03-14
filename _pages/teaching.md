@@ -13,4 +13,4 @@ h2, h3, h4, h5, h6 {margin: 0;}
 
 {% include base_path %}
 
-[Gaussian Beleif Propagation](teaching/swarm_gaussian_beleif)
+[Gaussian Belief Propagation](teaching/swarm_gaussian_belief)
