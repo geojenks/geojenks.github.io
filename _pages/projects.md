@@ -9,6 +9,10 @@ author_profile: true
 
 Academic Research:
 
+Upcoming:
+
+Braille-Pen: Developing the prototype demonstrated in [Braille-Tip](https://ieeexplore.ieee.org/abstract/document/10719951) and exploring the potential impact of this technology with respect to expediting Braille reading skill acquisition, particularly for visually impaired people.
+
 Ongoing:
 
 [Matching the Stitch](https://cfpr.uwe.ac.uk/matching-the-stitch/): Using segmentation, diffusion, and classification models to reverse-engineer embroidered artworks according to the techniques used to fabricate them.
@@ -19,9 +23,9 @@ Finished:
 
 [Advanced Robotics breasT ExaMination Intelligent System (ARTEMIS)](https://www.imperial.ac.uk/engagement-and-simulation-science/our-work/projects/advanced-robotics-breast-examination-intelligent-system-artemis/): A large part of my PhD was centred around developing soft tactile sensors and a platform to mount them on for testing the feasibility of automated clinical breast examniations.
 
-Other Projects:
+Some other projects (hobbies):
 
-I read about a game, crokinole, online, and saw that the boards were insanely expensive. So I gathered tongue and groove floorboard scrap wood, glued it together into a big block and jigsawed the basic circular shape and 2 sets of 12 pieces, pencilled on the boundaries and drilled out bolt holes and a central pocket. Quick enough to take with me and play on a trip in the afternoon. I'm currently drawing out dxf files to CNC route (or I guess route by hand if you're good) a set of modular boards from plywood. Will upload drawings as the project progresses.
+I read about a game, crokinole, online, and saw that the boards were insanely expensive. So I gathered tongue and groove floorboard scrap wood, glued it together into a big block and jigsawed the basic circular shape and 2 sets of 12 pieces, pencilled on the boundaries and drilled out bolt holes and a central pocket. Quick enough to take with me and play on a trip in the same afternoon. I'm currently drawing out dxf files to CNC route (or I guess route by hand if you're good) a set of modular boards from plywood. Will upload drawings as the project progresses.
 <img src="/images/crokinole.jpeg" style="height:450px;">
 
 
