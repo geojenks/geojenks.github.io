@@ -4,6 +4,7 @@ title: "Gaussian Belief propagation for Swarm Robotics"
 permalink: teaching/swarm_gaussian_belief
 author_profile: true
 ---
+Hello 
 
 <iframe 
   src="GBP/widget1.html" 
