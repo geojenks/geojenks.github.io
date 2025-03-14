@@ -118,6 +118,7 @@ author:
 
 # Reading Files
 include:
+  - teaching/GBP/widget1.html
   - .htaccess
   - _pages
   - keybase.txt
