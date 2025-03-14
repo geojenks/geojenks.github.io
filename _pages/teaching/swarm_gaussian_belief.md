@@ -6,7 +6,7 @@ author_profile: true
 ---
 
 <iframe 
-  src="/teaching/widget1.html" 
+  src="_pages/teaching/widget1.html" 
   width="100%" 
   height="720"
 ></iframe>
