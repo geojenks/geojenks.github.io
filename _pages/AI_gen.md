@@ -16,10 +16,10 @@ As part of my projects working with embroidered artwork interpretation for visua
 
 Teaching Flux-dev-1 the french knot embroidery technique:
 
-<img src="/images/red_head.gif" style="height:450px;">
-<img src="/images/bear_house.gif" style="height:450px;">
-<img src="/images/sign_holder.gif" style="height:450px;">
-<img src="/images/work_lightning.gif" style="height:450px;">
+<img src="/images/man_sign.gif" style="height:450px;">
+<img src="/images/bear_house_snow.gif" style="height:450px;">
+<img src="/images/man_sign.gif" style="height:450px;">
+<img src="/images/woman_desk_lightning.gif" style="height:450px;">
 
 I followed [this walkthrough](https://www.stablediffusiontutorials.com/2024/08/flux-lora.html#downloading-the-models) for the guide to train a Lora.
 
