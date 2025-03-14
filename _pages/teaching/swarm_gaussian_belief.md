@@ -1,11 +1,8 @@
 ---
-permalink: /
-title: "George Jenkinson"
-excerpt: "About me"
+layout: archive
+title: "Gaussian Belief propagation for Swarm Robotics"
+permalink: teaching/swarm_gaussian_belief
 author_profile: true
-redirect_from: 
-  - teaching/swarm_gaussian_belief
-  - teaching/swarm_gaussian_belief.html
 ---
 
 <!DOCTYPE html>
