@@ -7,7 +7,7 @@ author_profile: true
 Hello 
 
 <iframe 
-  src="/assets/teaching/GBP/widget1.html"
+  src="/assets/teaching/GBP/index.html"
   width="100%" 
   height="720"
 ></iframe>
