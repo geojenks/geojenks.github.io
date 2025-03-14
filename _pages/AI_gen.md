@@ -16,7 +16,7 @@ As part of my projects working with embroidered artwork interpretation for visua
 
 Teaching Flux-dev-1 the french knot embroidery technique:
 
-<img src="/images/man_sign.gif" style="height:450px;">
+<img src="/images/man_chess_park.gif" style="height:450px;">
 <img src="/images/bear_house_snow.gif" style="height:450px;">
 <img src="/images/man_sign.gif" style="height:450px;">
 <img src="/images/woman_desk_lightning.gif" style="height:450px;">
