@@ -1,3 +1,13 @@
+---
+permalink: /
+title: "George Jenkinson"
+excerpt: "About me"
+author_profile: true
+redirect_from: 
+  - teaching/swarm_gaussian_belief
+  - teaching/swarm_gaussian_belief.html
+---
+
 <!DOCTYPE html>
 <html>
 <head>
