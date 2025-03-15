@@ -791,51 +791,7 @@ d-contents nav>ul>li>a:hover {
 	<d-figure id="gaussian_gm" class="subgrid"></d-figure>
 
         
-    <g>
-    <d-figure class="small-right-d-figure" id="scaling"></d-figure>
-
-    <p>
-      A second cause of non-Gaussian factors is non-Gaussian data distributions.
-      We usually model observed data as coming from a Gaussian distribution: $d \sim h(X) + \epsilon$, by choosing $\epsilon$ to be Gaussian noise.
-      Although this is generally sensible <d-cite key="Jaynes:probability2003"></d-cite>, true data distributions often have stronger tails or are more tightly peaked.
-      In these cases, to retain the Gaussian form for GBP, we use an approximate Gaussian data distribution via covariance scaling <d-cite key="Agarwal:etal:ICRA2013, Davison:Ortiz:ARXIV2019"></d-cite>. 
-      The covariance of the approximate Gaussian is chosen such that the quadratic energy matches the true non-Gaussian energy at that residual, as shown in the <a href="#scaling">figure</a> on the right.
-    </p>
-
-    <p>
-      Robust data distributions (or <a href="https://en.wikipedia.org/wiki/M-estimator" target="_blank">M-estimators</a>), such as the Huber energy <d-cite key="Huber:AMS:1964, Huber:1981"></d-cite>, are a common class of non-Gaussian data distributions which have greater probability mass in the tails to reduce sensitivity to outliers.
-      The Huber energy is a continuous function that is quadratic close to the mean and transitions to a linear function for large residuals to reduce the energy cost of outliers
-      <d-footnote>
-        The distribution induced by the Huber energy is a Gaussian distribution close to the mean and a Laplace distribution in the tails.
-        The probability density function for the Laplace distribution is:
-        <d-math block="">
-          p(x ; \mu, \beta) = \frac{1}{2b} \exp\big(\frac{-|x - \mu|}{b}\big)
-          ~.
-        </d-math> 
-      </d-footnote>:
-      <d-math block="">
-        E_{\text{huber}}(r) =     
-        \begin{cases}
-          \frac{1}{2} r^\top \Sigma_n^{-1} r, & \text{if}\ \rvert r\rvert  < t \\
-          A \;+ \;  B \rvert r \rvert, & \text{otherwise} ~.
-        \end{cases}
-      </d-math> 
-      The approximate quadratic energy for the Huber distribution can be found by solving $\frac{1}{2} r^\top \Sigma_{\text{sc}}^{-1} r = E_{\text{huber}}(r)$ to give the diagonal scaled covariance:
-      <d-math block="">
-        \Sigma_{\text{sc}} =
-        \begin{cases}
-          \Sigma_n , & \text{if}\ \rvert r\rvert  < t \\
-          \frac{2 E_{\text{huber}}(r)}{ r^\top \Sigma_n^{-1} r} \Sigma_n, & \text{otherwise} ~.
-        \end{cases}
-      </d-math> 
-    </p>
-
-    <p>
-      Robust energy functions can make GBP much more generally useful - for example, they are crucial for bundle adjustment <d-cite key="Ortiz:etal:CVPR2020"></d-cite> and for sharp image denoising (as we will see in a <a href="#attentiongl">later figure</a>).
-      More generally, our interpretation is that robust factors can play a similar role to non-linearities in neural networks, activating or deactivating messages in the graph.
-    </p>
-
-    </g>
+    
 
     <p>
       The interactive <a href="#gbp1d_robust">figure</a> below gives intuition for the effect of robust factors for the task of 1D line fitting.
