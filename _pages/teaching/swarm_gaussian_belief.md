@@ -2,7 +2,7 @@
 layout: archive
 title: "Gaussian Belief propagation for Swarm Robotics"
 permalink: teaching/swarm_gaussian_belief/
-author_profile: true
+author_profile: false
 ---
 
 This page has been created from xxxx to be used as part of yyyy. The original source has 
