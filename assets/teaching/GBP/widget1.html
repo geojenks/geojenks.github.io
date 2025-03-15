@@ -787,39 +787,6 @@ d-contents nav>ul>li>a:hover {
       </p>
 
       <d-figure id="bp_equations" class="subgrid"></d-figure>
-
-      <p>
-        Most interesting problems have loopy structures and so for the remainder of the article we will use BP to refer to loopy BP.
-        So far, although we have outlined the BP equations, we have not specified the form of the factors, messages or beliefs. 
-        From here, we focus on Gaussian belief propagation which is a special form of continuous BP for Gaussian models. 
-      </p>
-
-      <h3 id="gaussian-models">Gaussian Models</h2>
-
-        <p>
-          We are interested in <b>Gaussian models</b> in which all factors and therefore the joint posterior are univariate / multivariate Gaussian distributions. Gaussians are a convenient choice for a number of reasons: (1) they accurately represent the distribution for many real world events <d-cite key="Jaynes:probability2003"></d-cite>, (2) they have a simple analytic form, (3) complex operations can be expressed with simple formulae and (4) they are closed under marginalization, conditioning and taking products (up to normalization). 
-        </p>
-    
-        <p>
-          A Gaussian factor or in general any Gaussian distribution can be written in the exponential form $p(x) \propto e^{-E(x)}$ with a quadratic energy function. 
-          There are two ways to write the quadratic energy which correspond to the two common parameterizations of multivariate Gaussian distributions: the <b>moments form</b><d-footnote>It's called the moments form as it is parameterized by the first moment and second central moments of the distribution.</d-footnote> and the <b>canonical form</b>. The key properties of each of these parameterizations are summarized in the <a href="#gaussian_equations">table</a> below. 
-        </p>
-    
-        <d-figure id="gaussian_equations" ></d-figure>
-    
-        <p>
-          The canonical form is often preferred when performing inference, for two main reasons. Firstly, taking a product is simple in the canonical form, so it is easy to form the posterior from the factors. Secondly, the precision matrix is sparse and relates closely to the structure of the factor graph.
-        </p>
-        <p>
-          The precision matrix describes direct associations or conditional dependence between variables. 
-          If entry $(i,j)$ of the precision matrix is zero then equivalently, there is no factor that directly connects $x_i$ and $x_j$ in the graph. 
-          You can see this in the default preset graph in the <a href="#gaussian_gm">figure</a> below where $\Lambda_{13}=\Lambda_{31}=0$ and $x_1$ and $x_3$ have no factor directly connecting them.
-        </p>
-        <p>
-          On the other hand, the covariance matrix describes induced correlations between variables and is dense as long as the graph is one single connected component. 
-          Unlike the canonical form, the moments form is unable to represent unconstrained distributions, as can be seen by selecting the unanchored preset graph in which there is only relative positional information. 
-          We encourage the reader to check out the other preset graphs and edit the graph to explore Gaussian models and the relationship with the canonical form.
-        </p>
     
         <d-figure id="gaussian_gm" class="subgrid"></d-figure>
 
