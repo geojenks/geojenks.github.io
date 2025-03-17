@@ -13,7 +13,7 @@ In these interactive demonstrations, we are looking at factor graph information 
 
 These demonstrations are taken from [Gaussian Belief Propagation](https://gaussianbp.github.io/), and are not specifically designed for robotic swarms. They should give you an intuition about how GBP works, and may motivate you to explore the maths more thoroughly outside of this session. The resource itself provides a good list of references, I would also encourage you to watch the video summary they provide, and to look at this [distill article](https://distill.pub/2019/visual-exploration-gaussian-processes/#MargCond) for further reading if you are interested.
 
-
+## Introduction (5 minutes)
 
 This is the belief propagation algorithm. In each of the interactive widgets below, you can choose to “activate” a node, each time you “activate” one, it performs these actions, in this order:
 
@@ -29,6 +29,8 @@ function resizeIframe1(iframe) {
   iframe.style.height = (iframe.contentWindow.document.body.scrollHeight + 100) + 'px';
 }
 </script>
+
+## Graph/Network topology (5 minutes)
 
 The important mechanism is that the nodes pass each other simple information, and converge on a global solution. This has a strong relationship with the way that they are connected. Try the chain, loop, and grid topologies in the box below and see if you can explain why they have slightly different speeds of convergence.
 
@@ -66,6 +68,8 @@ Make a distribution of red data points that approximates a simple or complex fun
 
 Q. What is the difference between doing a "sweep", a series of random messages, and synchronous iterations? Which is most efficient? Most ordered? Most swarm-like?
 
+Q. Notice that in a "sweep" the nodes only send a message "downstream", then only "upstream". Why would this be difficult in a dynamic swarm?
+
 Q. Clicking on the same node repeatedly does nothing – why?
 
 Make a distribution where there is dense data over 1 area of the graph, and the other areas are empty.
@@ -73,6 +77,8 @@ Make a distribution where there is dense data over 1 area of the graph, and the 
 Q. What happens if a variable node has no nearby factors?
 
 Q. Why do the variables line up in a straight line away from datapoints?
+
+## Gaussian Belief Propagation Playground (10 minutes)
 
 <iframe
   id="widgetFrame3"
