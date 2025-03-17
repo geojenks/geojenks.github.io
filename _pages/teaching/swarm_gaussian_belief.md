@@ -9,9 +9,9 @@ This is a page designed for a ~20 minute exercise as part of the Advanced Topics
 
 We are going to go through a few exercises to demonstrate how a gaussian belief propagation can be used to estimate functions based on decentralised and uncertain information exchange in a way that is scalable and robust in dynamic environments.
 
-In these interactive demonstrations, we are looking at factor graph information abstractions rather than topological networks or swarms. The “variables” could represent states that a robot may care about (for example its position, the position of a landmark, the position of another robot…) and “factors” represent relationships between these variables, usually by way of a robotic sensor (“this landmark is 2m ahead”, “Robot B is 1m East”, “I have moved 1m forward”...). Each of these are represented as a (multivariate) Gaussian probability density distribution, which means we can perform fast mathematical functions to combine, update, or marginalise these distributions. Each agent in a swarm would only have good knowledge of a subsection of the factor graph, but, as we shall see, propagating gaussian messages through a network means that collectively they can converge toward accurate and complete information.
+In these interactive demonstrations, we are looking at factor graph information abstractions rather than topological networks or swarms. The “variables” could represent states that a robot may care about (for example its position, the position of a landmark, the position of another robot…) and “factors” represent relationships between these variables, usually by way of a robotic sensor (“this landmark is 2m ahead”, “Robot B is 1m East”, “I have moved 1m forward”...). Each of these are represented as a (multivariate) Gaussian probability density distribution, which means we can perform fast mathematical functions on to combine, update, or marginalise these distributions. Each agent in a swarm would only have good knowledge of a subsection of the factor graph, but, as we shall see, propagating gaussian messages through a network means that they can converge toward accurate and complete information both locally and globally.
 
-These demonstrations are taken from [Gaussian Belief Propagation](https://gaussianbp.github.io/), and are not specifically designed for robotic swarms. They should give you an intuition about how GBP works, and may motivate you to explore the maths more thoroughly outside of this session. The resource itself provides a good list of references, I would also encourage you to watch the video summary they provide, and to look at this [distill article](https://distill.pub/2019/visual-exploration-gaussian-processes/#MargCond) for further reading if you are interested.
+These demonstrations are taken from this [page on Gaussian Belief Propagation](https://gaussianbp.github.io/), and are not specifically designed for robotic swarms. They should give you an intuition about how GBP works and may be applied to robotic swarms, and may motivate you to explore the maths more thoroughly outside of this session. The resource itself provides a good list of references, I would also encourage you to watch the video summary they provide, and to look at this [distill article](https://distill.pub/2019/visual-exploration-gaussian-processes/#MargCond) for further reading.
 
 ## Introduction (5 minutes)
 
@@ -49,7 +49,7 @@ function resizeIframe4(iframe) {
 }
 </script>
 
-We can set up our graph with a variety of topologies. A chain graph can have a clear order and hierarchy, which means there's very low noise so that it can very quickly converge to the optimal solution.
+We can set up our graph with a variety of topologies. A chain graph can have a clear order and hierarchy, so that it can very quickly converge to the optimal solution.
 
 <iframe
   id="widgetFrame2"
@@ -66,17 +66,11 @@ function resizeIframe2(iframe) {
 
 Make a distribution of red data points that approximates a simple or complex function over the space (or generate a random one).
 
-Q. What is the difference between doing a "sweep", a series of random messages, and synchronous iterations? Which is most efficient? Most ordered? Most swarm-like?
-
-Q. Notice that in a "sweep" the nodes only send a message "downstream", then only "upstream". Why would this be difficult in a dynamic swarm?
+Q. Notice that in a "sweep" the nodes only send a message "downstream", then only "upstream". Could this work in a dynamic swarm?
 
 Q. Clicking on the same node repeatedly does nothing – why?
 
-Make a distribution where there is dense data over 1 area of the graph, and the other areas are empty.
-
-Q. What happens if a variable node has no nearby factors?
-
-Q. Why do the variables line up in a straight line away from datapoints?
+Q. What is the difference between doing a "sweep", a series of random messages, and synchronous iterations? Which is most efficient? Most ordered? Most swarm-like?
 
 ## Gaussian Belief Propagation Playground (10 minutes)
 
