@@ -16,7 +16,7 @@ These demonstrations are taken from [Gaussian Belief Propagation](https://gaussi
 1.	This is the belief propagation algorithm. In each of the interactive widgets below, you can choose to “activate” a node, each time you “activate” one, it performs these actions, in this order:
 
 <iframe
-  id="widgetFrame"
+  id="widgetFrame1"
   src="/assets/teaching/GBP/widget1.html"
   width="100%"
   onload="resizeIframe(this)"
@@ -27,7 +27,7 @@ The important mechanism is that the nodes pass each other simple information, an
 Q. Why do some of them overshoot, taking a while to stabilise?
 
 <iframe
-  id="widgetFrame"
+  id="widgetFrame4"
   src="/assets/teaching/GBP/widget4.html"
   width="100%"
   onload="resizeIframe(this)"
@@ -36,7 +36,7 @@ Q. Why do some of them overshoot, taking a while to stabilise?
 We can set up our graph with a variety of topologies. A chain graph can have a clear order and hierarchy, which means there's very low noise so that it can very quickly converge to the optimal solution.
 
 <iframe
-  id="widgetFrame"
+  id="widgetFrame2"
   src="/assets/teaching/GBP/widget2.html"
   width="100%"
   onload="resizeIframe(this)"
@@ -55,7 +55,7 @@ Q. What happens if a variable node has no nearby factors?
 Q. Why do they line up in a straight line away from datapoints?
 
 <iframe
-  id="widgetFrame"
+  id="widgetFrame3"
   src="/assets/teaching/GBP/widget3.html"
   width="100%"
   onload="resizeIframe(this)"
