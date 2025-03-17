@@ -28,7 +28,7 @@ function resizeIframe1(iframe) {
 }
 </script>
 
-In each of the interactive widgets below, you can choose to “activate” a node, each time you “activate” one, it performs the actions in the algorithm, in this order.
+In each of the interactive widgets below, you can choose to “activate” a node, each time you “activate” one, it performs the actions in the algorithm, in the order above.
 
 ## Graph/Network topology (5 minutes)
 
