@@ -11,7 +11,7 @@ This page has been created from xxxqqx to be used as part of yyyy. The original 
 <iframe 
   src="/assets/teaching/GBP/widget1.html"
   width="100%" 
-  height="720"
+  height="100%"
 ></iframe>
 
 <iframe 
