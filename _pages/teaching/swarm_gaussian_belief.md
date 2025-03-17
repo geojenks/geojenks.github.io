@@ -89,8 +89,7 @@ function resizeIframe3(iframe) {
 
 Set up 2 (or more) connected groups of variable nodes – one chain, one loopy (like example image below). Set the priors to be quite far from the true positions. Then run 1 iteration at a time. You may also try pressing play, and setting the prior position to its maximum, then its minimum.
 
-<img src="/images/3_networks.png" width="50%;">
-<img src="/images/3_networks_2.png" width="50%;">
+<img src="/images/3_networks.png" width="45%;"><img src="/images/3_networks_2.png" width="45%;">
 
 Q. What is the difference in the way that the groups converge, why?
 
