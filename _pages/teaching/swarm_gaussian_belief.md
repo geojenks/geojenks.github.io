@@ -9,7 +9,7 @@ This is a page designed for a ~20 minute exercise as part of the Advanced Topics
 
 We are going to go through a few exercises to demonstrate how a gaussian belief propagation can be used to estimate functions based on decentralised and uncertain information exchange in a way that is scalable and robust in dynamic environments.
 
-In these interactive demonstrations, we are looking at factor graph information abstractions rather than topological networks or swarms. The “variables” could represent states that a robot may care about (for example its position, the position of a landmark, the position of another robot…) and “factors” represent relationships between these variables, usually by way of a robotic sensor (“this landmark is 2m ahead”, “Robot B is 1m East”, “I have moved 1m forward”...). Each of these are represented as a (multivariate) Gaussian probability density distribution, which means we can perform fast functions to combine, update, or marginalise. Each agent in a swarm would only have good knowledge of a subsection of the factor graph, but, as we shall see, collectively they can converge toward accurate and complete information.
+In these interactive demonstrations, we are looking at factor graph information abstractions rather than topological networks or swarms. The “variables” could represent states that a robot may care about (for example its position, the position of a landmark, the position of another robot…) and “factors” represent relationships between these variables, usually by way of a robotic sensor (“this landmark is 2m ahead”, “Robot B is 1m East”, “I have moved 1m forward”...). Each of these are represented as a (multivariate) Gaussian probability density distribution, which means we can perform fast mathematical functions to combine, update, or marginalise these distributions. Each agent in a swarm would only have good knowledge of a subsection of the factor graph, but, as we shall see, propagating gaussian messages through a network means that collectively they can converge toward accurate and complete information.
 
 These demonstrations are taken from [Gaussian Belief Propagation](https://gaussianbp.github.io/), and are not specifically designed for robotic swarms. They should give you an intuition about how GBP works, and may motivate you to explore the maths more thoroughly outside of this session. The resource itself provides a good list of references, I would also encourage you to watch the video summary they provide, and to look at this [distill article](https://distill.pub/2019/visual-exploration-gaussian-processes/#MargCond) for further reading if you are interested.
 
@@ -22,6 +22,9 @@ These demonstrations are taken from [Gaussian Belief Propagation](https://gaussi
   onload="resizeIframe(this)"
   ></iframe>
 
+The important mechanism is that the nodes pass each other simple information, and converge on a global solution. This has a strong relationship with the way that they are connected. Try the chain, loop, and grid topologies in the box below and see if you can explain why they have slightly different speeds of covnergence.
+
+Q. Why do some of them overshoot, taking a while to stabilise?
 
 <iframe
   id="widgetFrame"
@@ -58,7 +61,23 @@ Q. Why do they line up in a straight line away from datapoints?
   onload="resizeIframe(this)"
   ></iframe>
 
-Set up 2 connected groupd of – one chain, one loopy. What is the difference in their speed to convergence, why?
+Set up 2 (or more) connected groups of variable nodes – one chain, one loopy (example below). Set the priors to be quite far from the true positions. Then run 1 iteration at a time.
+
+Q. What is the difference in the way that the connected groups converge, why?
+
+Switch over to the "Robot Simulation". This plots a robot's current position, its intermittent historic positions, and the position of landmarks it has "seen".
+
+Q. What happens if the robot travels a long way without seeing a landmark?
+
+Q. What then changes as soon as it sees a landmark? - This is more obvious the more slowly you have the speed running
+
+Q. How does the uncertainty change if you lower or raise the odometry and sensor precision?
+
+Q. What happens to the uncertainty if you add more landmarks, why?
+
+Q. This simulation shows how a single robot can build up a map. How might this translate to a swarm, and what advantages or disadvatages might doing this with a swarm bring?
+
+
 
 <script>
 function resizeIframe(iframe) {
