@@ -16,9 +16,16 @@ These demonstrations are taken from [Gaussian Belief Propagation](https://gaussi
 
 <iframe 
   src="/assets/teaching/GBP/widget1.html"
-  width="100%" 
-  height="100%"
-></iframe>
+  border=none
+  ></iframe>
+
+<iframe id="widgetFrame" src="/assets/teaching/GBP/widget1.html" width="100%" onload="resizeIframe(this)" style="border:none;"></iframe>
+
+<script>
+function resizeIframe(iframe) {
+  iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+}
+</script>
 
 <iframe 
   src="/assets/teaching/GBP/index.html"
