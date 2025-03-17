@@ -72,7 +72,7 @@ Make a distribution where there is dense data over 1 area of the graph, and the 
 
 Q. What happens if a variable node has no nearby factors?
 
-Q. Why do they line up in a straight line away from datapoints?
+Q. Why do the variables line up in a straight line away from datapoints?
 
 <iframe
   id="widgetFrame3"
@@ -87,12 +87,12 @@ function resizeIframe3(iframe) {
 }
 </script>
 
-Set up 2 (or more) connected groups of variable nodes – one chain, one loopy (like example image below). Set the priors to be quite far from the true positions. Then run 1 iteration at a time.
+Set up 2 (or more) connected groups of variable nodes – one chain, one loopy (like example image below). Set the priors to be quite far from the true positions. Then run 1 iteration at a time. You may also try pressing play, and setting the prior position to its maximum, then its minimum.
 
-<img src="/images/3_networks.png" style="height:550px;">
-<img src="/images/3_networks_2.png" style="height:550px;">
+<img src="/images/3_networks.png" width="50%;">
+<img src="/images/3_networks_2.png" width="50%;">
 
-Q. What is the difference in the way that the connected groups converge, why?
+Q. What is the difference in the way that the groups converge, why?
 
 Switch over to the "Robot Simulation". This plots a robot's current position, its intermittent historic positions, and the position of landmarks it has "seen".
 
