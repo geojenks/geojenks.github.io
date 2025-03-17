@@ -9,7 +9,7 @@
 locale                   : "en-UK"
 title                    : "Dr. George Jenkinson"
 title_separator          : "-"
-name                     : &name "Dr. George Jenkinson"
+name                     : &name "George Jenkinson"
 description              : &description "I am a post doctoral researcher"
 url                      : https://geojenks.github.io
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
