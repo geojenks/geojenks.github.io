@@ -31,10 +31,26 @@ We can set up our graph with a variety of topologies. A chain graph can have a c
   onload="resizeIframe(this)"
   ></iframe>
 
-Q. what happens if a variable node has no nearby factors? – why do they line up in a straight line on the return sweep?
+Make a distribution of red data points that approximates a simple or complex function over the space (or generate a random one).
+
+Q. What is the difference between doing a "sweep", a series of random messages, and synchronous iterations? Which is most efficient? Most ordered? Most swarm-like?
 
 Q. Clicking on the same node repeatedly does nothing – why?
 
+Make a distribution where there is dense data over 1 area of the graph, and the other areas are empty.
+
+Q. What happens if a variable node has no nearby factors?
+
+Q. Why do they line up in a straight line away from datapoints?
+
+<iframe
+  id="widgetFrame"
+  src="/assets/teaching/GBP/widget3.html"
+  width="100%"
+  onload="resizeIframe(this)"
+  ></iframe>
+
+Set up 2 connected groupd of – one chain, one loopy. What is the difference in their speed to convergence, why?
 
 <script>
 function resizeIframe(iframe) {
