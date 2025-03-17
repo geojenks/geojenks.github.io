@@ -15,8 +15,6 @@ These demonstrations are taken from [Gaussian Belief Propagation](https://gaussi
 
 ## Introduction (5 minutes)
 
-This is the belief propagation algorithm. In each of the interactive widgets below, you can choose to “activate” a node, each time you “activate” one, it performs these actions, in this order:
-
 <iframe
   id="widgetFrame1"
   src="/assets/teaching/GBP/widget1.html"
@@ -29,6 +27,8 @@ function resizeIframe1(iframe) {
   iframe.style.height = (iframe.contentWindow.document.body.scrollHeight + 100) + 'px';
 }
 </script>
+
+In each of the interactive widgets below, you can choose to “activate” a node, each time you “activate” one, it performs the actions in the algorithm, in this order.
 
 ## Graph/Network topology (5 minutes)
 
