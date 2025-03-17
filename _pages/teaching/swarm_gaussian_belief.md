@@ -22,7 +22,7 @@ These demonstrations are taken from [Gaussian Belief Propagation](https://gaussi
   onload="resizeIframe(this)"
   ></iframe>
 
-The important mechanism is that the nodes pass each other simple information, and converge on a global solution. This has a strong relationship with the way that they are connected. Try the chain, loop, and grid topologies in the box below and see if you can explain why they have slightly different speeds of covnergence.
+The important mechanism is that the nodes pass each other simple information, and converge on a global solution. This has a strong relationship with the way that they are connected. Try the chain, loop, and grid topologies in the box below and see if you can explain why they have slightly different speeds of convergence.
 
 Q. Why do some of them overshoot, taking a while to stabilise?
 
