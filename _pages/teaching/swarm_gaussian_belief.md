@@ -26,9 +26,3 @@ function resizeIframe(iframe) {
   iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
 }
 </script>
-
-<iframe 
-  src="/assets/teaching/GBP/index.html"
-  width="100%" 
-  height="720"
-></iframe>
