@@ -763,7 +763,26 @@ d-contents nav>ul>li>a:hover {
     <d-figure id="bp_equations" class="subgrid" style="display:none !important;"></d-figure>
 
     <d-figure id="gaussian_gm" class="subgrid" style="display:none !important;"></d-figure>
-
+<p>
+      The interactive <a href="#gbp1d_robust">figure</a> below gives intuition for the effect of robust factors for the task of 1D line fitting.
+      The variables we are estimating are the $y$ values at fixed intervals along the $x$ axis and the blue circles and lines show the mean and standard deviation of the beliefs. 
+      The red squares are measurements that produce data factors in the graph and there are also smoothness factors between all adjacent variable nodes encouraging the $y$ values to be close
+      <d-footnote>
+        There are two types of factors in this example: smoothness factors and data factors. Smoothness factors encourage neighbouring nodes to take similar values and the measurement function is simply the difference between the values:
+        <d-math block="">
+          h(y_i, y_j) = y_i - y_j
+          ~.
+        </d-math>
+        For a measurement at $(x_m, y_m)$ which is spatially in between the nodes at $x_i$ and $x_j$, the measurement function for the data factor is:
+        <d-math block="">
+          h(y_i, y_j) = (1 - \lambda) y_i + \lambda y_j \:\:\:\:\text{where}\:\:\: \lambda = \frac{x_m - x_i}{x_j - x_i}
+          ~.
+        </d-math>
+      </d-footnote>.
+      You can add your own data factors by clicking on the canvas and a diagram of the factor graph is in the bottom right of the <a href="#gbp1d_robust">figure</a>.
+      Press play to run synchronous GBP and observe that a Huber energy can disregard outliers and retain step discontinuities in the data unlike the standard squared loss.
+    </p>
+	
     <d-figure id="gbp1d_robust" class="subgrid";"></d-figure>
 
     <d-figure id="gbp1d" class="subgrid";"></d-figure>
