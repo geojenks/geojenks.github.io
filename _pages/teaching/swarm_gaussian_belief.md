@@ -14,12 +14,12 @@ In these interactive demonstrations, we are looking at factor graph information 
 These demonstrations are taken from [Gaussian Belief Propagation](https://gaussianbp.github.io/), and are not specifically designed for robotic swarms. They should give you an intuition about how GBP works, and may motivate you to explore the maths more thoroughly outside of this session. The resource itself provides a good list of references, I would also encourage you to watch the video summary they provide, and to look at this [distill article](https://distill.pub/2019/visual-exploration-gaussian-processes/#MargCond) for further reading if you are interested.
 
 
-<iframe 
+<iframe
+  id="widgetFrame"
   src="/assets/teaching/GBP/widget1.html"
-  border=none
+  width="100%"
+  onload="resizeIframe(this)"
   ></iframe>
-
-<iframe id="widgetFrame" src="/assets/teaching/GBP/widget1.html" width="100%" onload="resizeIframe(this)" style="border:none;"></iframe>
 
 <script>
 function resizeIframe(iframe) {
