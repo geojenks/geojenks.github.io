@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-UK"
-title                    : "Dr. George Jenkinson"
+title                    : "George Jenkinson"
 title_separator          : "-"
 name                     : &name "George Jenkinson"
 description              : &description "I am a post doctoral researcher"
