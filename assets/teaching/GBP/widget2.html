@@ -785,7 +785,42 @@ d-contents nav>ul>li>a:hover {
 	
     <d-figure id="gbp1d_robust" class="subgrid";"></d-figure>
 
+	<h3 id="local-updates-and-scheduling">Local updates and Scheduling</h3>
+    
+    <p>
+      So far, we have assumed that all variable and factor nodes broadcast messages at each iteration in a synchronous fashion, where all nodes absorb and broadcast messages in parallel. 
+      In fact, this is far from a requirement and as GBP is entirely local, messages can be sent arbitrarily and asynchronously. 
+    </p>
+
+    <p>
+      It turns out that the message schedule can have a dramatic effect on the rate of convergence. For example, swapping synchronous updates for random message passing tends to improve convergence, while a fixed "round-robin" schedule can do even better <d-cite key="koller2009probabilistic"></d-cite>.
+      Better yet, if each message requires some unit of computation (and therefore energy), it's possible to prioritize sending messages that we think will contribute most to the overall convergence of the system (there is evidence that the brain may apply a similar economical principle <d-cite key="Evans:Burgess:NIPS2019"></d-cite>).
+      This is the idea behind residual belief propagation (RBP) <d-cite key="Elidan:etal:UAI2006"></d-cite> and similar variants <d-cite key="Sutton:McCallum:UAI2007, Ranganathan:etal:IJCAI2007"></d-cite>, which form a message queue according to the norm of the difference from the previous message.
+    </p>
+
+    <p>
+      In the <a href="#gbp1d">figure</a> below, we explore message scheduling using the 1D line fitting task once again.
+      The underlying factor graph is a chain (no loops) and so will converge after one sweep of messages from left to right and back again.
+      You can send messages through the graph using the preset schedules (synchronous, random or sweep) or create your own schedule by clicking on a variable node to send messages outwards.
+    </p>
+
     <d-figure id="gbp1d" class="subgrid";"></d-figure>
+
+	<p>
+      Playing around with different schedules for surface estimation highlights two important properties of GBP.
+      First, GBP can converge with an arbitrary message passing schedule. 
+      As a consequence, GBP can readily operate in systems with no global clock and varying local compute budgets such as on neuromorphic hardware or between a group of distributed devices <d-cite key="micusik2020ego"></d-cite>.
+    </p>
+
+    <p>
+      The second property is that GBP can achieve approximate local convergence without global convergence. 
+      Due to the factorized structure of GBP <d-cite key="diehl2018factorized"></d-cite>, global inference is achieved by jointly solving many interdependent local subproblems.
+      There are many instances in which we might only be interested in local solutions - in these cases, GBP can operate in a <b>just-in-time</b> or <b>attention-driven</b> fashion, focusing processing on parts of the graph to solve local subproblems as the task demands. 
+      Local message passing can yield accurate relative local solutions which estimate the marginals up to global corrections that come from more distant parts of the graph <d-footnote>One simple example is mapping two connected rooms. An accurate local map of one room can be constructed by focusing processing on the part of the factor graph in that room. For some applications this may be sufficient while for others it may be important to build a map with an accurate absolute position which may require longer range message passing between the parts of the graph corresponding to each separate room. </d-footnote>.
+      This attention-driven scheduling can be very economical with compute and energy, only sending the most task-critical messages. 
+
+      Sometimes, if we are only interested in a particular local set of marginals, solving the graph locally without global convergence may be enough to give accurate relative estimates.
+    </p>
     
     <d-figure id="attentiongl" class="subgrid" style="display:none !important;"></d-figure>
 
