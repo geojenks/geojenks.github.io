@@ -89,6 +89,9 @@ function resizeIframe3(iframe) {
 
 Set up 2 (or more) connected groups of variable nodes – one chain, one loopy (like example image below). Set the priors to be quite far from the true positions. Then run 1 iteration at a time.
 
+<img src="/images/3_networks.png" style="height:550px;">
+<img src="/images/3_networks_2.png" style="height:550px;">
+
 Q. What is the difference in the way that the connected groups converge, why?
 
 Switch over to the "Robot Simulation". This plots a robot's current position, its intermittent historic positions, and the position of landmarks it has "seen".
