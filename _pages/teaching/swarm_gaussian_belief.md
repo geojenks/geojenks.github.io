@@ -19,8 +19,14 @@ These demonstrations are taken from [Gaussian Belief Propagation](https://gaussi
   id="widgetFrame1"
   src="/assets/teaching/GBP/widget1.html"
   width="100%"
-  onload="resizeIframe(this)"
+  onload="resizeIframe1(this)"
   ></iframe>
+  
+<script>
+function resizeIframe1(iframe) {
+  iframe.style.height = (iframe.contentWindow.document.body.scrollHeight + 100) + 'px';
+}
+</script>
 
 The important mechanism is that the nodes pass each other simple information, and converge on a global solution. This has a strong relationship with the way that they are connected. Try the chain, loop, and grid topologies in the box below and see if you can explain why they have slightly different speeds of convergence.
 
@@ -30,8 +36,14 @@ Q. Why do some of them overshoot, taking a while to stabilise?
   id="widgetFrame4"
   src="/assets/teaching/GBP/widget4.html"
   width="100%"
-  onload="resizeIframe(this)"
+  onload="resizeIframe4(this)"
   ></iframe>
+  
+<script>
+function resizeIframe4(iframe) {
+  iframe.style.height = (iframe.contentWindow.document.body.scrollHeight + 100) + 'px';
+}
+</script>
 
 We can set up our graph with a variety of topologies. A chain graph can have a clear order and hierarchy, which means there's very low noise so that it can very quickly converge to the optimal solution.
 
@@ -39,8 +51,14 @@ We can set up our graph with a variety of topologies. A chain graph can have a c
   id="widgetFrame2"
   src="/assets/teaching/GBP/widget2.html"
   width="100%"
-  onload="resizeIframe(this)"
+  onload="resizeIframe2(this)"
   ></iframe>
+  
+<script>
+function resizeIframe2(iframe) {
+  iframe.style.height = (iframe.contentWindow.document.body.scrollHeight + 100) + 'px';
+}
+</script>
 
 Make a distribution of red data points that approximates a simple or complex function over the space (or generate a random one).
 
@@ -58,8 +76,14 @@ Q. Why do they line up in a straight line away from datapoints?
   id="widgetFrame3"
   src="/assets/teaching/GBP/widget3.html"
   width="100%"
-  onload="resizeIframe(this)"
+  onload="resizeIframe3(this)"
   ></iframe>
+  
+<script>
+function resizeIframe3(iframe) {
+  iframe.style.height = (iframe.contentWindow.document.body.scrollHeight + 100) + 'px';
+}
+</script>
 
 Set up 2 (or more) connected groups of variable nodes – one chain, one loopy (example below). Set the priors to be quite far from the true positions. Then run 1 iteration at a time.
 
@@ -77,10 +101,3 @@ Q. What happens to the uncertainty if you add more landmarks, why?
 
 Q. This simulation shows how a single robot can build up a map. How might this translate to a swarm, and what advantages or disadvatages might doing this with a swarm bring?
 
-
-
-<script>
-function resizeIframe(iframe) {
-  iframe.style.height = (iframe.contentWindow.document.body.scrollHeight + 100) + 'px';
-}
-</script>
