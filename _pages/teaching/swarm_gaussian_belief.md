@@ -13,7 +13,9 @@ In these interactive demonstrations, we are looking at factor graph information 
 
 These demonstrations are taken from [Gaussian Belief Propagation](https://gaussianbp.github.io/), and are not specifically designed for robotic swarms. They should give you an intuition about how GBP works, and may motivate you to explore the maths more thoroughly outside of this session. The resource itself provides a good list of references, I would also encourage you to watch the video summary they provide, and to look at this [distill article](https://distill.pub/2019/visual-exploration-gaussian-processes/#MargCond) for further reading if you are interested.
 
-1.	This is the belief propagation algorithm. In each of the interactive widgets below, you can choose to “activate” a node, each time you “activate” one, it performs these actions, in this order:
+
+
+This is the belief propagation algorithm. In each of the interactive widgets below, you can choose to “activate” a node, each time you “activate” one, it performs these actions, in this order:
 
 <iframe
   id="widgetFrame1"
@@ -85,7 +87,7 @@ function resizeIframe3(iframe) {
 }
 </script>
 
-Set up 2 (or more) connected groups of variable nodes – one chain, one loopy (example below). Set the priors to be quite far from the true positions. Then run 1 iteration at a time.
+Set up 2 (or more) connected groups of variable nodes – one chain, one loopy (like example image below). Set the priors to be quite far from the true positions. Then run 1 iteration at a time.
 
 Q. What is the difference in the way that the connected groups converge, why?
 
