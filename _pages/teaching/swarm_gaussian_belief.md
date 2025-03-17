@@ -22,6 +22,14 @@ These demonstrations are taken from [Gaussian Belief Propagation](https://gaussi
   onload="resizeIframe(this)"
   ></iframe>
 
+
+<iframe
+  id="widgetFrame"
+  src="/assets/teaching/GBP/widget4.html"
+  width="100%"
+  onload="resizeIframe(this)"
+  ></iframe>
+
 We can set up our graph with a variety of topologies. A chain graph can have a clear order and hierarchy, which means there's very low noise so that it can very quickly converge to the optimal solution.
 
 <iframe
