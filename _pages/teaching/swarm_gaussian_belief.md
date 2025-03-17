@@ -23,6 +23,6 @@ These demonstrations are taken from [Gaussian Belief Propagation](https://gaussi
 
 <script>
 function resizeIframe(iframe) {
-  iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
+  iframe.style.height = (iframe.contentWindow.document.body.scrollHeight + 20) + 'px';
 }
 </script>
