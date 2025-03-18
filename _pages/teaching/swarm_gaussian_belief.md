@@ -15,13 +15,13 @@ In these interactive demonstrations, we are looking at factor graph (see box bel
   id="FactorGraph"
   src="/assets/teaching/GBP/factor_graph.html"
   onload="resizeIframefg(this)"
-  width="50%"
+  width="75%"
   ></iframe>
 
   <script>
 function resizeIframefg(iframe) {
   iframe.style.height = (iframe.contentWindow.document.body.scrollHeight + 100) + 'px';
-  iframe.style.width = (iframe.contentWindow.document.body.scrollWidth + 50) + 'px';
+  iframe.style.width = (iframe.contentWindow.document.body.scrollWidth + 450) + 'px';
 }
 </script>
 
