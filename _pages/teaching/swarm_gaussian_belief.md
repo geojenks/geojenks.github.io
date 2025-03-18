@@ -21,6 +21,7 @@ In these interactive demonstrations, we are looking at factor graph (see box bel
   <script>
 function resizeIframefg(iframe) {
   iframe.style.height = (iframe.contentWindow.document.body.scrollHeight + 100) + 'px';
+  iframe.style.width = (iframe.contentWindow.document.body.scrollWidth + 50) + 'px';
 }
 </script>
 
