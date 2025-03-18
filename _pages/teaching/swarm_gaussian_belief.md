@@ -15,7 +15,7 @@ In these interactive demonstrations, we are looking at factor graph (see box bel
   id="FactorGraph"
   src="/assets/teaching/GBP/factor_graph.html"
   onload="resizeIframefg(this)"
-  width="75%"
+  width="100%"
   ></iframe>
 
   <script>
