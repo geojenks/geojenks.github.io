@@ -5,11 +5,18 @@ permalink: teaching/swarm_gaussian_belief/
 author_profile: false
 ---
 
-This is a page designed for a ~20 minute exercise as part of the Advanced Topics in Robotics course. It is a condensed and adapted version of: [Gaussian Belief Propagation](https://gaussianbp.github.io/). Please refer to that excellent resource for further reading and deeper exploration of the exercises here.
+This is a page designed for a ~20 minute exercise as part of the Swarm Robotics theme in the Advanced Topics in Robotics course at the University of Bristol. This is a condensed and adapted version of: [Gaussian Belief Propagation](https://gaussianbp.github.io/). Please refer to that excellent resource for further reading and deeper exploration of Gaussian Belief Propagation.
 
-We are going to go through a few exercises to demonstrate how a gaussian belief propagation can be used to estimate functions based on decentralised and uncertain information exchange in a way that is scalable and robust in dynamic environments.
+The goal of this exercise is to gain a fundamental understanding of Gaussian Belief Propagation and how it can be applied to robotics, particularly in decentralized and uncertain environments. Focus on grasping the core concepts through reading and interacting with the simulations. We are going to go through a few exercises to demonstrate how a Gaussian Belief Propagation can be used to estimate functions based on decentralised and uncertain information exchange in a way that is scalable and robust in dynamic environments. 
 
-In these interactive demonstrations, we are looking at factor graph information abstractions rather than topological networks or swarms. The “variables” could represent states that a robot may care about (for example its position, the position of a landmark, the position of another robot…) and “factors” represent relationships between these variables, usually by way of a robotic sensor (“this landmark is 2m ahead”, “Robot B is 1m East”, “I have moved 1m forward”...). Each of these are represented as a (multivariate) Gaussian probability density distribution, which means we can perform fast mathematical functions on to combine, update, or marginalise these distributions. Each agent in a swarm would only have good knowledge of a subsection of the factor graph, but, as we shall see, propagating gaussian messages through a network means that they can converge toward accurate and complete information both locally and globally.
+In these interactive demonstrations, we are looking at factor graph information abstractions rather than topological networks or swarms. The “variables” could represent states that a robot may care about (for example its position, the position of a landmark, the position of another robot…) and “factors” represent relationships between these variables, usually by way of a robotic sensor (“this landmark is 2m ahead”, “Robot B is 1m East”, “I have moved 1m forward”...). Each of these are represented as a (multivariate) Gaussian probability density distribution, which means we can perform fast mathematical functions on to combine, update, or marginalise these distributions. Each agent in a swarm would only have good first hand knowledge of a subsection of the factor graph, but, as we shall see, propagating gaussian messages through a network means that they can converge toward accurate and complete information both locally and globally.
+
+<iframe
+  id="FactorGraph"
+  src="/assets/teaching/GBP/factor_graph.html"
+  width="100%"
+  onload="resizeIframe1(this)"
+  ></iframe>
 
 These demonstrations are taken from this [page on Gaussian Belief Propagation](https://gaussianbp.github.io/), and are not specifically designed for robotic swarms. They should give you an intuition about how GBP works and may be applied to robotic swarms, and may motivate you to explore the maths more thoroughly outside of this session. The resource itself provides a good list of references, I would also encourage you to watch the video summary they provide, and to look at this [distill article](https://distill.pub/2019/visual-exploration-gaussian-processes/#MargCond) for further reading.
 
