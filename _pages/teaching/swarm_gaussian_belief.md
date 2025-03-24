@@ -5,7 +5,7 @@ permalink: teaching/swarm_gaussian_belief/
 author_profile: false
 ---
 
-This is a page designed for a ~20 minute exercise as part of the Swarm Robotics theme in the Advanced Topics in Robotics course at the University of Bristol. This is a condensed and adapted version of: [Gaussian Belief Propagation](https://gaussianbp.github.io/) by [Joseph Ortiz](https://joeaortiz.github.io/), [Talfan Evans](http://www.talfanevans.co.uk/) and [Andrew J. Davison](https://www.doc.ic.ac.uk/~ajd/). Boxed frames on this page are directly copied from that resource. Please refer to that excellent resource for further reading and deeper exploration of Gaussian Belief Propagation.
+This is a page designed for a ~20 minute exercise as part of the Swarm Robotics theme in the Advanced Topics in Robotics course at the University of Bristol. This is a condensed and adapted version of: [Gaussian Belief Propagation](https://gaussianbp.github.io/) by [Joseph Ortiz](https://joeaortiz.github.io/), [Talfan Evans](http://www.talfanevans.co.uk/) and [Andrew J. Davison](https://www.doc.ic.ac.uk/~ajd/). Boxed frames on this page are directly copied from that resource. Please refer to that excellent resource for further reading and deeper exploration of Gaussian Belief Propagation. See their short video introduction to the article [here](https://www.youtube.com/watch?v=ngzQxMgtCcg).
 
 **NB**: A static version of their interactive article has been published on [arXiv](https://arxiv.org/abs/2107.02308) and can be cited as:
 
@@ -15,9 +15,6 @@ This is a page designed for a ~20 minute exercise as part of the Swarm Robotics 
   journal={arXiv preprint arXiv:2107.02308},<br>
   year = {2021},<br>
   }
-
-See their short video introduction to the article [here](https://www.youtube.com/watch?v=ngzQxMgtCcg).
-
 
 The goal of this exercise is to gain a fundamental understanding of Gaussian Belief Propagation and how it can be applied to robotics, particularly in decentralized and uncertain environments. Focus on grasping the core concepts through reading and interacting with the simulations. We are going to go through a few exercises to demonstrate how a Gaussian Belief Propagation can be used to estimate functions based on decentralised and uncertain information exchange in a way that is scalable and robust in dynamic environments. 
 
