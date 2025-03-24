@@ -10,11 +10,11 @@ This is a page designed for a ~20 minute exercise as part of the Swarm Robotics 
 **NB**: A static version of their interactive article has been published on [arXiv](https://arxiv.org/abs/2107.02308) and can be cited as:
 
 @article{Ortiz2021visualGBP,<br>
-  title = {A visual introduction to Gaussian Belief Propagation},<br>  
-  author = {Ortiz, Joseph and Evans, Talfan and Davison, Andrew J.},<br>  
-  journal={arXiv preprint arXiv:2107.02308},<br>
-  year = {2021},<br>
-  }
+title = {A visual introduction to Gaussian Belief Propagation},<br>  
+author = {Ortiz, Joseph and Evans, Talfan and Davison, Andrew J.},<br>  
+journal={arXiv preprint arXiv:2107.02308},<br>
+year = {2021},<br>
+}
 
 The goal of this exercise is to gain a fundamental understanding of Gaussian Belief Propagation and how it can be applied to robotics, particularly in decentralized and uncertain environments. Focus on grasping the core concepts through reading and interacting with the simulations. We are going to go through a few exercises to demonstrate how a Gaussian Belief Propagation can be used to estimate functions based on decentralised and uncertain information exchange in a way that is scalable and robust in dynamic environments. 
 
