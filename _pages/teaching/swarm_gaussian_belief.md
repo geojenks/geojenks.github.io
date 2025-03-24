@@ -5,7 +5,7 @@ permalink: teaching/swarm_gaussian_belief/
 author_profile: false
 ---
 
-This is a page designed for a ~20 minute exercise as part of the Swarm Robotics theme in the Advanced Topics in Robotics course at the University of Bristol. This is a condensed and adapted version of: [Gaussian Belief Propagation](https://gaussianbp.github.io/) by [Joseph Ortiz](https://joeaortiz.github.io/), [Talfan Evans](http://www.talfanevans.co.uk/) and [Andrew J. Davison]([)](https://www.doc.ic.ac.uk/~ajd/). Boxed frames on this page are directly copied from that resource. Please refer to that excellent resource for further reading and deeper exploration of Gaussian Belief Propagation.
+This is a page designed for a ~20 minute exercise as part of the Swarm Robotics theme in the Advanced Topics in Robotics course at the University of Bristol. This is a condensed and adapted version of: [Gaussian Belief Propagation](https://gaussianbp.github.io/) by [Joseph Ortiz](https://joeaortiz.github.io/), [Talfan Evans](http://www.talfanevans.co.uk/) and [Andrew J. Davison](https://www.doc.ic.ac.uk/~ajd/). Boxed frames on this page are directly copied from that resource. Please refer to that excellent resource for further reading and deeper exploration of Gaussian Belief Propagation.
 
 **NB**: A static version of their interactive article has been published on [arXiv](https://arxiv.org/abs/2107.02308) and can be cited as:
 
