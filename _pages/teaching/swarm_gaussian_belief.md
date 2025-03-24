@@ -9,17 +9,13 @@ This is a page designed for a ~20 minute exercise as part of the Swarm Robotics 
 
 **NB**: A static version of their interactive article has been published on [arXiv](https://arxiv.org/abs/2107.02308) and can be cited as:
 
-@article{Ortiz2021visualGBP,
+@article{Ortiz2021visualGBP,<br>
+  title = {A visual introduction to Gaussian Belief Propagation},<br>  
+  author = {Ortiz, Joseph and Evans, Talfan and Davison, Andrew J.},<br>  
+  journal={arXiv preprint arXiv:2107.02308},<br>
+  year = {2021},<br>
+  }
 
-  title = {A visual introduction to Gaussian Belief Propagation},
-  
-  author = {Ortiz, Joseph and Evans, Talfan and Davison, Andrew J.},
-  
-  journal={arXiv preprint arXiv:2107.02308},
-  
-  year = {2021},
-  
-}
 See their short video introduction to the article [here](https://www.youtube.com/watch?v=ngzQxMgtCcg).
 
 
