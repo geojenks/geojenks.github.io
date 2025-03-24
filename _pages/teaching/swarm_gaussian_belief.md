@@ -55,7 +55,7 @@ In each of the interactive widgets below, you can choose to “activate” a nod
 
 ## Graph/Network topology (5 minutes)
 
-The important mechanism is that the nodes pass each other simple local information, and converge on a global solution. This has a strong relationship with the way that they are connected. Try the chain, loop, and grid topologies in the box below and see if you can explain why they have slightly different speeds of convergence.
+The important mechanism is that the nodes pass each other simple local information, and converge on a global solution. This has a strong relationship with the way that they are connected. Try the chain, loop, and grid topologies in the box below and see if you can explain why they have slightly different speeds of convergence. The circle around the dots is a 2D rendering of a gaussian (knwowledge with uncertainty) about a variable.
 
 Q. Why do some of them overshoot, taking a while to stabilise?
 
