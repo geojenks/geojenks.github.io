@@ -9,7 +9,13 @@ author_profile: true
 
 You can also find my articles on [my Google Scholar profile](https://scholar.google.com/citations?user=sZlkcJIAAAAJ&hl=en")
 
+**GP Jenkinson**, Myrsini Samaroudi, Xavier Aure Calvet [Tactile Embroidery Reproduction Exploiting Machine Vision for Visually Impaired Engagement](https://doi.org/10.2312/dh.20253349) Digital Heritage International Congress (2025)
+
+**GP Jenkinson**, AT Conn, A Tzemanaki ["Coil-Tac: Coiled Capacitor Mechanism with Liquid Metal for Tactile Sensing"](https://doi.org/10.1109/LRA.2025.3558655) IEEE Robotics and Automation Letters, 2025
+
 **GP Jenkinson**, AT Conn, A Tzemanaki ["Braille-Tip: Structured Small-Footprint Tactile Sensor for High Acuity Dynamic Tactile Tasks"](https://ieeexplore.ieee.org/abstract/document/10719951/) **10th IEEE RAS/EMBS International Conference for Biomedical Robotics and Biomechatronics (BioRob) 2024**
+
+**GP Jenkinson**, ["Soft Variable Stiffness Tactile Sensors for Clinical Examinations"](https://research-information.bris.ac.uk/en/studentTheses/soft-variable-stiffness-tactile-sensors-for-clinical-examinations/) PhD Thesis, University of Bristol, March 2024
 
 **GP Jenkinson**, K Tiemann, A Papathanasiou, J Bewley, AT Conn, A Tzemanaki ["A robotIc Radial palpatIon mechaniSm for breast examination (IRIS)"](https://ieeexplore.ieee.org/abstract/document/10309324/) **32nd IEEE International Conference on Robot and Human Interactive Communication (RO-MAN) 2023**
 
