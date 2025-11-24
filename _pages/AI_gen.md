@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "AI generated art"
+title: "AI powered heritage restoration"
 permalink: AI_gen/
 author_profile: true
 ---
