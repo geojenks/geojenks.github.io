@@ -23,10 +23,7 @@ Teaching Flux-dev-1 the french knot embroidery technique:
 
 And to make a "repair" to artwork:
 
-<video controls style="height:450px;">
-  <source src="/images/stitch_repair.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<img src="/images/stitch_repair.gif" style="height:450px;">
 
 I followed [this walkthrough](https://www.stablediffusiontutorials.com/2024/08/flux-lora.html#downloading-the-models) for the guide to train a Lora.
 
