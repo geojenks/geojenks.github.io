@@ -69,6 +69,7 @@
     /* Type variants */
     .pub-type.journal    { border-color: rgba(150,180,220,0.5); color: rgba(180,210,245,0.9); }
     .pub-type.conference { border-color: rgba(180,210,150,0.5); color: rgba(200,230,170,0.9); }
+    .pub-type.thesis     { border-color: rgba(240,160,80,0.55); color: rgba(255,195,120,0.9); }
     .pub-type.undergrad  { border-color: rgba(200,200,200,0.3); color: rgba(200,200,200,0.6); }
 
     /* Year */
@@ -196,7 +197,7 @@
     @media (max-width: 760px) {
       .pub-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(13, 50vh);
+        grid-template-rows: repeat(14, 50vh);
       }
       .quad::before { opacity: 0.45; }
     }
@@ -304,7 +305,26 @@
       </div>
     </div>
 
-    <!-- 6. IRIS (2023) -->
+    <!-- 6. PhD Thesis (2024) -->
+    <div class="quad pub-card"
+         style="--base: #2a1e0e; --hover: #1a1208; --img: url('images/phd_outline.png'); --pos: center 50%; --size: 90%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type thesis">PhD Thesis</span>
+          <span class="pub-year">2024</span>
+          <span class="pub-role first-author">First author</span>
+        </div>
+        <span class="quad-label">Soft Variable Stiffness Tactile Sensors for Clinical Examinations</span>
+        <span class="quad-sub">University of Bristol</span>
+        <p class="quad-desc">Supervised by Dr Antonia Tzemanaki &amp; Dr Andrew T. Conn</p>
+        <div class="pub-links">
+          <a href="https://research-information.bris.ac.uk/en/studentTheses/soft-variable-stiffness-tactile-sensors-for-clinical-examinations/" target="_blank" class="pub-link">Thesis ↗</a>
+          <a href="https://research-information.bris.ac.uk/files/470575709/PhD_Thesis.pdf" target="_blank" class="pub-link">PDF ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. IRIS (2023) -->
     <div class="quad pub-card"
          style="--base: #1e3a3a; --hover: #0f2525; --img: url('images/iris.webp'); --pos: center 50%;">
       <div class="quad-content">
@@ -323,7 +343,7 @@
       </div>
     </div>
 
-    <!-- 7. Acceptability Survey (2023) -->
+    <!-- 8. Acceptability Survey (2023) -->
     <div class="quad pub-card"
          style="--base: #1e2d3a; --hover: #0f1d28; --img: url('images/acceptable.png'); --pos: center 50%;">
       <div class="quad-content">
@@ -341,7 +361,7 @@
       </div>
     </div>
 
-    <!-- 8. ESPRESS.0 (2023) -->
+    <!-- 9. ESPRESS.0 (2023) -->
     <div class="quad pub-card"
          style="--base: #1e3245; --hover: #0f2030; --img: url('images/espresso.png'); --pos: center 50%;">
       <div class="quad-content">
@@ -360,7 +380,7 @@
       </div>
     </div>
 
-    <!-- 9. Tetraflex (2023, co-author) -->
+    <!-- 10. Tetraflex (2023, co-author) -->
     <div class="quad pub-card"
          style="--base: #1e3828; --hover: #0f2418; --img: url('images/tetraflex.gif'); --pos: center 28%;">
       <div class="quad-content">
@@ -379,7 +399,7 @@
       </div>
     </div>
 
-    <!-- 10. Optical-Tactile Sensor (2021, co-author) -->
+    <!-- 11. Optical-Tactile Sensor (2021, co-author) -->
     <div class="quad pub-card"
          style="--base: #28201e; --hover: #1a140f; --img: url('images/pneutip.webp'); --pos: center 50%;">
       <div class="quad-content">
@@ -398,7 +418,7 @@
       </div>
     </div>
 
-    <!-- 11. SPIDER (2020) -->
+    <!-- 12. SPIDER (2020) -->
     <div class="quad pub-card"
          style="--base: #2a1e3a; --hover: #1a0f28; --img: url('images/spider.png'); --pos: center 50%;">
       <div class="quad-content">
@@ -416,7 +436,7 @@
       </div>
     </div>
 
-    <!-- 12. Pressure Controlled Membrane (2020) -->
+    <!-- 13. Pressure Controlled Membrane (2020) -->
     <div class="quad pub-card"
          style="--base: #1e2a3a; --hover: #0f1a28; --img: url('images/pressure.png'); --pos: center 50%;">
       <div class="quad-content">
@@ -435,7 +455,7 @@
       </div>
     </div>
 
-    <!-- 13. Newton the Natural Philosopher (2016) -->
+    <!-- 14. Newton the Natural Philosopher (2016) -->
     <div class="quad pub-card"
          style="--base: #1e1e1e; --hover: #111111; --img: url('images/TODO_newton.jpg'); --pos: center 50%;">
       <div class="quad-content">
