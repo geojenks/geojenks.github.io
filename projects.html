@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — George Jenkinson</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Projects page ── */
+    .page-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 2rem;
+      background: var(--bio-accent);
+    }
+
+    .page-header a {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(240, 237, 232, 0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .page-header a:hover { color: var(--text-light); }
+
+    .page-header h2 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: normal;
+      color: var(--text-light);
+      margin: 0;
+    }
+
+    .page-header .sep {
+      color: rgba(240, 237, 232, 0.3);
+      font-size: 0.8rem;
+    }
+
+    /* ── Project grid ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, calc((100vh - 3.2rem) / 2));
+    }
+
+    /* Last item: if odd count, span full width */
+    .project-grid .quad:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+
+    /* ── Tag row (status + funder + role) ── */
+    .quad-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Base badge style */
+    .quad-tags span {
+      display: inline-block;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      padding: 0.2em 0.6em;
+      border-radius: 2px;
+      border: 1px solid rgba(240, 237, 232, 0.3);
+      color: rgba(240, 237, 232, 0.65);
+    }
+
+    /* Status variants */
+    .quad-status.current  { border-color: rgba(130,200,130,0.6); color: rgba(160,230,160,0.9); }
+    .quad-status.upcoming { border-color: rgba(200,180,100,0.6); color: rgba(230,210,130,0.9); }
+    .quad-status.ongoing  { border-color: rgba(150,180,220,0.6); color: rgba(180,210,240,0.9); }
+    .quad-status.finished { border-color: rgba(200,200,200,0.4); color: rgba(200,200,200,0.7); }
+
+    /* Funder variants */
+    .quad-funder.epsrc { border-color: rgba(160,100,220,0.55); color: rgba(195,150,245,0.9); }
+    .quad-funder.ahrc  { border-color: rgba(210,130,50,0.55);  color: rgba(240,175,100,0.9); }
+    .quad-funder.aria  { border-color: rgba(60,180,220,0.55);  color: rgba(120,210,240,0.9); }
+
+    /* Role variants */
+    .quad-role.grant-holder {
+      border-color: rgba(220,190,80,0.6);
+      color: rgba(245,215,110,0.9);
+    }
+    .quad-role.grant-holder::before {
+      content: '★ ';
+      font-size: 0.65em;
+      vertical-align: 0.05em;
+    }
+    .quad-role.joined {
+      border-color: rgba(200,200,200,0.25);
+      color: rgba(200,200,200,0.55);
+    }
+
+    .quad-desc {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: rgba(240, 237, 232, 0.65);
+      margin-top: 0.5rem;
+      max-width: 36ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* External link indicator */
+    .quad[href^="http"] .quad-label::after {
+      content: ' ↗';
+      font-size: 0.65em;
+      opacity: 0.5;
+      vertical-align: super;
+    }
+
+    @media (max-width: 760px) {
+      .project-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 45vh);
+      }
+      .project-grid .quad:last-child:nth-child(odd) {
+        grid-column: auto;
+      }
+      .quad::before { opacity: 0.45; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <a href="index.html">← George Jenkinson</a>
+    <span class="sep">/</span>
+    <h2>Projects</h2>
+  </header>
+
+  <section class="project-grid">
+
+    <!-- Robot Dexterity -->
+    <a class="quad" href="https://aria.org.uk/opportunity-spaces/smarter-robot-bodies/robot-dexterity/" target="_blank"
+       style="--base: #1e3a5a; --hover: #0f2540; --img: url('images/rob_dex.webp'); --pos: center 30%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="quad-status current">Current</span>
+          <span class="quad-funder aria">ARIA</span>
+          <span class="quad-role joined">Joined</span>
+        </div>
+        <span class="quad-label">Robot Dexterity</span>
+        <span class="quad-sub">University of Bath</span>
+        <span class="quad-sub">Prof Min Pan</span>
+        <p class="quad-desc">Wave-based formulation of in-hand manipulation: continuous dexterous motions as superposed travelling and standing waves through discrete finger contacts.</p>
+      </div>
+    </a>
+
+    <!-- Braille-Pen -->
+    <a class="quad" href="https://www.dexterousrobotlab.com/braillepen" target="_blank"
+       style="--base: #3a1e5a; --hover: #250f40; --img: url('images/full_pen_cropped.jpeg'); --pos: center 90%; --size: 100%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="quad-status ongoing">Ongoing</span>
+          <span class="quad-funder epsrc">EPSRC IAA</span>
+          <span class="quad-role grant-holder">Grant won</span>
+        </div>
+        <span class="quad-label">Braille-Pen</span>
+        <span class="quad-sub">University of Bristol</span>
+        <span class="quad-sub">Dr Antonia Tzemanaki and Prof Andrew Conn</span>
+        <p class="quad-desc">Developing the device introduced in Braille-Tip into a full pen prototype, with a focus on accelerating Braille reading skill acquisition for visually impaired people.</p>
+      </div>
+    </a>
+
+    <!-- Matching the Stitch -->
+    <a class="quad" href="https://cfpr.uwe.ac.uk/matching-the-stitch/" target="_blank"
+       style="--base: #1e5a3a; --hover: #0f4025; --img: url('images/stitch_repair.gif'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="quad-status finished">Finished</span>
+          <span class="quad-funder ahrc">AHRC IAA</span>
+          <span class="quad-role grant-holder">Grant won</span>
+        </div>
+        <span class="quad-label">Matching the Stitch</span>
+        <span class="quad-sub">Centre for Print Research, UWE</span>
+        <p class="quad-desc">Applying segmentation, diffusion, and classification models to reverse-engineer embroidered artworks — identifying techniques and enabling tactile reproductions for visually impaired audiences.</p>
+      </div>
+    </a>
+
+    <!-- 3D Technologies & Historic Textiles -->
+    <a class="quad" href="https://gtr.ukri.org/projects?ref=AH%2FX006522%2F1" target="_blank"
+       style="--base: #5a3a1e; --hover: #402510; --img: url('images/xavi_proj.jpg'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="quad-status ongoing">Ongoing</span>
+          <span class="quad-funder ahrc">AHRC</span>
+          <span class="quad-role joined">Joined</span>
+        </div>
+        <span class="quad-label">3D technologies applied to historic textiles</span>
+        <span class="quad-sub">Centre for Print Research, UWE</span>
+        <span class="quad-sub">Dr Xavier Aure Calvet</span>
+        <p class="quad-desc">AI interpretation of embroidered artwork to support conservation and engagement. Producing tactile and digital artefacts to improve accessibility for visually impaired audiences.</p>
+      </div>
+    </a>
+
+    <!-- ARTEMIS -->
+    <a class="quad" href="https://www.imperial.ac.uk/engagement-and-simulation-science/our-work/projects/advanced-robotics-breast-examination-intelligent-system-artemis/" target="_blank"
+       style="--base: #3a5a1e; --hover: #254010; --img: url('images/ARTEMIS_LOGO.png'); --pos: center 50%; --size: auto 100%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="quad-status finished">Finished</span>
+          <span class="quad-funder epsrc">EPSRC</span>
+          <span class="quad-role joined">Joined</span>
+        </div>
+        <span class="quad-label">ARTEMIS</span>
+        <span class="quad-sub">University of Bristol</span>
+        <span class="quad-sub">Dr Antonia Tzemanaki and Dr Andrew Conn</span>
+        <p class="quad-desc">Advanced Robotics breasT ExaMination Intelligent System. Developed soft tactile sensors and a robotic platform to investigate the feasibility of automated clinical breast examination. PhD work.</p>
+      </div>
+    </a>
+
+  </section>
+
+</body>
+</html>

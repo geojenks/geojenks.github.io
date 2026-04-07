@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>In the Media — George Jenkinson</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Media page ── */
+    .page-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 2rem;
+      background: var(--bio-accent);
+    }
+    .page-header a {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(240, 237, 232, 0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .page-header a:hover { color: var(--text-light); }
+    .page-header h2 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: normal;
+      color: var(--text-light);
+      margin: 0;
+    }
+    .page-header .sep { color: rgba(240, 237, 232, 0.3); font-size: 0.8rem; }
+
+    /* ── Media grid ── */
+    .media-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(4, calc((100vh - 3.2rem) / 2));
+    }
+
+    /* ── Tag row ── */
+    .quad-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.35rem;
+      margin-bottom: 0.75rem;
+    }
+    .quad-tags span {
+      display: inline-block;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      padding: 0.2em 0.6em;
+      border-radius: 2px;
+      border: 1px solid rgba(240, 237, 232, 0.3);
+      color: rgba(240, 237, 232, 0.65);
+    }
+
+    /* Media type */
+    .media-type.tv      { border-color: rgba(220,180,60,0.55);  color: rgba(245,210,100,0.9); }
+    .media-type.radio   { border-color: rgba(160,100,220,0.55); color: rgba(195,150,245,0.9); }
+    .media-type.podcast { border-color: rgba(60,180,160,0.55);  color: rgba(110,220,200,0.9); }
+    .media-type.press   { border-color: rgba(100,160,220,0.55); color: rgba(150,200,245,0.9); }
+
+    /* Project */
+    .media-project.braille-tip { border-color: rgba(180,130,220,0.4); color: rgba(210,170,245,0.8); }
+    .media-project.artemis     { border-color: rgba(100,200,130,0.4); color: rgba(140,230,170,0.8); }
+
+    /* Description */
+    .quad-desc {
+      font-size: 0.8rem;
+      line-height: 1.55;
+      color: rgba(240, 237, 232, 0.6);
+      margin-top: 0.4rem;
+      max-width: 36ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Media action buttons ── */
+    .media-links {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .media-link {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.3em 0.9em;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      border: 1px solid rgba(240, 237, 232, 0.35);
+      color: rgba(240, 237, 232, 0.7);
+    }
+    .media-link:hover {
+      border-color: rgba(240, 237, 232, 0.85);
+      color: var(--text-light);
+    }
+    button.media-link {
+      background: none;
+      cursor: pointer;
+      font-family: var(--sans);
+    }
+    .media-link.play {
+      border-color: rgba(255, 255, 255, 0.45);
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .media-link.play:hover {
+      border-color: rgba(255, 255, 255, 0.9);
+      color: #fff;
+    }
+
+    /* ── Modal ── */
+    .media-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .media-modal.open { display: flex; }
+
+    .media-modal-bg {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      cursor: pointer;
+    }
+
+    .media-modal-inner {
+      position: relative;
+      z-index: 1;
+      width: min(92vw, 960px);
+      background: #080808;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.7);
+    }
+
+    /* Audio mode: narrower, no 16:9 constraint */
+    .media-modal-inner.audio-mode {
+      max-width: 520px;
+    }
+
+    .media-close {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.7rem;
+      background: none;
+      border: none;
+      color: rgba(240, 237, 232, 0.5);
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 2;
+      line-height: 1;
+      padding: 0.2rem 0.4rem;
+      transition: color 0.2s;
+    }
+    .media-close:hover { color: var(--text-light); }
+
+    .media-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+    .media-container.audio-mode {
+      aspect-ratio: unset;
+      padding: 2rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .media-container iframe,
+    .media-container video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .media-container audio {
+      width: 100%;
+    }
+    .modal-audio-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: rgba(240, 237, 232, 0.8);
+      font-style: italic;
+    }
+
+    @media (max-width: 760px) {
+      .media-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(7, 50vh);
+      }
+      .quad::before { opacity: 0.45; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <a href="index.html">← George Jenkinson</a>
+    <span class="sep">/</span>
+    <h2>In the Media</h2>
+  </header>
+
+  <section class="media-grid">
+
+    <!-- 1. BBC Points West — TV (2024, Braille-Tip) -->
+    <div class="quad"
+         style="--base: #2a1a2e; --hover: #1a0f1e; --img: url('images/BBC_Points_West_Braille-Tip.jpg'); --pos: center 30%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="media-type tv">TV</span>
+          <span class="media-project braille-tip">Braille-Tip</span>
+        </div>
+        <span class="quad-label">BBC Points West</span>
+        <span class="quad-sub">BBC Local Television &nbsp;·&nbsp; 2024</span>
+        <p class="quad-desc">Local news feature on the Braille-Tip tactile sensor pen and its potential to support Braille learning.</p>
+        <div class="media-links">
+          <button class="media-link play" data-type="local" data-video="files/BBC_Points_West_Braille-Tip.mp4" data-title="BBC Points West — Braille-Tip (2024)">▶ Watch</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. BBC News Online — Braille-Tip (2024) -->
+    <a class="quad" href="https://www.bbc.co.uk/news/articles/cd6yexnwq5no" target="_blank"
+       style="--base: #2a1a1a; --hover: #1e0f0f; --img: url('https://ichef.bbci.co.uk/ace/standard/624/cpsprodpb/41ca/live/323b90f0-6ac9-11ef-a329-01e5398e96e2.jpg.webp'); --pos: center 40%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="media-type press">Press</span>
+          <span class="media-project braille-tip">Braille-Tip</span>
+        </div>
+        <span class="quad-label">BBC News</span>
+        <span class="quad-sub">BBC News Online &nbsp;·&nbsp; 2024</span>
+        <p class="quad-desc">"Braille reading pen developed to 'bridge learning gap'" — national online coverage of the Braille-Tip research.</p>
+        <div class="media-links">
+          <span class="media-link">Read ↗</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 3. BBC Radio Bristol — Braille-Tip (2024) -->
+    <div class="quad"
+         style="--base: #1a1a2e; --hover: #0f0f1e; --img: url('images/full_pen_cropped.jpeg'); --pos: center 90%; --size: 90%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="media-type radio">Radio</span>
+          <span class="media-project braille-tip">Braille-Tip</span>
+        </div>
+        <span class="quad-label">BBC Radio Bristol</span>
+        <span class="quad-sub">BBC Local Radio &nbsp;·&nbsp; 2024</span>
+        <p class="quad-desc">Radio interview on the Braille-Tip pen prototype and its potential impact for visually impaired readers.</p>
+        <div class="media-links">
+          <button class="media-link play" data-type="audio" data-video="files/BBC Radio Bristol - Braille-Tip.m4a" data-title="BBC Radio Bristol — Braille-Tip (2024)">▶ Listen</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Somewhere on Earth — Braille-Tip (2024) -->
+    <div class="quad"
+         style="--base: #1e1a14; --hover: #140f0a;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="media-type podcast">Podcast</span>
+          <span class="media-project braille-tip">Braille-Tip</span>
+        </div>
+        <span class="quad-label">Somewhere on Earth</span>
+        <span class="quad-sub">Science Podcast &nbsp;·&nbsp; 2024</span>
+        <p class="quad-desc">Feature on the Braille-Tip sensor pen on the science and technology podcast Somewhere on Earth.</p>
+        <div class="media-links">
+          <button class="media-link play" data-type="audio" data-video="files/Somewhere on Earth - Braille-Tip (1600).mp3" data-title="Somewhere on Earth — Braille-Tip (2024)">▶ Listen</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. BBC News Online — ARTEMIS (2023) -->
+    <a class="quad" href="https://www.bbc.co.uk/news/uk-england-bristol-66983232" target="_blank"
+       style="--base: #1a2a1a; --hover: #0f1e0f; --img: url('https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/B56A/production/_131324464_thumbnail_videocapture_20231003-193609.jpg.webp'); --pos: center 40%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="media-type press">Press</span>
+          <span class="media-project artemis">ARTEMIS</span>
+        </div>
+        <span class="quad-label">BBC News</span>
+        <span class="quad-sub">BBC News Online &nbsp;·&nbsp; 2023</span>
+        <p class="quad-desc">"Robot designed by Bristol Uni could diagnose breast cancer early" — national coverage of the ARTEMIS robotic examination platform.</p>
+        <div class="media-links">
+          <span class="media-link">Read ↗</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- 6. BBC Radio Bristol — ARTEMIS (2023) -->
+    <div class="quad"
+         style="--base: #1a2a1e; --hover: #0f1e14; --img: url('images/ARTEMIS_LOGO.png'); --pos: center 50%; --size: auto 60%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="media-type radio">Radio</span>
+          <span class="media-project artemis">ARTEMIS</span>
+        </div>
+        <span class="quad-label">BBC Radio Bristol</span>
+        <span class="quad-sub">BBC Local Radio &nbsp;·&nbsp; 2023</span>
+        <p class="quad-desc">Radio interview on the ARTEMIS robotic platform for automated clinical breast examination.</p>
+        <div class="media-links">
+          <button class="media-link play" data-type="audio" data-video="files/BBC Bristol Troy Artemis.mp3" data-title="BBC Radio Bristol — ARTEMIS (2023)">▶ Listen</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Somewhere on Earth Ep1 — ARTEMIS (2023) -->
+    <div class="quad"
+         style="--base: #20181a; --hover: #150f10;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="media-type podcast">Podcast</span>
+          <span class="media-project artemis">ARTEMIS</span>
+        </div>
+        <span class="quad-label">Somewhere on Earth, Ep. 1</span>
+        <span class="quad-sub">Science Podcast &nbsp;·&nbsp; 2023</span>
+        <p class="quad-desc">Pilot episode of Somewhere on Earth features the ARTEMIS breast cancer detection robot and the research behind it.</p>
+        <div class="media-links">
+          <button class="media-link play" data-type="audio" data-video="files/Somewhere on Earth Ep1 - Breast Cancer.mp3" data-title="Somewhere on Earth Ep. 1 — ARTEMIS (2023)">▶ Listen</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── Media modal ── -->
+  <div id="media-modal" class="media-modal">
+    <div class="media-modal-bg"></div>
+    <div class="media-modal-inner" id="media-modal-inner">
+      <button class="media-close" aria-label="Close">✕</button>
+      <div class="media-container" id="media-container"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const modal     = document.getElementById('media-modal');
+      const inner     = document.getElementById('media-modal-inner');
+      const container = document.getElementById('media-container');
+      const closeBtn  = document.querySelector('.media-close');
+      const bg        = document.querySelector('.media-modal-bg');
+
+      function openMedia(type, src, title) {
+        container.innerHTML = '';
+        inner.classList.remove('audio-mode');
+        container.classList.remove('audio-mode');
+
+        if (type === 'local') {
+          const video = document.createElement('video');
+          video.src = src;
+          video.controls = true;
+          video.autoplay = true;
+          container.appendChild(video);
+        } else if (type === 'audio') {
+          inner.classList.add('audio-mode');
+          container.classList.add('audio-mode');
+          if (title) {
+            const t = document.createElement('p');
+            t.className = 'modal-audio-title';
+            t.textContent = title;
+            container.appendChild(t);
+          }
+          const audio = document.createElement('audio');
+          audio.src = src;
+          audio.controls = true;
+          audio.autoplay = true;
+          container.appendChild(audio);
+        }
+
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMedia() {
+        modal.classList.remove('open');
+        container.innerHTML = '';
+        document.body.style.overflow = '';
+      }
+
+      closeBtn.addEventListener('click', closeMedia);
+      bg.addEventListener('click', closeMedia);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMedia();
+      });
+
+      document.querySelectorAll('button.media-link.play').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          openMedia(btn.dataset.type, btn.dataset.video, btn.dataset.title);
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

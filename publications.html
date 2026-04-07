@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications — George Jenkinson</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Publications page ── */
+    .page-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 2rem;
+      background: var(--bio-accent);
+    }
+    .page-header a {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(240, 237, 232, 0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .page-header a:hover { color: var(--text-light); }
+    .page-header h2 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: normal;
+      color: var(--text-light);
+      margin: 0;
+    }
+    .page-header .sep { color: rgba(240, 237, 232, 0.3); font-size: 0.8rem; }
+
+    /* ── Publication grid ── */
+    .pub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(7, calc((100vh - 3.2rem) / 2));
+    }
+
+    /* Div-based quad: needs explicit pointer and hover wired in */
+    .pub-card {
+      cursor: default;
+    }
+
+    /* ── Tag row ── */
+    .quad-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.35rem;
+      margin-bottom: 0.75rem;
+    }
+    .quad-tags span {
+      display: inline-block;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      padding: 0.2em 0.6em;
+      border-radius: 2px;
+      border: 1px solid rgba(240, 237, 232, 0.3);
+      color: rgba(240, 237, 232, 0.65);
+    }
+
+    /* Type variants */
+    .pub-type.journal    { border-color: rgba(150,180,220,0.5); color: rgba(180,210,245,0.9); }
+    .pub-type.conference { border-color: rgba(180,210,150,0.5); color: rgba(200,230,170,0.9); }
+    .pub-type.undergrad  { border-color: rgba(200,200,200,0.3); color: rgba(200,200,200,0.6); }
+
+    /* Year */
+    .pub-year { border-color: rgba(240,237,232,0.2); color: rgba(240,237,232,0.45); }
+
+    /* Role */
+    .pub-role.first-author {
+      border-color: rgba(220,190,80,0.5);
+      color: rgba(245,215,110,0.9);
+    }
+    .pub-role.first-author::before { content: '★ '; font-size: 0.65em; vertical-align: 0.05em; }
+    .pub-role.co-author {
+      border-color: rgba(200,200,200,0.2);
+      color: rgba(200,200,200,0.5);
+    }
+
+    /* Description (authors) */
+    .quad-desc {
+      font-size: 0.78rem;
+      line-height: 1.5;
+      color: rgba(240, 237, 232, 0.55);
+      margin-top: 0.4rem;
+      max-width: 38ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Publication link buttons ── */
+    .pub-links {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .pub-link {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.3em 0.8em;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      border: 1px solid rgba(240, 237, 232, 0.3);
+      color: rgba(240, 237, 232, 0.65);
+    }
+    .pub-link:hover {
+      border-color: rgba(240, 237, 232, 0.8);
+      color: var(--text-light);
+    }
+    .pub-link.yt {
+      border-color: rgba(220, 60, 60, 0.45);
+      color: rgba(255, 120, 120, 0.85);
+    }
+    .pub-link.yt:hover {
+      border-color: rgba(255, 80, 80, 0.9);
+      color: rgba(255, 160, 160, 1);
+    }
+
+    /* Reset button element to match <a> pub-link style */
+    button.pub-link {
+      background: none;
+      cursor: pointer;
+      font-family: var(--sans);
+    }
+
+    /* ── Video modal ── */
+    .video-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-modal.open { display: flex; }
+
+    .video-modal-bg {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      cursor: pointer;
+    }
+
+    .video-modal-inner {
+      position: relative;
+      z-index: 1;
+      width: min(92vw, 960px);
+      background: #080808;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.7);
+    }
+
+    .video-close {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.7rem;
+      background: none;
+      border: none;
+      color: rgba(240, 237, 232, 0.5);
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 2;
+      line-height: 1;
+      padding: 0.2rem 0.4rem;
+      transition: color 0.2s;
+    }
+    .video-close:hover { color: var(--text-light); }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+    .video-container iframe,
+    .video-container video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 760px) {
+      .pub-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(13, 50vh);
+      }
+      .quad::before { opacity: 0.45; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <a href="index.html">← George Jenkinson</a>
+    <span class="sep">/</span>
+    <h2>Publications</h2>
+  </header>
+
+  <section class="pub-grid">
+
+    <!-- 1. Tactile Embroidery Reproduction (2025) -->
+    <div class="quad pub-card"
+         style="--base: #1e3245; --hover: #0f1f30; --img: url('images/TODO_embroidery.jpg'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type conference">Conference</span>
+          <span class="pub-year">2025</span>
+          <span class="pub-role first-author">First author</span>
+        </div>
+        <span class="quad-label">Tactile Embroidery Reproduction</span>
+        <span class="quad-sub">Digital Heritage 2025 &nbsp;·&nbsp; Eurographics</span>
+        <p class="quad-desc">Jenkinson GP, Samaroudi M, Aure Calvet X</p>
+        <div class="pub-links">
+          <a href="https://doi.org/10.2312/dh.20253349" target="_blank" class="pub-link">Paper ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Coil-Tac (2025) -->
+    <div class="quad pub-card"
+         style="--base: #1e2f45; --hover: #0f1e30; --img: url('images/coil_tac.gif');">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type journal">Journal</span>
+          <span class="pub-year">2025</span>
+          <span class="pub-role first-author">First author</span>
+        </div>
+        <span class="quad-label">Coil-Tac</span>
+        <span class="quad-sub">IEEE Robotics and Automation Letters</span>
+        <p class="quad-desc">Jenkinson GP, Conn AT, Tzemanaki A</p>
+        <div class="pub-links">
+          <a href="https://doi.org/10.1109/LRA.2025.3558655" target="_blank" class="pub-link">Paper ↗</a>
+          <button class="pub-link yt" data-type="local" data-video="files/coil_tac.mp4">▶ Video</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Matching the Stitch — conference (2025) -->
+    <div class="quad pub-card"
+         style="--base: #1e3a30; --hover: #0f2520; --img: url('images/stitch_repair.gif'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type conference">Conference</span>
+          <span class="pub-year">2025</span>
+          <span class="pub-role first-author">First author</span>
+        </div>
+        <span class="quad-label">Matching the Stitch</span>
+        <span class="quad-sub">Textile Conservation Conference @ 50, Glasgow</span>
+        <p class="quad-desc">Jenkinson GP, Aure Calvet X</p>
+        <div class="pub-links">
+          <a href="#" target="_blank" class="pub-link">In press</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Beyond the Display Case (2025, co-author) -->
+    <div class="quad pub-card"
+         style="--base: #2a2a1e; --hover: #1a1a0f; --img: url('images/TODO_textiles.jpg'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type conference">Conference</span>
+          <span class="pub-year">2025</span>
+          <span class="pub-role co-author">Co-author</span>
+        </div>
+        <span class="quad-label">Beyond the Display Case</span>
+        <span class="quad-sub">Textile Conservation Conference @ 50, Glasgow</span>
+        <p class="quad-desc">Aure Calvet X, Jenkinson GP</p>
+        <div class="pub-links">
+          <a href="#" target="_blank" class="pub-link">In press</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Braille-tip (2024) -->
+    <div class="quad pub-card"
+         style="--base: #2c1e45; --hover: #1a0f30; --img: url('images/full_pen_cropped.jpeg'); --pos: center 90%; --size: 100%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type conference">Conference</span>
+          <span class="pub-year">2024</span>
+          <span class="pub-role first-author">First author</span>
+        </div>
+        <span class="quad-label">Braille-tip</span>
+        <span class="quad-sub">IEEE BioRob 2024, Heidelberg</span>
+        <p class="quad-desc">Jenkinson GP, Conn AT, Tzemanaki A</p>
+        <div class="pub-links">
+          <a href="https://doi.org/10.1109/BioRob60516.2024.10719951" target="_blank" class="pub-link">Paper ↗</a>
+          <button class="pub-link yt" data-type="youtube" data-video="0XcNFRXq7cA">▶ Video</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. IRIS (2023) -->
+    <div class="quad pub-card"
+         style="--base: #1e3a3a; --hover: #0f2525; --img: url('images/iris.webp'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type conference">Conference</span>
+          <span class="pub-year">2023</span>
+          <span class="pub-role first-author">First author</span>
+        </div>
+        <span class="quad-label">IRIS</span>
+        <span class="quad-sub">IEEE RO-MAN 2023, Busan</span>
+        <p class="quad-desc">Jenkinson GP, Tiemann K, Papathanasiou A, Bewley J, Conn AT, Tzemanaki A</p>
+        <div class="pub-links">
+          <a href="https://doi.org/10.1109/RO-MAN57019.2023.10309324" target="_blank" class="pub-link">Paper ↗</a>
+          <button class="pub-link yt" data-type="youtube" data-video="JL4EqBO38KU">▶ Video</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Acceptability Survey (2023) -->
+    <div class="quad pub-card"
+         style="--base: #1e2d3a; --hover: #0f1d28; --img: url('images/acceptable.png'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type journal">Journal</span>
+          <span class="pub-year">2023</span>
+          <span class="pub-role first-author">First author</span>
+        </div>
+        <span class="quad-label">Acceptability of Automated Breast Examination</span>
+        <span class="quad-sub">Journal of Participatory Medicine</span>
+        <p class="quad-desc">Jenkinson GP*, Houghton N*, van Zalk N, Waller J, Bello F, Tzemanaki A</p>
+        <div class="pub-links">
+          <a href="https://doi.org/10.2196/42704" target="_blank" class="pub-link">Paper ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. ESPRESS.0 (2023) -->
+    <div class="quad pub-card"
+         style="--base: #1e3245; --hover: #0f2030; --img: url('images/espresso.png'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type journal">Journal</span>
+          <span class="pub-year">2023</span>
+          <span class="pub-role first-author">First author</span>
+        </div>
+        <span class="quad-label">ESPRESS.0</span>
+        <span class="quad-sub">MDPI Sensors</span>
+        <p class="quad-desc">Jenkinson GP, Conn AT, Tzemanaki A</p>
+        <div class="pub-links">
+          <a href="https://doi.org/10.3390/s23020567" target="_blank" class="pub-link">Paper ↗</a>
+          <button class="pub-link yt" data-type="youtube" data-video="2hecuR0vmoY">▶ Video</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Tetraflex (2023, co-author) -->
+    <div class="quad pub-card"
+         style="--base: #1e3828; --hover: #0f2418; --img: url('images/tetraflex.gif'); --pos: center 28%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type journal">Journal</span>
+          <span class="pub-year">2023</span>
+          <span class="pub-role co-author">Co-author</span>
+        </div>
+        <span class="quad-label">Tetraflex</span>
+        <span class="quad-sub">IEEE Robotics and Automation Letters</span>
+        <p class="quad-desc">Wharton P*, You TL*, Jenkinson GP, Diteesawat RS, et al.</p>
+        <div class="pub-links">
+          <a href="https://doi.org/10.1109/LRA.2023.3290409" target="_blank" class="pub-link">Paper ↗</a>
+          <button class="pub-link yt" data-type="local" data-video="files/tetraflex.mp4">▶ Video</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10. Optical-Tactile Sensor (2021, co-author) -->
+    <div class="quad pub-card"
+         style="--base: #28201e; --hover: #1a140f; --img: url('images/pneutip.webp'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type journal">Journal</span>
+          <span class="pub-year">2021</span>
+          <span class="pub-role co-author">Co-author</span>
+        </div>
+        <span class="quad-label">Optical-Tactile Sensor for Lump Detection</span>
+        <span class="quad-sub">Frontiers in Robotics and AI</span>
+        <p class="quad-desc">Bewley J, Jenkinson GP, Tzemanaki A</p>
+        <div class="pub-links">
+          <a href="https://doi.org/10.3389/frobt.2021.672315" target="_blank" class="pub-link">Paper ↗</a>
+          <button class="pub-link yt" data-type="youtube" data-video="_GW7-QmtuyA">▶ Video</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. SPIDER (2020) -->
+    <div class="quad pub-card"
+         style="--base: #2a1e3a; --hover: #1a0f28; --img: url('images/spider.png'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type conference">Conference</span>
+          <span class="pub-year">2020</span>
+          <span class="pub-role first-author">First author</span>
+        </div>
+        <span class="quad-label">SPIDER</span>
+        <span class="quad-sub">ALIFE 2020</span>
+        <p class="quad-desc">Jenkinson GP*, Hunt ER*, Wilsher MJG, Dettmann CP, Hauert S</p>
+        <div class="pub-links">
+          <a href="https://doi.org/10.1162/isal_a_00279" target="_blank" class="pub-link">Paper ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Pressure Controlled Membrane (2020) -->
+    <div class="quad pub-card"
+         style="--base: #1e2a3a; --hover: #0f1a28; --img: url('images/pressure.png'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type conference">Conference</span>
+          <span class="pub-year">2020</span>
+          <span class="pub-role first-author">First author</span>
+        </div>
+        <span class="quad-label">Pressure-Controlled Membrane for Haptic Sensing</span>
+        <span class="quad-sub">TAROS 2020, Nottingham</span>
+        <p class="quad-desc">Jenkinson GP, Conn AT, Tzemanaki A</p>
+        <div class="pub-links">
+          <a href="https://doi.org/10.1007/978-3-030-63486-5_31" target="_blank" class="pub-link">Paper ↗</a>
+          <button class="pub-link yt" data-type="youtube" data-video="URWH6bPn4M0">▶ Video</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. Newton the Natural Philosopher (2016) -->
+    <div class="quad pub-card"
+         style="--base: #1e1e1e; --hover: #111111; --img: url('images/TODO_newton.jpg'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type undergrad">Undergraduate Journal</span>
+          <span class="pub-year">2016</span>
+          <span class="pub-role first-author">First author</span>
+        </div>
+        <span class="quad-label">Newton the Natural Philosopher</span>
+        <span class="quad-sub">AUC Undergraduate Journal of Liberal Arts &amp; Sciences</span>
+        <p class="quad-desc">Jenkinson GP</p>
+        <div class="pub-links">
+          <!-- Replace # with journal link -->
+          <a href="#" target="_blank" class="pub-link">Link ↗</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── Video modal ── -->
+  <div id="video-modal" class="video-modal">
+    <div class="video-modal-bg"></div>
+    <div class="video-modal-inner">
+      <button class="video-close" aria-label="Close video">✕</button>
+      <div class="video-container" id="video-container"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const modal     = document.getElementById('video-modal');
+      const container = document.getElementById('video-container');
+      const closeBtn  = document.querySelector('.video-close');
+      const bg        = document.querySelector('.video-modal-bg');
+
+      function openVideo(type, src) {
+        container.innerHTML = '';
+        if (type === 'youtube') {
+          const iframe = document.createElement('iframe');
+          iframe.src = 'https://www.youtube.com/embed/' + src + '?autoplay=1';
+          iframe.allow = 'autoplay; encrypted-media; fullscreen';
+          iframe.allowFullscreen = true;
+          container.appendChild(iframe);
+        } else if (type === 'local') {
+          const video = document.createElement('video');
+          video.src = src;
+          video.controls = true;
+          video.autoplay = true;
+          container.appendChild(video);
+        }
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeVideo() {
+        modal.classList.remove('open');
+        container.innerHTML = '';   // stops playback immediately
+        document.body.style.overflow = '';
+      }
+
+      closeBtn.addEventListener('click', closeVideo);
+      bg.addEventListener('click', closeVideo);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeVideo();
+      });
+
+      document.querySelectorAll('button.pub-link.yt').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var type  = btn.dataset.type;
+          var video = btn.dataset.video;
+          if (type && video) openVideo(type, video);
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>

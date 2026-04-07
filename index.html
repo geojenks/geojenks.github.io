@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>George Jenkinson</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── BIO SECTION ── -->
+  <section class="bio">
+
+    <!-- Left: text -->
+    <div class="bio-inner">
+      <div class="bio-header">
+        <img class="bio-photo" src="images/Jenkinson_github.jpeg" alt="George Jenkinson">
+        <div>
+          <h1>George Jenkinson</h1>
+          <p class="bio-role">Postdoctoral Researcher &nbsp;·&nbsp; University of Bath</p>
+        </div>
+      </div>
+      <p class="bio-tagline">Exploring mathematically driven robotic mechanisms to better understand ourselves.</p>
+      <p class="bio-text">
+        My research spans tactile sensing, dexterous manipulation, swarm robotics, and
+        machine learning — with a particular focus on assistive technology for visually
+        impaired people. I completed my PhD at Bristol working across the Dexterous
+        Manipulation and Soft Robotics research groups, and am currently part of the
+        ARIA Robot Dexterity programme at the University of Bath.
+      </p>
+      <p class="bio-text">
+        Alongside academia I explore nature, music, food, and any other pursuit I find enriching.
+      </p>
+    </div>
+
+    <a class="scroll-hint" href="#grid" aria-label="Scroll to explore">&#8964;</a>
+
+    <!-- Right: animation -->
+    <div class="bio-canvas-wrap">
+      <canvas id="wave-canvas"></canvas>
+      <!-- Controls -->
+      <div class="controls">
+        <div class="control-row">
+          <label for="ctrl-freq">Speed</label>
+          <input type="range" id="ctrl-freq" min="0.02" max="0.6" step="0.01" value="0.18">
+        </div>
+        <div class="control-row">
+          <label for="ctrl-duty">Contact</label>
+          <input type="range" id="ctrl-duty" min="0.1" max="0.9" step="0.01" value="0.55">
+        </div>
+        <div class="control-row">
+          <label for="ctrl-n">Fingers</label>
+          <input type="range" id="ctrl-n" min="4" max="32" step="1" value="18">
+          <span class="ctrl-val" id="val-n">18</span>
+        </div>
+        <div class="control-row">
+          <label for="ctrl-peaks">Peaks</label>
+          <input type="range" id="ctrl-peaks" min="1" max="4" step="1" value="1">
+          <span class="ctrl-val" id="val-peaks">1</span>
+        </div>
+      </div>
+      <p class="canvas-caption">Exploring the use of waves to control in-hand manipulation</p>
+    </div>
+
+  </section>
+
+  <!-- ── QUAD GRID ── -->
+  <section class="grid" id="grid">
+
+    <a class="quad" href="projects.html"
+       style="--base: #2c4a6e; --hover: #1a3050; --img: url('images/full_pen_cropped.jpeg'); --pos: center 95%;">
+      <div class="quad-content">
+        <span class="quad-label">Projects</span>
+        <span class="quad-sub">Research &amp; Engineering</span>
+      </div>
+    </a>
+
+    <a class="quad" href="publications.html"
+       style="--base: #4a2c6e; --hover: #311850; --img: url('images/conf_talk.jpeg'); --pos: center 25%;">
+      <div class="quad-content">
+        <span class="quad-label">Publications</span>
+        <span class="quad-sub">Papers &amp; Preprints</span>
+      </div>
+    </a>
+
+    <a class="quad" href="media.html"
+       style="--base: #2c6e4a; --hover: #185030; --img: url('images/BBC_Points_West_Braille-Tip.jpg');">
+      <div class="quad-content">
+        <span class="quad-label">In the Media</span>
+        <span class="quad-sub">Press &amp; Outreach</span>
+      </div>
+    </a>
+
+    <a class="quad" href="rest.html"
+       style="--base: #6e4a2c; --hover: #503018; --img: url('images/crokinole.jpeg'); --pos: center 60%;">
+      <div class="quad-content">
+        <span class="quad-label">&hellip;&thinsp;the Rest</span>
+        <span class="quad-sub">Side Projects, Hobbies, Writing, Extra Content, &amp; More</span>
+      </div>
+    </a>
+
+  </section>
+
+  <script src="wave.js"></script>
+</body>
+</html>
