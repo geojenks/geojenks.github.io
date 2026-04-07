@@ -270,10 +270,16 @@ body { font-family: var(--sans); color: var(--text-dark); background: var(--bio-
 @media (max-width: 760px) {
   .bio {
     flex-direction: column;
-    padding: 3rem 2rem;
-    gap: 2.5rem;
+    height: auto;
+    min-height: 100vh;
+    justify-content: flex-start;
+    padding: 3rem 2rem 5rem;
+    gap: 2rem;
   }
-  .bio-canvas-wrap { max-width: 320px; }
+  .bio-canvas-wrap {
+    width: 75vw;
+    max-width: 300px;
+  }
   .grid {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 40vh);
