@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoRA Workshop — George Jenkinson</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* ── Page header (matches rest.html) ── */
+    .page-header {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.9rem 2rem;
+      background: var(--bio-accent);
+    }
+    .page-header a {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: rgba(240, 237, 232, 0.6); text-decoration: none; transition: color 0.2s;
+    }
+    .page-header a:hover { color: var(--text-light); }
+    .page-header h2 {
+      font-family: var(--serif); font-size: 1.1rem; font-weight: normal;
+      color: var(--text-light); margin: 0;
+    }
+    .page-header .sep { color: rgba(240, 237, 232, 0.3); font-size: 0.8rem; }
+
+    /* ── Shell ── */
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 2rem 8rem; }
+
+    .lede { padding: 3.5rem 0 2.5rem; }
+    .lede h1 {
+      font-family: var(--serif); font-weight: normal;
+      font-size: clamp(2rem, 4.5vw, 3rem); letter-spacing: -0.01em;
+      color: var(--bio-accent); margin-bottom: 0.35rem;
+    }
+    .lede .role {
+      font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.09em;
+      color: #999; margin-bottom: 1.6rem;
+    }
+    .lede blockquote {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(1rem, 1.8vw, 1.2rem); line-height: 1.55; color: #555;
+      border-left: 2px solid var(--bio-accent); padding-left: 1rem; margin-bottom: 1.8rem;
+    }
+    p { font-size: 0.97rem; line-height: 1.8; color: #555; margin-bottom: 1rem; }
+    .wrap a { color: var(--bio-accent); }
+
+    /* ── Section nav ── */
+    .toc {
+      position: sticky; top: 3.2rem; z-index: 15;
+      display: flex; flex-wrap: wrap; gap: 0 1.4rem;
+      padding: 0.85rem 0; margin-bottom: 1rem;
+      background: var(--bio-bg);
+      border-bottom: 1px solid rgba(44, 74, 110, 0.12);
+    }
+    .toc a {
+      font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.11em;
+      color: #999; text-decoration: none; transition: color 0.2s;
+      padding: 0.15rem 0; border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--bio-accent); }
+    .toc a.on { color: var(--bio-accent); border-bottom-color: var(--bio-accent); }
+
+    /* ── Sections ── */
+    section { padding-top: 2.8rem; }
+    section > h2 {
+      font-family: var(--serif); font-weight: normal; font-size: 1.6rem;
+      color: var(--bio-accent); margin-bottom: 0.25rem;
+      scroll-margin-top: 6rem;
+    }
+    section > .sub {
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.11em;
+      color: #bbb; margin-bottom: 1.4rem;
+    }
+    h3 {
+      font-family: var(--serif); font-weight: normal; font-size: 1.12rem;
+      color: #333; margin: 1.8rem 0 0.5rem;
+    }
+    ol, ul { margin: 0 0 1rem 1.15rem; }
+    li { font-size: 0.97rem; line-height: 1.75; color: #555; margin-bottom: 0.35rem; }
+    strong { color: #333; font-weight: 600; }
+
+    /* ── Code ── */
+    .code {
+      position: relative;
+      background: rgba(44, 74, 110, 0.05);
+      border: 1px solid rgba(44, 74, 110, 0.1);
+      border-radius: 8px;
+      padding: 0.85rem 3.2rem 0.85rem 1rem;
+      margin: 0.6rem 0 1.2rem;
+      overflow-x: auto;
+    }
+    .code pre {
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.8rem; line-height: 1.7; color: #2f3d4f;
+      white-space: pre; margin: 0;
+    }
+    code {
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.85em; color: var(--bio-accent);
+      background: rgba(44, 74, 110, 0.07);
+      padding: 0.12em 0.38em; border-radius: 3px;
+    }
+    .copy {
+      position: absolute; top: 0.5rem; right: 0.5rem;
+      font-family: var(--sans);
+      font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em;
+      background: none; cursor: pointer;
+      border: 1px solid rgba(44, 74, 110, 0.25); border-radius: 2px;
+      color: #8a9bb0; padding: 0.25em 0.6em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .copy:hover { border-color: var(--bio-accent); color: var(--bio-accent); }
+    .copy.done { border-color: #6a9a6a; color: #6a9a6a; }
+
+    /* ── Destination list ── */
+    .dest { border-top: 1px solid rgba(44, 74, 110, 0.12); }
+    .dest .row {
+      display: grid; grid-template-columns: 8.5rem 1fr;
+      gap: 1rem; align-items: baseline;
+      padding: 0.85rem 0; border-bottom: 1px solid rgba(44, 74, 110, 0.12);
+    }
+    .dest .k {
+      font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.11em; color: #999;
+    }
+    .dest .v {
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.82rem; color: var(--bio-accent); word-break: break-all;
+    }
+    .dest .v a { text-decoration: none; border-bottom: 1px solid rgba(44,74,110,0.3); }
+    .dest .v a:hover { border-bottom-color: var(--bio-accent); }
+
+    /* ── Tables ── */
+    .tbl { width: 100%; overflow-x: auto; margin: 0.4rem 0 1.4rem; }
+    table { border-collapse: collapse; width: 100%; min-width: 30rem; }
+    th {
+      font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.11em;
+      color: #999; font-weight: normal; text-align: left;
+      padding: 0.5rem 0.8rem 0.5rem 0; border-bottom: 1px solid rgba(44, 74, 110, 0.2);
+      white-space: nowrap;
+    }
+    td {
+      font-size: 0.88rem; line-height: 1.65; color: #555; vertical-align: top;
+      padding: 0.6rem 0.8rem 0.6rem 0; border-bottom: 1px solid rgba(44, 74, 110, 0.09);
+    }
+    td:first-child { color: #333; }
+
+    /* ── Details / progressive disclosure ── */
+    details {
+      border-bottom: 1px solid rgba(44, 74, 110, 0.12);
+      padding: 0.2rem 0;
+    }
+    details > summary {
+      cursor: pointer; list-style: none;
+      padding: 0.85rem 0;
+      font-size: 0.9rem; color: #333;
+      display: flex; align-items: center; gap: 0.7rem;
+      transition: color 0.2s;
+    }
+    details > summary::-webkit-details-marker { display: none; }
+    details > summary::before {
+      content: '+'; font-family: var(--sans); font-size: 1rem;
+      color: #bbb; width: 0.8rem; flex-shrink: 0;
+      transition: transform 0.2s, color 0.2s;
+    }
+    details[open] > summary::before { content: '\2212'; color: var(--bio-accent); }
+    details > summary:hover { color: var(--bio-accent); }
+    details > summary:hover::before { color: var(--bio-accent); }
+    .details-body { padding: 0.2rem 0 1.2rem 1.5rem; }
+
+    /* ── Callout ── */
+    .note {
+      border-left: 2px solid var(--bio-accent);
+      padding: 0.15rem 0 0.15rem 1rem;
+      margin: 1.2rem 0;
+    }
+    .note p { margin-bottom: 0.4rem; }
+    .note p:last-child { margin-bottom: 0; }
+    .note .tag {
+      display: block; font-size: 0.62rem; text-transform: uppercase;
+      letter-spacing: 0.13em; color: #999; margin-bottom: 0.35rem;
+    }
+
+    /* ── Out-links ── */
+    .links { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 0.6rem; }
+    .links a {
+      font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 0.45em 1em; border-radius: 2px; text-decoration: none;
+      border: 1px solid rgba(44, 74, 110, 0.3); color: #5d7794;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .links a:hover { border-color: var(--bio-accent); color: var(--bio-accent); }
+
+    footer {
+      margin-top: 5rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(44, 74, 110, 0.12);
+      font-size: 0.72rem; color: #bbb; letter-spacing: 0.03em;
+    }
+
+    @media (max-width: 700px) {
+      .wrap { padding: 0 1.3rem 5rem; }
+      .page-header { padding: 0.9rem 1.3rem; }
+      .dest .row { grid-template-columns: 1fr; gap: 0.25rem; }
+      .toc { gap: 0 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <a href="../index.html">← George Jenkinson</a>
+    <span class="sep">/</span>
+    <a href="../rest.html">…the Rest</a>
+    <span class="sep">/</span>
+    <h2>LoRA Workshop</h2>
+  </header>
+
+  <div class="wrap">
+
+    <div class="lede">
+      <h1>LoRA Workshop</h1>
+      <p class="role">Two days &nbsp;·&nbsp; Photos in, trained LoRA out</p>
+      <blockquote>Take twenty photographs of one subject, and by tomorrow morning have a
+        model that knows it well enough to put it anywhere.</blockquote>
+      <p>Everything runs on a shared GPU box. <strong>Your laptop is a thin client</strong> —
+        there is nothing to install beyond a browser, an SSH client and Tailscale, and no GPU
+        required at your end. Two web pages do the captioning and the watching; two commands
+        submit a run and follow it.</p>
+      <p>The queue runs overnight, so the ambitious job is the one you leave behind when you
+        go home. This page is the whole workshop: what to do before you arrive, what to do on
+        the day, and what to do when it misbehaves.</p>
+    </div>
+
+    <nav class="toc">
+      <a href="#destinations">Destinations</a>
+      <a href="#before">Before you arrive</a>
+      <a href="#day">On the day</a>
+      <a href="#reference">Reference</a>
+      <a href="#wrong">When it goes wrong</a>
+      <a href="#slides">Slides</a>
+      <a href="#code">The code</a>
+    </nav>
+
+    <!-- ─────────────────────────────── destinations -->
+    <section id="destinations">
+      <h2>Your three destinations</h2>
+      <p class="sub">Everything you touch is one of these</p>
+
+      <div class="dest">
+        <div class="row">
+          <span class="k">Captioning</span>
+          <span class="v"><a href="http://desktop-sp62bqg.taild599ce.ts.net:8771">desktop-sp62bqg.taild599ce.ts.net:8771</a></span>
+        </div>
+        <div class="row">
+          <span class="k">Dashboard</span>
+          <span class="v"><a href="http://desktop-sp62bqg.taild599ce.ts.net:8770">desktop-sp62bqg.taild599ce.ts.net:8770</a></span>
+        </div>
+        <div class="row">
+          <span class="k">Shell</span>
+          <span class="v">ssh gpubox</span>
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="tag">Use the name, never an IP</span>
+        <p>The box has a <strong>different <code>100.x</code> address for every person it is
+          shared with</strong> — George's address for it is not yours. The full name resolves
+          to whichever one is right for you. An IP copied off someone else's screen will simply
+          time out.</p>
+      </div>
+
+      <p>Both pages need nothing but a browser and an accepted Tailscale share. If a page won't
+        load, start the services — safe to run at any time, and it will not restart the queue
+        worker while a job is training:</p>
+
+      <div class="code"><button class="copy">copy</button><pre>ssh gpubox "powershell -File D:\workshop\start.ps1"</pre></div>
+    </section>
+
+    <!-- ─────────────────────────────── before -->
+    <section id="before">
+      <h2>Before you arrive</h2>
+      <p class="sub">Four things, none of them need a GPU</p>
+
+      <p>Do this <strong>a few days before, not the night before</strong> — if your SSH key
+        isn't on the box yet, George has to add it, and that isn't instant.</p>
+
+      <details>
+        <summary>1 · Tailscale — how you reach the box</summary>
+        <div class="details-body">
+          <p>Install from <a href="https://tailscale.com" target="_blank">tailscale.com</a> and
+            sign in. George will share the box with you by link; accept the share before
+            running the checks below.</p>
+          <p>The first-run wizard tries to walk you through building your own network and can
+            trap you in a loop. Take the <strong>"I already know how to use Tailscale"</strong>
+            escape to reach the normal client, <em>then</em> open the share link.</p>
+          <p>Once accepted, the box appears in <code>tailscale status</code> on the line ending
+            in George's email. Two things worth knowing, because they cause most of the
+            confusion:</p>
+          <ul>
+            <li>the box's <strong>short</strong> name does not resolve for you at all — only
+              the full <code>…ts.net</code> name does;</li>
+            <li>Tailscale gives the box a <strong>different address for every person</strong>
+              it's shared with, so IPs are not transferable between people.</li>
+          </ul>
+          <div class="code"><button class="copy">copy</button><pre>tailscale status</pre></div>
+          <p>The box is the line with George's email on it; its address is the first column.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>2 · SSH — and the one shortcut worth setting up</summary>
+        <div class="details-body">
+          <p>An SSH client is already built into Windows 10+, macOS and Linux. Send George your
+            public key — <code>~/.ssh/id_ed25519.pub</code>, or make one with
+            <code>ssh-keygen -t ed25519</code> — so he can add it to the box.</p>
+          <p>Your username on the box is <strong>not</strong> your laptop username, and it
+            contains spaces and brackets, which makes it awkward to type. Put this in
+            <code>~/.ssh/config</code> (no file extension; on Windows it's
+            <code>C:\Users\&lt;you&gt;\.ssh\config</code>):</p>
+          <div class="code"><button class="copy">copy</button><pre>Host gpubox
+    HostName desktop-sp62bqg.taild599ce.ts.net
+    User &lt;the username George gives you&gt;</pre></div>
+          <p>Now <code>ssh gpubox</code> just works, and so does
+            <code>scp … gpubox:</code>.</p>
+
+          <h3>Skipping the config file</h3>
+          <p>If you'd rather type it each time, this works — but only on
+            <strong>OpenSSH 9.5 and older</strong>, which is what Windows 11 currently ships:</p>
+          <div class="code"><button class="copy">copy</button><pre>ssh "george (stable diff)@desktop-sp62bqg.taild599ce.ts.net"</pre></div>
+          <p>OpenSSH <strong>9.6 added a check that rejects brackets in a command-line
+            username</strong>, so on current macOS, on Linux, and in Git Bash the same line
+            fails with <code>remote username contains invalid characters</code>. Check with
+            <code>ssh -V</code>. This form works on every version, in both PowerShell and
+            bash:</p>
+          <div class="code"><button class="copy">copy</button><pre>ssh -o "User='george (stable diff)'" desktop-sp62bqg.taild599ce.ts.net</pre></div>
+          <p>The quoting is load-bearing: the inner single quotes are what let the config
+            parser take the name as one value.</p>
+
+          <div class="note">
+            <span class="tag">The box is a Windows machine</span>
+            <p>Your laptop can be anything, but when you <code>ssh</code> in you land in
+              <strong>cmd</strong> — type <code>powershell</code> first, every time. You don't
+              need to learn PowerShell; every command you'll actually run is written out ready
+              to paste.</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>3 · Git and Python on your laptop</summary>
+        <div class="details-body">
+          <p>Python 3.10+ for the queue client and light scripts. Neither needs a GPU.</p>
+          <div class="code"><button class="copy">copy</button><pre>winget install Git.Git                 # Windows
+winget install Python.Python.3.12      # tick "Add to PATH"
+
+brew install git python@3.12           # macOS
+sudo apt install git python3 python3-pip python3-venv   # Linux</pre></div>
+          <p>Then, after cloning the repo:</p>
+          <div class="code"><button class="copy">copy</button><pre>python -m pip install -r requirements.txt</pre></div>
+          <p>On macOS and Linux use <code>python3</code> if <code>python</code> isn't found.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>4 · Run the sanity check</summary>
+        <div class="details-body">
+          <p>This checks Python, git, ssh, your key, Tailscale, that the box answers, that your
+            login works, and the dashboard. It changes nothing on the box.</p>
+          <div class="code"><button class="copy">copy</button><pre>python tools/check_setup.py --ssh-alias gpubox</pre></div>
+          <p>The box's address is already the default, so there's nothing to fill in.
+            <code>[--]</code> lines are warnings worth reading; <code>[XX]</code> lines come
+            with instructions for fixing them.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Also before Day 1 — your dataset</summary>
+        <div class="details-body">
+          <p>Complete the intent section of the run card, upload your images, and arrange for
+            automatic captioning on the box. <strong>The live session is for auditing captions
+            and submitting</strong>, not for waiting on three full datasets to caption.</p>
+          <p>What makes a good set: <strong>20–40 images, one subject, at least 1024 px on the
+            short edge.</strong> Variety in pose, lighting and background; the thing you want
+            the model to learn should be the only constant.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ─────────────────────────────── on the day -->
+    <section id="day">
+      <h2>On the day</h2>
+      <p class="sub">Caption · configure · submit · collect</p>
+
+      <h3>1 · Caption your images</h3>
+      <p>On the captioning page. Your <strong>name</strong> is your folder — it's what finds
+        your images and your previous configs. Your <strong>trigger word</strong> is a rare
+        token prefixed to every caption.</p>
+      <ol>
+        <li>Drop your images on the page.</li>
+        <li><strong>Remove</strong> the ones you don't want <em>before</em> captioning.</li>
+        <li>Pick a style, or type a custom instruction, and press <strong>Caption</strong> —
+          about 15 s per image.</li>
+        <li><strong>Read every caption and fix it.</strong> This is the actual work.</li>
+        <li><strong>Save captions.</strong> The timestamp is the confirmation — if it doesn't
+          move, it didn't save.</li>
+      </ol>
+
+      <div class="note">
+        <span class="tag">The one idea worth carrying</span>
+        <p>Caption what you want to stay <em>changeable</em>. Leave out what you want
+          <em>baked in</em> to the trigger word. If every photo is captioned "wearing a red
+          coat", the coat stays changeable; if you never mention it, the trigger learns it.</p>
+      </div>
+
+      <p>Captions save as <code>&lt;image&gt;.txt</code> next to each image — that's what
+        training reads, so there's no export step. <strong>Save before you submit:</strong>
+        training reads the files at the moment the job starts.</p>
+
+      <h3>2 · Make the training config</h3>
+      <p>Panel 3 on the same page. Pick a base model, check the sample prompts, press
+        <strong>Make config</strong>. It writes the <code>.yaml</code> on the box, already
+        pointed at your images, and shows you the exact submit command.</p>
+      <p>You can also <strong>start from a previous config</strong> — the dropdown lists your
+        earlier runs, and your most recent one's sample prompts load automatically. Change the
+        model or a couple of words and press Make config for the next version. Each press makes
+        a new version, so nothing is ever overwritten.</p>
+
+      <div class="note">
+        <span class="tag">Sample prompts</span>
+        <p>Include one you <strong>expect to fail</strong>. The sample grid is the only
+          instrument you get in the morning, and a grid of successes tells you nothing.</p>
+      </div>
+
+      <p>Leave <strong>Make GIFs of the samples</strong> ticked. When the run finishes, each
+        sample prompt's images are stitched into one looping GIF, half a second a frame, from
+        the first step to the last — they land in <code>sample_gifs</code> beside
+        <code>samples</code>. Watching the likeness arrive and then curdle takes about seven
+        seconds; finding the same thing by clicking through ninety JPEGs takes rather longer.</p>
+
+      <h3>3 · Submit</h3>
+      <div class="code"><button class="copy">copy</button><pre>ssh gpubox
+powershell
+$py = "C:\Users\George (Stable Diff)\Documents\Stable diff\GUI\ComfyUI\Scripts\python.exe"
+cd D:\workshop\loraq
+&amp; $py loraq.py submit "D:\workshop\configs\&lt;name&gt;\&lt;name&gt;_sdxl_v1.yaml" --owner &lt;name&gt; --steps 3500</pre></div>
+      <p>Before a big overnight run, check the GPU is actually free:</p>
+      <div class="code"><button class="copy">copy</button><pre>nvidia-smi --query-gpu=memory.free --format=csv,noheader</pre></div>
+      <p>Under ~14 GB free means the captioner is still holding the GPU. Press
+        <strong>Free the GPU</strong> on the captioning page, or wait fifteen minutes and it
+        releases on its own.</p>
+
+      <div class="note">
+        <span class="tag">The queue is fair, so use it</span>
+        <p>Runs are round-robin by owner: <strong>everyone's first run goes before anyone's
+          second.</strong> Submit a safe one early and the ambitious one second, and you get
+          both.</p>
+      </div>
+
+      <h3>4 · Watch, then go home</h3>
+      <p>The dashboard and <code>loraq.py ls</code> both show what each job is doing. A
+        checkpoint and a sample grid land every 250 steps, and the queue survives you logging
+        out.</p>
+      <div class="code"><pre>19  geo  geo_flux2_klein_v2  running  0:11:17  3500  step 262/3500 (7%)  loss 0.521  eta 1:11:14
+20  ana  ana_sdxl_v1         queued                  next up</pre></div>
+      <p>You'll also see <code>loading model</code>, <code>caching latents</code> and
+        <code>sampling</code>. A step count that stops moving while it says
+        <code>sampling</code> is normal — a sample grid takes a minute. Failed jobs show the
+        error.</p>
+
+      <h3>5 · Collect</h3>
+      <div class="code"><button class="copy">copy</button><pre>scp gpubox:'D:/workshop/loraq/output/&lt;run&gt;/*.safetensors' .
+scp -r gpubox:'D:/workshop/loraq/output/&lt;run&gt;/samples' .
+scp -r gpubox:'D:/workshop/loraq/output/&lt;run&gt;/sample_gifs' .</pre></div>
+      <p>The <code>.safetensors</code> file <em>is</em> your LoRA. Drop it in
+        <code>models/loras/</code> in ComfyUI or A1111 and it's ready to use.</p>
+    </section>
+
+    <!-- ─────────────────────────────── reference -->
+    <section id="reference">
+      <h2>Reference</h2>
+      <p class="sub">Models, timings, commands</p>
+
+      <h3>Base models</h3>
+      <div class="tbl">
+        <table>
+          <tr><th>Model</th><th>Speed</th><th>1200 steps</th><th>3500 steps</th><th></th></tr>
+          <tr><td>SDXL 1.0</td><td>~38 steps/min</td><td>31 min</td><td>~1 h 30</td><td>start here</td></tr>
+          <tr><td>Flux.2 klein 4B</td><td>~25 steps/min</td><td>49 min</td><td>~2 h 20</td><td></td></tr>
+          <tr><td>Flux.1 dev</td><td>~13 steps/min</td><td>1 h 30</td><td>~4 h 20</td><td>book it overnight</td></tr>
+          <tr><td>SD 1.5</td><td>fast</td><td>—</td><td>—</td><td>dated</td></tr>
+          <tr><td>Qwen-Image</td><td>—</td><td>—</td><td>—</td><td>experimental</td></tr>
+        </table>
+      </div>
+      <p>Three people × two SDXL runs is a comfortable night. Three people × two Flux.1 runs
+        is not.</p>
+
+      <h3>Queue commands</h3>
+      <div class="tbl">
+        <table>
+          <tr><th>Command</th><th>What it does</th></tr>
+          <tr><td><code>loraq.py ls</code></td><td>the queue, and what each job is doing</td></tr>
+          <tr><td><code>loraq.py log &lt;id&gt;</code></td><td>that job's output — <code>-f</code> follows it</td></tr>
+          <tr><td><code>loraq.py cancel &lt;id&gt;</code></td><td>queued or running</td></tr>
+          <tr><td><code>loraq.py requeue &lt;id&gt;</code></td><td>put a failed job back</td></tr>
+          <tr><td><code>loraq.py prio &lt;id&gt; &lt;n&gt;</code></td><td>jump the queue</td></tr>
+        </table>
+      </div>
+
+      <h3>Where things live on the box</h3>
+      <div class="code"><pre>D:\workshop\data\&lt;name&gt;\images\      your images + .txt captions
+D:\workshop\data\&lt;name&gt;\binned\      images you removed
+D:\workshop\configs\&lt;name&gt;\          your training configs
+D:\workshop\loraq\output\&lt;run&gt;\      checkpoints + samples   &lt;- the result
+D:\workshop\loraq\logs\              one log per job
+D:\workshop\logs\                    service logs</pre></div>
+
+      <h3>Starting and restarting</h3>
+      <div class="tbl">
+        <table>
+          <tr><th>Flag</th><th>Effect</th></tr>
+          <tr><td><code>start.ps1</code></td><td>start whatever isn't running, wait until both pages answer</td></tr>
+          <tr><td><code>-Status</code></td><td>report only, start nothing</td></tr>
+          <tr><td><code>-Restart</code></td><td>stop and restart everything, after editing a tool</td></tr>
+        </table>
+      </div>
+      <p>It refuses to restart the queue worker while a job is training — that would kill the
+        run. A manual kill won't refuse, so use the script.</p>
+    </section>
+
+    <!-- ─────────────────────────────── troubleshooting -->
+    <section id="wrong">
+      <h2>When it goes wrong</h2>
+      <p class="sub">In rough order of how often it happens</p>
+
+      <div class="tbl">
+        <table>
+          <tr><th>Symptom</th><th>Fix</th></tr>
+          <tr><td>Tailscale shows the device but the page times out</td>
+              <td>You're on an IP that isn't yours. Use the full name. If it won't resolve, run <code>tailscale status</code> — the box is the line with George's email, and its address is the first column.</td></tr>
+          <tr><td>A page won't load at all</td>
+              <td>Run <code>start.ps1</code>.</td></tr>
+          <tr><td><code>remote username contains invalid characters</code></td>
+              <td>Your OpenSSH is 9.6+. Use the <code>-o "User='…'"</code> form, or the config file.</td></tr>
+          <tr><td><code>'Get-CimInstance' is not recognized</code></td>
+              <td>You're in cmd. Type <code>powershell</code>.</td></tr>
+          <tr><td>Job fails in ~30 s, <code>FileNotFoundError</code></td>
+              <td>The config points somewhere that doesn't exist. Regenerate it from the page.</td></tr>
+          <tr><td>Job fails, CUDA out of memory</td>
+              <td>The captioner still holds the GPU. Press <strong>Free the GPU</strong>.</td></tr>
+          <tr><td>"loading joycaption…" never finishes</td>
+              <td>Started by hand instead of via <code>start.ps1</code>. Re-run it with <code>-Restart</code>.</td></tr>
+          <tr><td>The previous-configs dropdown is empty</td>
+              <td>It's found by the <strong>Your name</strong> box at the top of the page. No name, no list.</td></tr>
+          <tr><td>Samples look blurry</td>
+              <td>Images under 1024 px were upscaled.</td></tr>
+          <tr><td>"nothing to do" when captioning</td>
+              <td>Everything already has a caption. Tick <strong>redo existing</strong>.</td></tr>
+          <tr><td>Trained on raw captions</td>
+              <td>You submitted before pressing Save.</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────── slides -->
+    <section id="slides">
+      <h2>Slides</h2>
+      <p class="sub">Day 1 — five sessions</p>
+      <p>The deck runs in the browser. It's a large single file with the sample grids embedded,
+        so give it a moment on first load.</p>
+      <ol>
+        <li>Overview — what we're doing and why</li>
+        <li>How the models work</li>
+        <li>Bricks — the counter-example, where a LoRA is the wrong tool</li>
+        <li>LoRA theory, and reading a sample grid</li>
+        <li>Launching training</li>
+      </ol>
+      <div class="links">
+        <a href="slides/day1.html">Open the Day 1 deck</a>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────── code -->
+    <section id="code">
+      <h2>The code</h2>
+      <p class="sub">Everything used on the day</p>
+      <p>The workshop kit — configs for all five base models, the captioning page, the queue,
+        the depth tools and the full documentation.</p>
+      <div class="links">
+        <a href="https://github.com/geojenks/lora-workshop" target="_blank">lora-workshop</a>
+        <a href="https://github.com/geojenks/procedural-bricks" target="_blank">procedural-bricks</a>
+        <a href="https://github.com/ostris/ai-toolkit" target="_blank">ai-toolkit</a>
+      </div>
+      <p style="margin-top:1.4rem">Training itself is <a href="https://github.com/ostris/ai-toolkit"
+        target="_blank">ai-toolkit</a>; the queue, the captioning page and the dashboard are
+        ours. <code>procedural-bricks</code> is the counter-example from session 3 — the
+        problem that looks like it wants a LoRA and doesn't.</p>
+      <p class="sub">The first two are private repositories: if the link 404s, ask George for
+        access rather than assuming it has moved.</p>
+    </section>
+
+    <footer>
+      Written for three makers over two days. Corrections welcome.
+    </footer>
+
+  </div>
+
+<script>
+// ── copy buttons ────────────────────────────────────────────────────────────
+// The whole point of a cheat sheet is that commands go from screen to terminal without
+// being retyped, and half of these contain quoting that is painful to retype correctly.
+document.querySelectorAll('.copy').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const text = btn.parentElement.querySelector('pre').innerText;
+    try { await navigator.clipboard.writeText(text); }
+    catch (e) {
+      // clipboard API needs a secure context; this page may well be served over plain http
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove();
+    }
+    btn.textContent = 'copied'; btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('done'); }, 1400);
+  });
+});
+
+// ── which section am I in ───────────────────────────────────────────────────
+const links = [...document.querySelectorAll('.toc a')];
+const seen = new Map();
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => seen.set(e.target.id, e.isIntersecting));
+  // Topmost visible section wins, so scrolling up highlights what you're arriving at
+  // rather than whatever happened to fire an event last.
+  const active = links.find(a => seen.get(a.hash.slice(1)));
+  links.forEach(a => a.classList.toggle('on', a === active));
+}, { rootMargin: '-15% 0px -75% 0px' });
+document.querySelectorAll('section').forEach(s => io.observe(s));
+</script>
+
+</body>
+</html>
