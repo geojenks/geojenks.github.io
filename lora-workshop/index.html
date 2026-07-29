@@ -321,6 +321,16 @@
         software and you can learn one without the other. The guide below is all of day 1,
         from installing Tailscale to collecting the trained file. Day 2 goes in beside it as
         it is written.</p>
+
+      <p>Why it is remote at all: fine-tuning is heavy. Flux.1 at 1024 pixels needs more
+        video memory than any laptop has, and even quantised it wants most of a 24 GB card.
+        SDXL and SD1.5 will train on a lot less and are worth a try if you have a gaming GPU
+        at home, but they are two model generations behind and the output shows it. So the
+        models live on one desktop with a 32 GB GPU and we all work on it at once. That is
+        the only reason Tailscale and <code>ssh</code> are in the setup below: Tailscale puts
+        your laptop and that desktop on the same private network so the browser can reach it,
+        and <code>ssh</code> gives you a command line on it. Neither is something you need to
+        learn, they are just the way in.</p>
     </div>
 
     <nav class="toc">
@@ -373,10 +383,11 @@
     <!-- ─────────────────────────────── slides -->
     <section id="slides">
       <h2>Slides</h2>
-      <p>The decks run in the browser. Day 1 is a single large file with all the sample grids
-        embedded, so give it a moment on first load.</p>
+      <p>The decks run in the browser. Both have every sample grid embedded, so they are large
+        files and want a moment on first load.</p>
       <div class="links">
         <a href="slides/day1.html">Day 1 deck</a>
+        <a href="slides/day2.html">Day 2 deck</a>
       </div>
       <ol style="margin-top:1rem">
         <li>Overview: what we are doing and why</li>
@@ -384,8 +395,14 @@
         <li>Bricks: a problem that looks like it wants a LoRA and does not</li>
         <li>LoRA theory, and reading a sample grid</li>
         <li>Launching training</li>
+        <li>Flux 3, what landed while we slept</li>
+        <li>Reading your own results, and picking a checkpoint</li>
+        <li>ComfyUI crash course</li>
+        <li>Staying current, and making a new model earn its place</li>
+        <li>Depth, normals and 3D for machining</li>
+        <li>Close</li>
       </ol>
-      <p>Day 2 goes up here once it is written.</p>
+      <p>One to five are day 1, six to eleven are day 2.</p>
 
       <h4>Links used in the slides</h4>
       <ul class="reflist">
