@@ -111,6 +111,8 @@
     .flowwrap { overflow-x: auto; margin: 0.5rem 0 1.6rem; }
     .flow { display: block; width: 100%; min-width: 640px; height: auto; }
     .flow .panel { fill: rgba(44, 74, 110, 0.045); stroke: rgba(44, 74, 110, 0.22); }
+    .flow .group { fill: rgba(44, 74, 110, 0.05); stroke: rgba(44, 74, 110, 0.18); }
+    .flow .group.two { fill: rgba(70, 110, 80, 0.06); stroke: rgba(70, 110, 80, 0.28); }
     .flow .box   { fill: #fff; stroke: rgba(44, 74, 110, 0.3); }
     .flow .t { font: 600 13px var(--sans); fill: #2f3d4f; }
     .flow .m { font: 12px 'SF Mono', Menlo, Consolas, monospace; fill: #2f3d4f; }
@@ -234,17 +236,19 @@
 
     <div class="lede">
       <h1>LoRA Workshop</h1>
-      <p>Two days. Photographs of one subject go in, and a trained LoRA comes out: a small
-        file you can drop into ComfyUI to put that subject anywhere.</p>
+      <p>Photographs of one subject go in, and a trained LoRA comes out: a small file you
+        can drop into ComfyUI to put that subject anywhere. That is day 1. Day 2 is ComfyUI
+        itself, and what you can do with the file once you have it.</p>
       <p>All of it runs on a remote desktop with a big GPU in it. Your laptop is only a
         browser and an SSH client, so there is nothing to install and no GPU needed at your
         end. Here is what sits where.</p>
 
       <div class="flowwrap">
-        <svg class="flow" viewBox="0 0 780 430" role="img"
-             aria-label="Your laptop connects over Tailscale to a remote desktop that hosts
-                         the captioning page, the queue dashboard, the training worker and
-                         all the files.">
+        <svg class="flow" viewBox="0 0 780 512" role="img"
+             aria-label="Your laptop connects over Tailscale to a remote desktop. Day 1 on
+                         that desktop is the captioning page, the queue dashboard and the
+                         training worker; day 2 is ComfyUI on port 8188. Both read and write
+                         the same files, and the trained LoRA passes from one to the other.">
           <defs>
             <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5"
                     markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -254,52 +258,69 @@
 
           <!-- the private network everything crosses -->
           <text class="h" x="297" y="30" text-anchor="middle">TAILSCALE</text>
-          <line class="dash" x1="297" y1="44" x2="297" y2="378"/>
+          <line class="dash" x1="297" y1="44" x2="297" y2="482"/>
 
           <!-- laptop -->
-          <rect class="panel" x="6" y="44" width="236" height="330" rx="10"/>
+          <rect class="panel" x="6" y="44" width="236" height="434" rx="10"/>
           <text class="h" x="24" y="70">YOUR LAPTOP</text>
           <rect class="box" x="24" y="84" width="200" height="52" rx="6"/>
           <text class="t" x="38" y="108">Browser</text>
-          <text class="s" x="38" y="125">opens the two pages</text>
+          <text class="s" x="38" y="125">opens all three pages</text>
           <rect class="box" x="24" y="150" width="200" height="52" rx="6"/>
           <text class="t" x="38" y="174">SSH client</text>
           <text class="s" x="38" y="191">submits runs, collects files</text>
-          <rect class="box" x="24" y="248" width="200" height="56" rx="6"/>
-          <text class="m" x="38" y="272">your_lora.safetensors</text>
-          <text class="s" x="38" y="290">what you take home</text>
-          <text class="s" x="24" y="342">No GPU, nothing trains here.</text>
+          <rect class="box" x="24" y="300" width="200" height="56" rx="6"/>
+          <text class="m" x="38" y="324">your_lora.safetensors</text>
+          <text class="s" x="38" y="342">only if you want it locally</text>
+          <text class="s" x="24" y="404">No GPU, nothing runs here.</text>
 
           <!-- remote desktop -->
-          <rect class="panel" x="352" y="44" width="422" height="330" rx="10"/>
-          <text class="h" x="370" y="70">REMOTE DESKTOP, BIG GPU, WINDOWS</text>
-          <rect class="box" x="370" y="84" width="386" height="52" rx="6"/>
-          <text class="t" x="384" y="108">Captioning page, port 8771</text>
-          <text class="s" x="384" y="125">a captioning model reads your images, on the GPU</text>
-          <rect class="box" x="370" y="146" width="386" height="52" rx="6"/>
-          <text class="t" x="384" y="170">Queue dashboard, port 8770</text>
-          <text class="s" x="384" y="187">watch, pause, cancel, reorder</text>
-          <rect class="box" x="370" y="208" width="386" height="52" rx="6"/>
-          <text class="t" x="384" y="232">Queue worker, running ai-toolkit</text>
-          <text class="s" x="384" y="249">one training job at a time, on the GPU</text>
-          <rect class="box" x="370" y="274" width="386" height="82" rx="6"/>
-          <text class="m" x="384" y="298">D:\workshop</text>
-          <text class="s" x="384" y="318">your images and their captions</text>
-          <text class="s" x="384" y="336">configs, checkpoints, sample images</text>
+          <rect class="panel" x="352" y="44" width="422" height="434" rx="10"/>
+          <text class="h" x="368" y="70">REMOTE DESKTOP, BIG GPU, WINDOWS</text>
+
+          <!-- day 1: training -->
+          <rect class="group" x="362" y="80" width="402" height="200" rx="8"/>
+          <text class="h" x="376" y="98">DAY 1, TRAINING A LORA</text>
+          <rect class="box" x="376" y="106" width="374" height="48" rx="6"/>
+          <text class="t" x="390" y="128">Captioning page, port 8771</text>
+          <text class="s" x="390" y="145">a captioning model reads your images, on the GPU</text>
+          <rect class="box" x="376" y="162" width="374" height="48" rx="6"/>
+          <text class="t" x="390" y="184">Queue dashboard, port 8770</text>
+          <text class="s" x="390" y="201">watch, pause, cancel, reorder</text>
+          <rect class="box" x="376" y="218" width="374" height="48" rx="6"/>
+          <text class="t" x="390" y="240">Queue worker, running ai-toolkit</text>
+          <text class="s" x="390" y="257">one training job at a time, on the GPU</text>
+
+          <!-- day 2: generating -->
+          <rect class="group two" x="362" y="304" width="402" height="82" rx="8"/>
+          <text class="h" x="376" y="322">DAY 2, USING IT</text>
+          <rect class="box" x="376" y="330" width="374" height="48" rx="6"/>
+          <text class="t" x="390" y="352">ComfyUI, port 8188</text>
+          <text class="s" x="390" y="369">generates with your LoRA, also on the GPU</text>
+
+          <!-- shared files -->
+          <rect class="box" x="362" y="404" width="402" height="60" rx="6"/>
+          <text class="m" x="376" y="426">D:\workshop</text>
+          <text class="s" x="376" y="446">images, captions, configs, checkpoints, samples</text>
+
+          <!-- the LoRA crossing from one part to the other -->
+          <path class="arr" d="M700 268 V 326"/>
+          <text class="s" x="692" y="298" text-anchor="end">the trained file</text>
 
           <!-- who talks to what -->
-          <path class="arr" d="M228 100 H364"/>
-          <path class="arr" d="M228 118 C 290 118, 300 168, 364 168"/>
-          <path class="arr" d="M228 182 C 290 182, 300 230, 364 230"/>
-          <path class="arr" d="M366 320 C 300 320, 300 276, 232 276"/>
-          <text class="s" x="352" y="312" text-anchor="end">scp</text>
+          <path class="arr" d="M228 100 C 300 100, 300 130, 370 130"/>
+          <path class="arr" d="M228 114 C 300 114, 300 186, 370 186"/>
+          <path class="arr" d="M228 128 C 300 128, 300 354, 370 354"/>
+          <path class="arr" d="M228 180 C 300 180, 300 242, 370 242"/>
+          <path class="arr" d="M358 440 C 300 440, 300 328, 232 328"/>
+          <text class="s" x="350" y="424" text-anchor="end">scp</text>
         </svg>
       </div>
 
-      <p>Day 1 was how the models work, captioning, and getting everyone's first runs into
-        the queue overnight. Day 2 is ComfyUI and what to do with the files that came out.
-        The guide below is the whole process, from installing Tailscale to collecting the
-        trained file.</p>
+      <p>The two halves share the machine and the files, but they are separate pieces of
+        software and you can learn one without the other. The guide below is all of day 1,
+        from installing Tailscale to collecting the trained file. Day 2 goes in beside it as
+        it is written.</p>
     </div>
 
     <nav class="toc">
@@ -326,6 +347,10 @@
           <span class="v"><a href="http://desktop-sp62bqg.taild599ce.ts.net:8770">desktop-sp62bqg.taild599ce.ts.net:8770</a></span>
         </div>
         <div class="row">
+          <span class="k">ComfyUI</span>
+          <span class="v"><a href="http://desktop-sp62bqg.taild599ce.ts.net:8188">desktop-sp62bqg.taild599ce.ts.net:8188</a></span>
+        </div>
+        <div class="row">
           <span class="k">Shell</span>
           <span class="v">ssh gpubox</span>
         </div>
@@ -338,8 +363,9 @@
           <code>.ts.net</code> name resolves to whichever one is right for you.</p>
       </div>
 
-      <p>Both pages need nothing but a browser and an accepted Tailscale share. If one does
-        not load, start the services. This is safe to run at any time:</p>
+      <p>All three pages need nothing but a browser and an accepted Tailscale share. If one
+        does not load, start the services. This is safe to run at any time, and it brings up
+        whichever of the four is missing:</p>
 
       <div class="code"><button class="copy">copy</button><pre>ssh gpubox "powershell -File D:\workshop\start.ps1"</pre></div>
     </section>
@@ -620,13 +646,21 @@ cd D:\workshop\loraq
         <div class="shot">[insert picture of the dashboard mid-run, with samples showing]</div>
 
         <h4>5. Collect</h4>
+        <p>The <code>.safetensors</code> file is your LoRA. There is one per checkpoint, so
+          take the step number the samples say is best rather than the last one by default.
+          It only has to reach <code>models/loras/</code> in ComfyUI, and the copy on the
+          remote desktop is already next to the ComfyUI that will use it, so for day 2 you do
+          not have to move anything at all.</p>
+        <p>Copying it to your own laptop is a separate thing you might want: to keep it, to
+          use it in a ComfyUI or A1111 of your own, or to have the sample images and GIFs to
+          look at later. <code>scp</code> is the file-copy half of ssh, and it uses the same
+          <code>gpubox</code> shortcut, so run these from your laptop in whatever folder you
+          want the files to land in:</p>
         <div class="code"><button class="copy">copy</button><pre>scp gpubox:'D:/workshop/loraq/output/&lt;run&gt;/*.safetensors' .
 scp -r gpubox:'D:/workshop/loraq/output/&lt;run&gt;/samples' .
 scp -r gpubox:'D:/workshop/loraq/output/&lt;run&gt;/sample_gifs' .</pre></div>
-        <p>The <code>.safetensors</code> file is your LoRA. Put it in
-          <code>models/loras/</code> in ComfyUI or A1111 and it is ready to use. There is one
-          per checkpoint, so take the step number the samples say is best rather than the last
-          one by default.</p>
+        <p>The trailing <code>.</code> is the destination, meaning the folder you are
+          currently in.</p>
       </div>
 
       <!-- reference -->
@@ -673,13 +707,19 @@ D:\workshop\logs\                    service logs</pre></div>
         <div class="tbl">
           <table>
             <tr><th>Flag</th><th>Effect</th></tr>
-            <tr><td><code>start.ps1</code></td><td>start whatever is not running, wait until both pages answer</td></tr>
+            <tr><td><code>start.ps1</code></td><td>start whatever is not running, wait until the pages answer</td></tr>
             <tr><td><code>-Status</code></td><td>report only, start nothing</td></tr>
             <tr><td><code>-Restart</code></td><td>stop and restart everything, after editing a tool</td></tr>
           </table>
         </div>
-        <p>If a job is training, <code>-Restart</code> leaves the queue alone and only
-          restarts the two pages, so you can run it mid-run without killing anyone's job.</p>
+        <p>It handles four services: the captioning page, the queue worker, the dashboard and
+          ComfyUI. If a job is training, <code>-Restart</code> leaves the queue alone and
+          restarts the rest, so you can run it mid-run without killing anyone's job. ComfyUI
+          it will restart regardless, so do not run it while you are waiting on a generation.</p>
+        <p>ComfyUI idles at about 2 GB of VRAM, which is not enough to disturb a training run.
+          Generating while a job trains is what causes an out of memory, and pausing the queue
+          on the <a href="http://desktop-sp62bqg.taild599ce.ts.net:8770">dashboard</a> is the
+          way round it.</p>
       </div>
 
       <!-- problems -->
