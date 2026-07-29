@@ -361,6 +361,10 @@
           <span class="v"><a href="http://desktop-sp62bqg.taild599ce.ts.net:8188">desktop-sp62bqg.taild599ce.ts.net:8188</a></span>
         </div>
         <div class="row">
+          <span class="k">ComfyUI output</span>
+          <span class="v"><a href="http://desktop-sp62bqg.taild599ce.ts.net:8772">desktop-sp62bqg.taild599ce.ts.net:8772</a></span>
+        </div>
+        <div class="row">
           <span class="k">Shell</span>
           <span class="v">ssh gpubox</span>
         </div>
@@ -373,9 +377,21 @@
           <code>.ts.net</code> name resolves to whichever one is right for you.</p>
       </div>
 
-      <p>All three pages need nothing but a browser and an accepted Tailscale share. If one
+      <p>Everything you generate in ComfyUI lands in one folder on the desktop, and the page
+        on 8772 is that folder in a browser, newest first, read only. Click an image to open
+        it and save it. Each PNG still carries the workflow that made it, so a file you save
+        today can be dragged back onto a canvas later and rebuild its own graph. When you
+        want the whole morning's work rather than three pictures, run this on your laptop
+        instead, from the workshop kit:</p>
+
+      <div class="code"><button class="copy">copy</button><pre>python tools/pull_outputs.py --since 3h</pre></div>
+
+      <p>It skips anything it has already fetched, so you can run it as often as you like.
+        Add <code>--list</code> to see what it would take without taking it.</p>
+
+      <p>All four pages need nothing but a browser and an accepted Tailscale share. If one
         does not load, start the services. This is safe to run at any time, and it brings up
-        whichever of the four is missing:</p>
+        whichever of the five is missing:</p>
 
       <div class="code"><button class="copy">copy</button><pre>ssh gpubox "powershell -File D:\workshop\start.ps1"</pre></div>
     </section>
@@ -729,8 +745,8 @@ D:\workshop\logs\                    service logs</pre></div>
             <tr><td><code>-Restart</code></td><td>stop and restart everything, after editing a tool</td></tr>
           </table>
         </div>
-        <p>It handles four services: the captioning page, the queue worker, the dashboard and
-          ComfyUI. If a job is training, <code>-Restart</code> leaves the queue alone and
+        <p>It handles five services: the captioning page, the queue worker, the dashboard,
+          ComfyUI and the output browser. If a job is training, <code>-Restart</code> leaves the queue alone and
           restarts the rest, so you can run it mid-run without killing anyone's job. ComfyUI
           it will restart regardless, so do not run it while you are waiting on a generation.</p>
         <p>ComfyUI idles at about 2 GB of VRAM, which is not enough to disturb a training run.
