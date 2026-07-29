@@ -27,20 +27,11 @@
     /* ── Shell ── */
     .wrap { max-width: 820px; margin: 0 auto; padding: 0 2rem 8rem; }
 
-    .lede { padding: 3.5rem 0 2.5rem; }
+    .lede { padding: 3.5rem 0 1.5rem; }
     .lede h1 {
       font-family: var(--serif); font-weight: normal;
       font-size: clamp(2rem, 4.5vw, 3rem); letter-spacing: -0.01em;
-      color: var(--bio-accent); margin-bottom: 0.35rem;
-    }
-    .lede .role {
-      font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.09em;
-      color: #999; margin-bottom: 1.6rem;
-    }
-    .lede blockquote {
-      font-family: var(--serif); font-style: italic;
-      font-size: clamp(1rem, 1.8vw, 1.2rem); line-height: 1.55; color: #555;
-      border-left: 2px solid var(--bio-accent); padding-left: 1rem; margin-bottom: 1.8rem;
+      color: var(--bio-accent); margin-bottom: 1.4rem;
     }
     p { font-size: 0.97rem; line-height: 1.8; color: #555; margin-bottom: 1rem; }
     .wrap a { color: var(--bio-accent); }
@@ -65,15 +56,18 @@
     section { padding-top: 2.8rem; }
     section > h2 {
       font-family: var(--serif); font-weight: normal; font-size: 1.6rem;
-      color: var(--bio-accent); margin-bottom: 0.25rem;
+      color: var(--bio-accent); margin-bottom: 1rem;
       scroll-margin-top: 6rem;
     }
-    section > .sub {
-      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.11em;
-      color: #bbb; margin-bottom: 1.4rem;
+    .chunk { padding-top: 2.2rem; }
+    .chunk > h3 {
+      font-family: var(--serif); font-weight: normal; font-size: 1.25rem;
+      color: var(--bio-accent); margin: 0 0 0.8rem;
+      padding-bottom: 0.4rem; border-bottom: 1px solid rgba(44, 74, 110, 0.15);
+      scroll-margin-top: 6rem;
     }
-    h3 {
-      font-family: var(--serif); font-weight: normal; font-size: 1.12rem;
+    h4 {
+      font-family: var(--serif); font-weight: normal; font-size: 1.08rem;
       color: #333; margin: 1.8rem 0 0.5rem;
     }
     ol, ul { margin: 0 0 1rem 1.15rem; }
@@ -113,7 +107,20 @@
     .copy:hover { border-color: var(--bio-accent); color: var(--bio-accent); }
     .copy.done { border-color: #6a9a6a; color: #6a9a6a; }
 
-    /* ── Destination list ── */
+    /* ── Flowchart ── */
+    .flowwrap { overflow-x: auto; margin: 0.5rem 0 1.6rem; }
+    .flow { display: block; width: 100%; min-width: 640px; height: auto; }
+    .flow .panel { fill: rgba(44, 74, 110, 0.045); stroke: rgba(44, 74, 110, 0.22); }
+    .flow .box   { fill: #fff; stroke: rgba(44, 74, 110, 0.3); }
+    .flow .t { font: 600 13px var(--sans); fill: #2f3d4f; }
+    .flow .m { font: 12px 'SF Mono', Menlo, Consolas, monospace; fill: #2f3d4f; }
+    .flow .s { font: 11.5px var(--sans); fill: #8a9bb0; }
+    .flow .h { font: 10.5px var(--sans); letter-spacing: 1.4px; fill: #a0a8b4; }
+    .flow .arr { stroke: rgba(44, 74, 110, 0.45); stroke-width: 1.4; fill: none;
+                 marker-end: url(#ah); }
+    .flow .dash { stroke: rgba(44, 74, 110, 0.25); stroke-width: 1; stroke-dasharray: 3 5; }
+
+    /* ── Link list ── */
     .dest { border-top: 1px solid rgba(44, 74, 110, 0.12); }
     .dest .row {
       display: grid; grid-template-columns: 8.5rem 1fr;
@@ -176,9 +183,13 @@
     }
     .note p { margin-bottom: 0.4rem; }
     .note p:last-child { margin-bottom: 0; }
-    .note .tag {
-      display: block; font-size: 0.62rem; text-transform: uppercase;
-      letter-spacing: 0.13em; color: #999; margin-bottom: 0.35rem;
+
+    /* ── Picture placeholder ── */
+    .shot {
+      border: 1px dashed rgba(44, 74, 110, 0.35); border-radius: 6px;
+      padding: 1.1rem 1rem; margin: 1rem 0;
+      font-size: 0.8rem; color: #8a9bb0; text-align: center;
+      background: rgba(44, 74, 110, 0.02);
     }
 
     /* ── Out-links ── */
@@ -190,6 +201,10 @@
       transition: border-color 0.2s, color 0.2s;
     }
     .links a:hover { border-color: var(--bio-accent); color: var(--bio-accent); }
+
+    .reflist { list-style: none; margin-left: 0; }
+    .reflist li { margin-bottom: 0.5rem; }
+    .reflist .why { color: #999; font-size: 0.9em; }
 
     footer {
       margin-top: 5rem; padding-top: 1.5rem;
@@ -219,32 +234,87 @@
 
     <div class="lede">
       <h1>LoRA Workshop</h1>
-      <p class="role">Two days &nbsp;·&nbsp; Photos in, trained LoRA out</p>
-      <blockquote>Take twenty photographs of one subject, and by tomorrow morning have a
-        model that knows it well enough to put it anywhere.</blockquote>
-      <p>Everything runs on a shared GPU box. <strong>Your laptop is a thin client</strong> —
-        there is nothing to install beyond a browser, an SSH client and Tailscale, and no GPU
-        required at your end. Two web pages do the captioning and the watching; two commands
-        submit a run and follow it.</p>
-      <p>The queue runs overnight, so the ambitious job is the one you leave behind when you
-        go home. This page is the whole workshop: what to do before you arrive, what to do on
-        the day, and what to do when it misbehaves.</p>
+      <p>Two days. Photographs of one subject go in, and a trained LoRA comes out: a small
+        file you can drop into ComfyUI to put that subject anywhere.</p>
+      <p>All of it runs on a remote desktop with a big GPU in it. Your laptop is only a
+        browser and an SSH client, so there is nothing to install and no GPU needed at your
+        end. Here is what sits where.</p>
+
+      <div class="flowwrap">
+        <svg class="flow" viewBox="0 0 780 430" role="img"
+             aria-label="Your laptop connects over Tailscale to a remote desktop that hosts
+                         the captioning page, the queue dashboard, the training worker and
+                         all the files.">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5"
+                    markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="rgba(44,74,110,0.5)"/>
+            </marker>
+          </defs>
+
+          <!-- the private network everything crosses -->
+          <text class="h" x="297" y="30" text-anchor="middle">TAILSCALE</text>
+          <line class="dash" x1="297" y1="44" x2="297" y2="378"/>
+
+          <!-- laptop -->
+          <rect class="panel" x="6" y="44" width="236" height="330" rx="10"/>
+          <text class="h" x="24" y="70">YOUR LAPTOP</text>
+          <rect class="box" x="24" y="84" width="200" height="52" rx="6"/>
+          <text class="t" x="38" y="108">Browser</text>
+          <text class="s" x="38" y="125">opens the two pages</text>
+          <rect class="box" x="24" y="150" width="200" height="52" rx="6"/>
+          <text class="t" x="38" y="174">SSH client</text>
+          <text class="s" x="38" y="191">submits runs, collects files</text>
+          <rect class="box" x="24" y="248" width="200" height="56" rx="6"/>
+          <text class="m" x="38" y="272">your_lora.safetensors</text>
+          <text class="s" x="38" y="290">what you take home</text>
+          <text class="s" x="24" y="342">No GPU, nothing trains here.</text>
+
+          <!-- remote desktop -->
+          <rect class="panel" x="352" y="44" width="422" height="330" rx="10"/>
+          <text class="h" x="370" y="70">REMOTE DESKTOP, BIG GPU, WINDOWS</text>
+          <rect class="box" x="370" y="84" width="386" height="52" rx="6"/>
+          <text class="t" x="384" y="108">Captioning page, port 8771</text>
+          <text class="s" x="384" y="125">a captioning model reads your images, on the GPU</text>
+          <rect class="box" x="370" y="146" width="386" height="52" rx="6"/>
+          <text class="t" x="384" y="170">Queue dashboard, port 8770</text>
+          <text class="s" x="384" y="187">watch, pause, cancel, reorder</text>
+          <rect class="box" x="370" y="208" width="386" height="52" rx="6"/>
+          <text class="t" x="384" y="232">Queue worker, running ai-toolkit</text>
+          <text class="s" x="384" y="249">one training job at a time, on the GPU</text>
+          <rect class="box" x="370" y="274" width="386" height="82" rx="6"/>
+          <text class="m" x="384" y="298">D:\workshop</text>
+          <text class="s" x="384" y="318">your images and their captions</text>
+          <text class="s" x="384" y="336">configs, checkpoints, sample images</text>
+
+          <!-- who talks to what -->
+          <path class="arr" d="M228 100 H364"/>
+          <path class="arr" d="M228 118 C 290 118, 300 168, 364 168"/>
+          <path class="arr" d="M228 182 C 290 182, 300 230, 364 230"/>
+          <path class="arr" d="M366 320 C 300 320, 300 276, 232 276"/>
+          <text class="s" x="352" y="312" text-anchor="end">scp</text>
+        </svg>
+      </div>
+
+      <p>Day 1 was how the models work, captioning, and getting everyone's first runs into
+        the queue overnight. Day 2 is ComfyUI and what to do with the files that came out.
+        The guide below is the whole process, from installing Tailscale to collecting the
+        trained file.</p>
     </div>
 
     <nav class="toc">
-      <a href="#destinations">Destinations</a>
-      <a href="#before">Before you arrive</a>
+      <a href="#links">Links</a>
+      <a href="#slides">Slides</a>
+      <a href="#code">Code</a>
+      <a href="#setup">Setup</a>
       <a href="#day">On the day</a>
       <a href="#reference">Reference</a>
-      <a href="#wrong">When it goes wrong</a>
-      <a href="#slides">Slides</a>
-      <a href="#code">The code</a>
+      <a href="#problems">Problems</a>
     </nav>
 
-    <!-- ─────────────────────────────── destinations -->
-    <section id="destinations">
-      <h2>Your three destinations</h2>
-      <p class="sub">Everything you touch is one of these</p>
+    <!-- ─────────────────────────────── links -->
+    <section id="links">
+      <h2>Links</h2>
 
       <div class="dest">
         <div class="row">
@@ -252,7 +322,7 @@
           <span class="v"><a href="http://desktop-sp62bqg.taild599ce.ts.net:8771">desktop-sp62bqg.taild599ce.ts.net:8771</a></span>
         </div>
         <div class="row">
-          <span class="k">Dashboard</span>
+          <span class="k">Queue</span>
           <span class="v"><a href="http://desktop-sp62bqg.taild599ce.ts.net:8770">desktop-sp62bqg.taild599ce.ts.net:8770</a></span>
         </div>
         <div class="row">
@@ -262,344 +332,392 @@
       </div>
 
       <div class="note">
-        <span class="tag">Use the name, never an IP</span>
-        <p>The box has a <strong>different <code>100.x</code> address for every person it is
-          shared with</strong> — George's address for it is not yours. The full name resolves
-          to whichever one is right for you. An IP copied off someone else's screen will simply
-          time out.</p>
+        <p>Use the full name above rather than an IP address. Tailscale gives the desktop a
+          different <code>100.x</code> address for each person it is shared with, so an
+          address copied off someone else's screen will time out. The full
+          <code>.ts.net</code> name resolves to whichever one is right for you.</p>
       </div>
 
-      <p>Both pages need nothing but a browser and an accepted Tailscale share. If a page won't
-        load, start the services — safe to run at any time, and it will not restart the queue
-        worker while a job is training:</p>
+      <p>Both pages need nothing but a browser and an accepted Tailscale share. If one does
+        not load, start the services. This is safe to run at any time:</p>
 
       <div class="code"><button class="copy">copy</button><pre>ssh gpubox "powershell -File D:\workshop\start.ps1"</pre></div>
     </section>
 
-    <!-- ─────────────────────────────── before -->
-    <section id="before">
-      <h2>Before you arrive</h2>
-      <p class="sub">Four things, none of them need a GPU</p>
+    <!-- ─────────────────────────────── slides -->
+    <section id="slides">
+      <h2>Slides</h2>
+      <p>The decks run in the browser. Day 1 is a single large file with all the sample grids
+        embedded, so give it a moment on first load.</p>
+      <div class="links">
+        <a href="slides/day1.html">Day 1 deck</a>
+      </div>
+      <ol style="margin-top:1rem">
+        <li>Overview: what we are doing and why</li>
+        <li>How the models work</li>
+        <li>Bricks: a problem that looks like it wants a LoRA and does not</li>
+        <li>LoRA theory, and reading a sample grid</li>
+        <li>Launching training</li>
+      </ol>
+      <p>Day 2 goes up here once it is written.</p>
 
-      <p>Do this <strong>a few days before, not the night before</strong> — if your SSH key
-        isn't on the box yet, George has to add it, and that isn't instant.</p>
-
-      <details>
-        <summary>1 · Tailscale — how you reach the box</summary>
-        <div class="details-body">
-          <p>Install from <a href="https://tailscale.com" target="_blank">tailscale.com</a> and
-            sign in. George will share the box with you by link; accept the share before
-            running the checks below.</p>
-          <p>The first-run wizard tries to walk you through building your own network and can
-            trap you in a loop. Take the <strong>"I already know how to use Tailscale"</strong>
-            escape to reach the normal client, <em>then</em> open the share link.</p>
-          <p>Once accepted, the box appears in <code>tailscale status</code> on the line ending
-            in George's email. Two things worth knowing, because they cause most of the
-            confusion:</p>
-          <ul>
-            <li>the box's <strong>short</strong> name does not resolve for you at all — only
-              the full <code>…ts.net</code> name does;</li>
-            <li>Tailscale gives the box a <strong>different address for every person</strong>
-              it's shared with, so IPs are not transferable between people.</li>
-          </ul>
-          <div class="code"><button class="copy">copy</button><pre>tailscale status</pre></div>
-          <p>The box is the line with George's email on it; its address is the first column.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>2 · SSH — and the one shortcut worth setting up</summary>
-        <div class="details-body">
-          <p>An SSH client is already built into Windows 10+, macOS and Linux. Send George your
-            public key — <code>~/.ssh/id_ed25519.pub</code>, or make one with
-            <code>ssh-keygen -t ed25519</code> — so he can add it to the box.</p>
-          <p>Your username on the box is <strong>not</strong> your laptop username, and it
-            contains spaces and brackets, which makes it awkward to type. Put this in
-            <code>~/.ssh/config</code> (no file extension; on Windows it's
-            <code>C:\Users\&lt;you&gt;\.ssh\config</code>):</p>
-          <div class="code"><button class="copy">copy</button><pre>Host gpubox
-    HostName desktop-sp62bqg.taild599ce.ts.net
-    User &lt;the username George gives you&gt;</pre></div>
-          <p>Now <code>ssh gpubox</code> just works, and so does
-            <code>scp … gpubox:</code>.</p>
-
-          <h3>Skipping the config file</h3>
-          <p>If you'd rather type it each time, this works — but only on
-            <strong>OpenSSH 9.5 and older</strong>, which is what Windows 11 currently ships:</p>
-          <div class="code"><button class="copy">copy</button><pre>ssh "george (stable diff)@desktop-sp62bqg.taild599ce.ts.net"</pre></div>
-          <p>OpenSSH <strong>9.6 added a check that rejects brackets in a command-line
-            username</strong>, so on current macOS, on Linux, and in Git Bash the same line
-            fails with <code>remote username contains invalid characters</code>. Check with
-            <code>ssh -V</code>. This form works on every version, in both PowerShell and
-            bash:</p>
-          <div class="code"><button class="copy">copy</button><pre>ssh -o "User='george (stable diff)'" desktop-sp62bqg.taild599ce.ts.net</pre></div>
-          <p>The quoting is load-bearing: the inner single quotes are what let the config
-            parser take the name as one value.</p>
-
-          <div class="note">
-            <span class="tag">The box is a Windows machine</span>
-            <p>Your laptop can be anything, but when you <code>ssh</code> in you land in
-              <strong>cmd</strong> — type <code>powershell</code> first, every time. You don't
-              need to learn PowerShell; every command you'll actually run is written out ready
-              to paste.</p>
-          </div>
-        </div>
-      </details>
-
-      <details>
-        <summary>3 · Git and Python on your laptop</summary>
-        <div class="details-body">
-          <p>Python 3.10+ for the queue client and light scripts. Neither needs a GPU.</p>
-          <div class="code"><button class="copy">copy</button><pre>winget install Git.Git                 # Windows
-winget install Python.Python.3.12      # tick "Add to PATH"
-
-brew install git python@3.12           # macOS
-sudo apt install git python3 python3-pip python3-venv   # Linux</pre></div>
-          <p>Then, after cloning the repo:</p>
-          <div class="code"><button class="copy">copy</button><pre>python -m pip install -r requirements.txt</pre></div>
-          <p>On macOS and Linux use <code>python3</code> if <code>python</code> isn't found.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>4 · Run the sanity check</summary>
-        <div class="details-body">
-          <p>This checks Python, git, ssh, your key, Tailscale, that the box answers, that your
-            login works, and the dashboard. It changes nothing on the box.</p>
-          <div class="code"><button class="copy">copy</button><pre>python tools/check_setup.py --ssh-alias gpubox</pre></div>
-          <p>The box's address is already the default, so there's nothing to fill in.
-            <code>[--]</code> lines are warnings worth reading; <code>[XX]</code> lines come
-            with instructions for fixing them.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Also before Day 1 — your dataset</summary>
-        <div class="details-body">
-          <p>Complete the intent section of the run card, upload your images, and arrange for
-            automatic captioning on the box. <strong>The live session is for auditing captions
-            and submitting</strong>, not for waiting on three full datasets to caption.</p>
-          <p>What makes a good set: <strong>20–40 images, one subject, at least 1024 px on the
-            short edge.</strong> Variety in pose, lighting and background; the thing you want
-            the model to learn should be the only constant.</p>
-        </div>
-      </details>
+      <h4>Links used in the slides</h4>
+      <ul class="reflist">
+        <li><a href="https://poloclub.github.io/diffusion-explainer/" target="_blank">Diffusion Explainer</a>
+          <span class="why">and <a href="https://jalammar.github.io/illustrated-stable-diffusion/" target="_blank">The Illustrated Stable Diffusion</a>, if you want the pictures version of session 2</span></li>
+        <li><a href="https://arxiv.org/abs/2106.09685" target="_blank">LoRA: Low-Rank Adaptation</a>
+          <span class="why">the original paper, and it is readable</span></li>
+        <li><a href="https://arxiv.org/abs/2212.09748" target="_blank">Diffusion models with transformers</a>
+          <span class="why">what Flux is, roughly</span></li>
+        <li><a href="https://arxiv.org/abs/2302.05543" target="_blank">ControlNet</a>,
+          <a href="https://github.com/lllyasviel/ControlNet" target="_blank">code</a>,
+          <a href="https://comfyanonymous.github.io/ComfyUI_examples/controlnet/" target="_blank">ComfyUI examples</a>
+          <span class="why">the other way to control output, and often the right one</span></li>
+        <li><a href="https://huggingface.co/models" target="_blank">Hugging Face models</a>
+          <span class="why">where the base models come from</span></li>
+        <li><a href="https://github.com/xinntao/ESRGAN" target="_blank">ESRGAN</a>
+          <span class="why">upscaling, from session 3</span></li>
+        <li><a href="https://www.youtube.com/@3blue1brown" target="_blank">3Blue1Brown</a> and
+          <a href="https://www.youtube.com/@AICoffeeBreak" target="_blank">AI Coffee Break</a>
+          <span class="why">if you want to keep going</span></li>
+      </ul>
     </section>
 
-    <!-- ─────────────────────────────── on the day -->
-    <section id="day">
-      <h2>On the day</h2>
-      <p class="sub">Caption · configure · submit · collect</p>
+    <!-- ─────────────────────────────── code -->
+    <section id="code">
+      <h2>Code</h2>
+      <p>The workshop kit holds the configs for all five base models, the captioning page,
+        the queue, the depth tools and the documentation. Training itself is ai-toolkit, which
+        is not mine. <code>procedural-bricks</code> is the counter-example from session 3.</p>
+      <div class="links">
+        <a href="https://github.com/geojenks/lora-workshop" target="_blank">lora-workshop</a>
+        <a href="https://github.com/geojenks/procedural-bricks" target="_blank">procedural-bricks</a>
+        <a href="https://github.com/ostris/ai-toolkit" target="_blank">ai-toolkit</a>
+      </div>
+      <p style="margin-top:1.2rem">The first two are private. If a link 404s, ask me for access
+        rather than assuming it has moved. Documentation worth reading on its own:
+        <a href="https://github.com/geojenks/lora-workshop/blob/main/docs/should_i_train.md" target="_blank">should I train</a>,
+        <a href="https://github.com/geojenks/lora-workshop/blob/main/docs/dataset.md" target="_blank">dataset</a>,
+        <a href="https://github.com/geojenks/lora-workshop/blob/main/docs/captioning_web.md" target="_blank">captioning</a>,
+        <a href="https://github.com/geojenks/lora-workshop/blob/main/docs/workflow.md" target="_blank">workflow</a>,
+        <a href="https://github.com/geojenks/lora-workshop/blob/main/docs/reference.md" target="_blank">reference</a>.</p>
+    </section>
 
-      <h3>1 · Caption your images</h3>
-      <p>On the captioning page. Your <strong>name</strong> is your folder — it's what finds
-        your images and your previous configs. Your <strong>trigger word</strong> is a rare
-        token prefixed to every caption.</p>
-      <ol>
-        <li>Drop your images on the page.</li>
-        <li><strong>Remove</strong> the ones you don't want <em>before</em> captioning.</li>
-        <li>Pick a style, or type a custom instruction, and press <strong>Caption</strong> —
-          about 15 s per image.</li>
-        <li><strong>Read every caption and fix it.</strong> This is the actual work.</li>
-        <li><strong>Save captions.</strong> The timestamp is the confirmation — if it doesn't
-          move, it didn't save.</li>
-      </ol>
+    <!-- ─────────────────────────────── the guide -->
+    <section id="guide">
+      <h2>LoRA training guide</h2>
 
-      <div class="note">
-        <span class="tag">The one idea worth carrying</span>
-        <p>Caption what you want to stay <em>changeable</em>. Leave out what you want
-          <em>baked in</em> to the trigger word. If every photo is captioned "wearing a red
-          coat", the coat stays changeable; if you never mention it, the trigger learns it.</p>
+      <!-- setup -->
+      <div class="chunk" id="setup">
+        <h3>Install preliminaries</h3>
+        <p>Two of these you need, two are optional. It is a fair bit to ask and nobody has to
+          have finished it alone, so if any of it is still outstanding we can do it together.
+          What each one is for:</p>
+
+        <details>
+          <summary>Tailscale, required</summary>
+          <div class="details-body">
+            <p>The desktop is not on the public internet. Tailscale is a private network that
+              puts your laptop and the desktop on the same one, which is how the browser
+              reaches the two pages and how <code>ssh</code> gets in. Without it nothing else
+              on this page works.</p>
+            <p>Install from <a href="https://tailscale.com" target="_blank">tailscale.com</a>
+              and sign in. I share the machine with you by link; accept the share before
+              trying anything else.</p>
+            <p>The first-run wizard tries to walk you through building your own network and
+              can trap you in a loop. Take the "I already know how to use Tailscale" escape to
+              get to the normal client, then open the share link.</p>
+            <p>Once accepted, the machine appears in <code>tailscale status</code> on the line
+              with my email on it, and its address is the first column. Two things cause most
+              of the confusion: the short name does not resolve for you at all, only the full
+              <code>.ts.net</code> one does; and the address is different for every person it
+              is shared with, so addresses are not transferable.</p>
+            <div class="code"><button class="copy">copy</button><pre>tailscale status</pre></div>
+            <div class="shot">[insert picture of the Tailscale machine list, with the shared
+              device and its address pointed out]</div>
+          </div>
+        </details>
+
+        <details>
+          <summary>SSH, required</summary>
+          <div class="details-body">
+            <p>You need a shell on the desktop to submit a training run and to copy the
+              finished file back. A client is already built into Windows 10 and later, macOS
+              and Linux, so there is nothing to install. Send me your public key
+              (<code>~/.ssh/id_ed25519.pub</code>, or make one with
+              <code>ssh-keygen -t ed25519</code>) and I will add it.</p>
+            <p>Your username on the desktop is not your laptop username, and it contains
+              spaces and brackets, which makes it awkward to type. Put this in
+              <code>~/.ssh/config</code> (no file extension; on Windows that is
+              <code>C:\Users\&lt;you&gt;\.ssh\config</code>):</p>
+            <div class="code"><button class="copy">copy</button><pre>Host gpubox
+    HostName desktop-sp62bqg.taild599ce.ts.net
+    User &lt;the username I give you&gt;</pre></div>
+            <p>After that <code>ssh gpubox</code> works, and so does
+              <code>scp … gpubox:</code>.</p>
+
+            <h4>Typing it out instead</h4>
+            <p>If you would rather not keep a config file, this works, but only on OpenSSH 9.5
+              and older, which is what Windows 11 currently ships:</p>
+            <div class="code"><button class="copy">copy</button><pre>ssh "george (stable diff)@desktop-sp62bqg.taild599ce.ts.net"</pre></div>
+            <p>OpenSSH 9.6 added a check that rejects brackets in a username given on the
+              command line, so on current macOS, on Linux and in Git Bash that same line fails
+              with <code>remote username contains invalid characters</code>. Check yours with
+              <code>ssh -V</code>. This form works on every version, in both PowerShell and
+              bash, and the inner single quotes are what make it work:</p>
+            <div class="code"><button class="copy">copy</button><pre>ssh -o "User='george (stable diff)'" desktop-sp62bqg.taild599ce.ts.net</pre></div>
+
+            <div class="note">
+              <p>The desktop is a Windows machine. Your laptop can be anything, but when you
+                <code>ssh</code> in you land in cmd, so type <code>powershell</code> first,
+                every time. You do not need to learn PowerShell; every command you will
+                actually run is written out below ready to paste.</p>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>Python, optional</summary>
+          <div class="details-body">
+            <p>Nothing you do needs Python on your laptop. Training, captioning and the queue
+              all run on the remote desktop, using its Python, and the two pages are just web
+              pages. The only reason to install it is to run the setup checker below, which is
+              a single file and uses nothing beyond the standard library.</p>
+            <div class="code"><button class="copy">copy</button><pre>winget install Python.Python.3.12      # Windows, tick "Add to PATH"
+brew install python@3.12               # macOS
+sudo apt install python3               # Linux</pre></div>
+          </div>
+        </details>
+
+        <details>
+          <summary>Git, optional</summary>
+          <div class="details-body">
+            <p>Only useful if you want the kit on your own machine, to read the configs and
+              docs offline or to keep up with changes. GitHub will also hand you a zip of the
+              repository, which is just as good for reading. Nothing in the workshop asks you
+              to commit anything.</p>
+            <div class="code"><button class="copy">copy</button><pre>git clone https://github.com/geojenks/lora-workshop.git</pre></div>
+          </div>
+        </details>
+
+        <details>
+          <summary>The setup checker, optional</summary>
+          <div class="details-body">
+            <p>One script that tells you which of the above is in place: ssh, your key,
+              Tailscale, whether the desktop answers, whether your login works, and whether
+              the two pages are up. It changes nothing on the desktop, and it is worth running
+              once before a session so that any fixing happens before we are all sitting down.
+              It needs Python and the repository.</p>
+            <div class="code"><button class="copy">copy</button><pre>python tools/check_setup.py --ssh-alias gpubox</pre></div>
+            <p>The address is already the default, so there is nothing to fill in.
+              <code>[--]</code> lines are warnings worth reading; <code>[XX]</code> lines come
+              with instructions for fixing them.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Your dataset</summary>
+          <div class="details-body">
+            <p>Twenty to forty images of one subject, at least 1024 px on the short edge.
+              Variety in pose, lighting and background: the thing you want the model to learn
+              should be the only constant. Captioning a full set takes a while, so it is worth
+              uploading and captioning before a session rather than during one.</p>
+          </div>
+        </details>
       </div>
 
-      <p>Captions save as <code>&lt;image&gt;.txt</code> next to each image — that's what
-        training reads, so there's no export step. <strong>Save before you submit:</strong>
-        training reads the files at the moment the job starts.</p>
+      <!-- on the day -->
+      <div class="chunk" id="day">
+        <h3>Caption, configure, submit, collect</h3>
 
-      <h3>2 · Make the training config</h3>
-      <p>Panel 3 on the same page. Pick a base model, check the sample prompts, press
-        <strong>Make config</strong>. It writes the <code>.yaml</code> on the box, already
-        pointed at your images, and shows you the exact submit command.</p>
-      <p>You can also <strong>start from a previous config</strong> — the dropdown lists your
-        earlier runs, and your most recent one's sample prompts load automatically. Change the
-        model or a couple of words and press Make config for the next version. Each press makes
-        a new version, so nothing is ever overwritten.</p>
+        <h4>1. Caption your images</h4>
+        <p>On the <a href="http://desktop-sp62bqg.taild599ce.ts.net:8771">captioning page</a>.
+          Your name is your folder, and it is what finds your images and your previous
+          configs. Your trigger word is a rare token put at the front of every caption, and it
+          is what you will type later to summon the subject.</p>
+        <ol>
+          <li>Drop your images on the page.</li>
+          <li>Remove the ones you do not want, before captioning.</li>
+          <li>Pick a captioning style, or type a custom instruction, and press Caption. It
+            takes about 15 seconds an image.</li>
+          <li>Read every caption and fix or edit as needed. This can be a bit boring.</li>
+          <li>Press Save captions. The timestamp is the confirmation: if it does not move, it
+            did not save.</li>
+        </ol>
 
-      <div class="note">
-        <span class="tag">Sample prompts</span>
-        <p>Include one you <strong>expect to fail</strong>. The sample grid is the only
-          instrument you get in the morning, and a grid of successes tells you nothing.</p>
-      </div>
+        <div class="shot">[insert picture of the captioning page with a set part-captioned]</div>
 
-      <p>Leave <strong>Make GIFs of the samples</strong> ticked. When the run finishes, each
-        sample prompt's images are stitched into one looping GIF, half a second a frame, from
-        the first step to the last — they land in <code>sample_gifs</code> beside
-        <code>samples</code>. Watching the likeness arrive and then curdle takes about seven
-        seconds; finding the same thing by clicking through ninety JPEGs takes rather longer.</p>
+        <div class="note">
+          <p>Caption what you want to stay changeable, and leave out what you want baked into
+            the trigger word. If every photo is captioned "wearing a red coat", the coat stays
+            changeable. If you never mention it, the trigger word learns it.</p>
+        </div>
 
-      <h3>3 · Submit</h3>
-      <div class="code"><button class="copy">copy</button><pre>ssh gpubox
+        <p>Captions save as <code>&lt;image&gt;.txt</code> next to each image, which is what
+          training reads, so there is no export step. Save before you submit, because training
+          reads the files at the moment the job starts.</p>
+
+        <h4>2. Make the training config</h4>
+        <p>Panel 3 on the same page. Pick a base model, check the sample prompts, press Make
+          config. It writes a <code>.yaml</code> file on the desktop, already pointed at your
+          images, and shows you the exact command to submit it.</p>
+        <p>A <code>.yaml</code> file is a plain text settings file: names and values, one per
+          line, indented into groups. This one says which base model to start from, where your
+          images are, how long to train, how often to save, and which prompts to render as it
+          goes. You never have to write one by hand, but it is readable if you want to see
+          what you asked for.</p>
+        <p>You can also start from a previous config. The dropdown lists your earlier runs,
+          and your most recent one's sample prompts load automatically. Change the model or a
+          couple of words and press Make config again for the next version. Each press makes a
+          new version, so nothing is overwritten.</p>
+
+        <div class="note">
+          <p>Include one sample prompt you expect to fail. The sample images are the only
+            instrument you get in the morning, and a set of successes tells you nothing about
+            where the edge is.</p>
+        </div>
+
+        <p>Leave "Make GIFs of the samples" ticked. When the run finishes, each sample
+          prompt's images are stitched into one looping GIF, half a second a frame, with the
+          step count in the corner. They land in <code>sample_gifs</code> next to
+          <code>samples</code>. Watching the likeness arrive and then curdle takes about seven
+          seconds; finding the same thing by clicking through ninety JPEGs takes rather
+          longer.</p>
+
+        <div class="shot">[insert one of the sample GIFs, ideally a run that overcooks]</div>
+
+        <h4>3. Submit</h4>
+        <div class="code"><button class="copy">copy</button><pre>ssh gpubox
 powershell
 $py = "C:\Users\George (Stable Diff)\Documents\Stable diff\GUI\ComfyUI\Scripts\python.exe"
 cd D:\workshop\loraq
 &amp; $py loraq.py submit "D:\workshop\configs\&lt;name&gt;\&lt;name&gt;_sdxl_v1.yaml" --owner &lt;name&gt; --steps 3500</pre></div>
-      <p>Before a big overnight run, check the GPU is actually free:</p>
-      <div class="code"><button class="copy">copy</button><pre>nvidia-smi --query-gpu=memory.free --format=csv,noheader</pre></div>
-      <p>Under ~14 GB free means the captioner is still holding the GPU. Press
-        <strong>Free the GPU</strong> on the captioning page, or wait fifteen minutes and it
-        releases on its own.</p>
+        <p>All of us can submit as many runs as we like. They queue up and run one at a time,
+          and the queue is visible on the
+          <a href="http://desktop-sp62bqg.taild599ce.ts.net:8770">dashboard</a>.</p>
+        <p>Before a long overnight run, check the GPU is actually free:</p>
+        <div class="code"><button class="copy">copy</button><pre>nvidia-smi --query-gpu=memory.free --format=csv,noheader</pre></div>
+        <p>Under about 14 GB free means the captioning model is still loaded. Press "Free the
+          GPU" on the captioning page, or wait fifteen minutes and it releases on its own.</p>
 
-      <div class="note">
-        <span class="tag">The queue is fair, so use it</span>
-        <p>Runs are round-robin by owner: <strong>everyone's first run goes before anyone's
-          second.</strong> Submit a safe one early and the ambitious one second, and you get
-          both.</p>
-      </div>
-
-      <h3>4 · Watch, then go home</h3>
-      <p>The dashboard and <code>loraq.py ls</code> both show what each job is doing. A
-        checkpoint and a sample grid land every 250 steps, and the queue survives you logging
-        out.</p>
-      <div class="code"><pre>19  geo  geo_flux2_klein_v2  running  0:11:17  3500  step 262/3500 (7%)  loss 0.521  eta 1:11:14
+        <h4>4. Watch, then do something else while it trains</h4>
+        <p>The <a href="http://desktop-sp62bqg.taild599ce.ts.net:8770">dashboard</a> is the
+          nicer way to follow a run. It shows every job, what it is currently doing, and the
+          most recent sample images, and it refreshes itself, so it is the thing to leave open
+          on a second screen. You can pause and resume the whole queue from it, which is how
+          you get the GPU back for ComfyUI without losing a run, and you can cancel a job or
+          move one up and down the order.</p>
+        <p>A checkpoint and a set of samples land every 250 steps, and the queue keeps running
+          after you close the laptop. From a shell, <code>loraq.py ls</code> is the same
+          information as text:</p>
+        <div class="code"><pre>19  geo  geo_flux2_klein_v2  running  0:11:17  3500  step 262/3500 (7%)  loss 0.521  eta 1:11:14
 20  ana  ana_sdxl_v1         queued                  next up</pre></div>
-      <p>You'll also see <code>loading model</code>, <code>caching latents</code> and
-        <code>sampling</code>. A step count that stops moving while it says
-        <code>sampling</code> is normal — a sample grid takes a minute. Failed jobs show the
-        error.</p>
+        <p>You will also see <code>loading model</code>, <code>caching latents</code> and
+          <code>sampling</code>. A step count that stops moving while it says
+          <code>sampling</code> is normal, because rendering the samples takes a minute or so.
+          Failed jobs show their error.</p>
 
-      <h3>5 · Collect</h3>
-      <div class="code"><button class="copy">copy</button><pre>scp gpubox:'D:/workshop/loraq/output/&lt;run&gt;/*.safetensors' .
+        <div class="shot">[insert picture of the dashboard mid-run, with samples showing]</div>
+
+        <h4>5. Collect</h4>
+        <div class="code"><button class="copy">copy</button><pre>scp gpubox:'D:/workshop/loraq/output/&lt;run&gt;/*.safetensors' .
 scp -r gpubox:'D:/workshop/loraq/output/&lt;run&gt;/samples' .
 scp -r gpubox:'D:/workshop/loraq/output/&lt;run&gt;/sample_gifs' .</pre></div>
-      <p>The <code>.safetensors</code> file <em>is</em> your LoRA. Drop it in
-        <code>models/loras/</code> in ComfyUI or A1111 and it's ready to use.</p>
-    </section>
-
-    <!-- ─────────────────────────────── reference -->
-    <section id="reference">
-      <h2>Reference</h2>
-      <p class="sub">Models, timings, commands</p>
-
-      <h3>Base models</h3>
-      <div class="tbl">
-        <table>
-          <tr><th>Model</th><th>Speed</th><th>1200 steps</th><th>3500 steps</th><th></th></tr>
-          <tr><td>SDXL 1.0</td><td>~38 steps/min</td><td>31 min</td><td>~1 h 30</td><td>start here</td></tr>
-          <tr><td>Flux.2 klein 4B</td><td>~25 steps/min</td><td>49 min</td><td>~2 h 20</td><td></td></tr>
-          <tr><td>Flux.1 dev</td><td>~13 steps/min</td><td>1 h 30</td><td>~4 h 20</td><td>book it overnight</td></tr>
-          <tr><td>SD 1.5</td><td>fast</td><td>—</td><td>—</td><td>dated</td></tr>
-          <tr><td>Qwen-Image</td><td>—</td><td>—</td><td>—</td><td>experimental</td></tr>
-        </table>
-      </div>
-      <p>Three people × two SDXL runs is a comfortable night. Three people × two Flux.1 runs
-        is not.</p>
-
-      <h3>Queue commands</h3>
-      <div class="tbl">
-        <table>
-          <tr><th>Command</th><th>What it does</th></tr>
-          <tr><td><code>loraq.py ls</code></td><td>the queue, and what each job is doing</td></tr>
-          <tr><td><code>loraq.py log &lt;id&gt;</code></td><td>that job's output — <code>-f</code> follows it</td></tr>
-          <tr><td><code>loraq.py cancel &lt;id&gt;</code></td><td>queued or running</td></tr>
-          <tr><td><code>loraq.py requeue &lt;id&gt;</code></td><td>put a failed job back</td></tr>
-          <tr><td><code>loraq.py prio &lt;id&gt; &lt;n&gt;</code></td><td>jump the queue</td></tr>
-        </table>
+        <p>The <code>.safetensors</code> file is your LoRA. Put it in
+          <code>models/loras/</code> in ComfyUI or A1111 and it is ready to use. There is one
+          per checkpoint, so take the step number the samples say is best rather than the last
+          one by default.</p>
       </div>
 
-      <h3>Where things live on the box</h3>
-      <div class="code"><pre>D:\workshop\data\&lt;name&gt;\images\      your images + .txt captions
+      <!-- reference -->
+      <div class="chunk" id="reference">
+        <h3>Reference</h3>
+
+        <h4>Base models</h4>
+        <div class="tbl">
+          <table>
+            <tr><th>Model</th><th>Speed</th><th>1200 steps</th><th>3500 steps</th><th></th></tr>
+            <tr><td>SDXL 1.0</td><td>~38 steps/min</td><td>31 min</td><td>~1 h 30</td><td>start here</td></tr>
+            <tr><td>Flux.2 klein 4B</td><td>~25 steps/min</td><td>49 min</td><td>~2 h 20</td><td></td></tr>
+            <tr><td>Flux.1 dev</td><td>~13 steps/min</td><td>1 h 30</td><td>~4 h 20</td><td>book it overnight</td></tr>
+            <tr><td>SD 1.5</td><td>fast</td><td></td><td></td><td>dated, not timed</td></tr>
+            <tr><td>Qwen-Image</td><td></td><td></td><td></td><td>experimental, not timed</td></tr>
+          </table>
+        </div>
+
+        <h4>Queue commands</h4>
+        <p>Most of this is on the
+          <a href="http://desktop-sp62bqg.taild599ce.ts.net:8770">dashboard</a> now, as
+          buttons. These are the same actions from a shell, for when you are already in one.</p>
+        <div class="tbl">
+          <table>
+            <tr><th>Command</th><th>What it does</th></tr>
+            <tr><td><code>loraq.py ls</code></td><td>the queue, and what each job is doing</td></tr>
+            <tr><td><code>loraq.py log &lt;id&gt;</code></td><td>that job's output, <code>-f</code> follows it</td></tr>
+            <tr><td><code>loraq.py cancel &lt;id&gt;</code></td><td>queued or running</td></tr>
+            <tr><td><code>loraq.py requeue &lt;id&gt;</code></td><td>put a failed job back</td></tr>
+            <tr><td><code>loraq.py prio &lt;id&gt; &lt;n&gt;</code></td><td>move it up the order</td></tr>
+            <tr><td><code>loraq.py pause</code> / <code>resume</code></td><td>stop the queue at the last checkpoint, and start it again</td></tr>
+          </table>
+        </div>
+
+        <h4>Where things live on the desktop</h4>
+        <div class="code"><pre>D:\workshop\data\&lt;name&gt;\images\      your images + .txt captions
 D:\workshop\data\&lt;name&gt;\binned\      images you removed
 D:\workshop\configs\&lt;name&gt;\          your training configs
 D:\workshop\loraq\output\&lt;run&gt;\      checkpoints + samples   &lt;- the result
 D:\workshop\loraq\logs\              one log per job
 D:\workshop\logs\                    service logs</pre></div>
 
-      <h3>Starting and restarting</h3>
-      <div class="tbl">
-        <table>
-          <tr><th>Flag</th><th>Effect</th></tr>
-          <tr><td><code>start.ps1</code></td><td>start whatever isn't running, wait until both pages answer</td></tr>
-          <tr><td><code>-Status</code></td><td>report only, start nothing</td></tr>
-          <tr><td><code>-Restart</code></td><td>stop and restart everything, after editing a tool</td></tr>
-        </table>
+        <h4>Starting and restarting the services</h4>
+        <div class="tbl">
+          <table>
+            <tr><th>Flag</th><th>Effect</th></tr>
+            <tr><td><code>start.ps1</code></td><td>start whatever is not running, wait until both pages answer</td></tr>
+            <tr><td><code>-Status</code></td><td>report only, start nothing</td></tr>
+            <tr><td><code>-Restart</code></td><td>stop and restart everything, after editing a tool</td></tr>
+          </table>
+        </div>
+        <p>If a job is training, <code>-Restart</code> leaves the queue alone and only
+          restarts the two pages, so you can run it mid-run without killing anyone's job.</p>
       </div>
-      <p>It refuses to restart the queue worker while a job is training — that would kill the
-        run. A manual kill won't refuse, so use the script.</p>
-    </section>
 
-    <!-- ─────────────────────────────── troubleshooting -->
-    <section id="wrong">
-      <h2>When it goes wrong</h2>
-      <p class="sub">In rough order of how often it happens</p>
-
-      <div class="tbl">
-        <table>
-          <tr><th>Symptom</th><th>Fix</th></tr>
-          <tr><td>Tailscale shows the device but the page times out</td>
-              <td>You're on an IP that isn't yours. Use the full name. If it won't resolve, run <code>tailscale status</code> — the box is the line with George's email, and its address is the first column.</td></tr>
-          <tr><td>A page won't load at all</td>
-              <td>Run <code>start.ps1</code>.</td></tr>
-          <tr><td><code>remote username contains invalid characters</code></td>
-              <td>Your OpenSSH is 9.6+. Use the <code>-o "User='…'"</code> form, or the config file.</td></tr>
-          <tr><td><code>'Get-CimInstance' is not recognized</code></td>
-              <td>You're in cmd. Type <code>powershell</code>.</td></tr>
-          <tr><td>Job fails in ~30 s, <code>FileNotFoundError</code></td>
-              <td>The config points somewhere that doesn't exist. Regenerate it from the page.</td></tr>
-          <tr><td>Job fails, CUDA out of memory</td>
-              <td>The captioner still holds the GPU. Press <strong>Free the GPU</strong>.</td></tr>
-          <tr><td>"loading joycaption…" never finishes</td>
-              <td>Started by hand instead of via <code>start.ps1</code>. Re-run it with <code>-Restart</code>.</td></tr>
-          <tr><td>The previous-configs dropdown is empty</td>
-              <td>It's found by the <strong>Your name</strong> box at the top of the page. No name, no list.</td></tr>
-          <tr><td>Samples look blurry</td>
-              <td>Images under 1024 px were upscaled.</td></tr>
-          <tr><td>"nothing to do" when captioning</td>
-              <td>Everything already has a caption. Tick <strong>redo existing</strong>.</td></tr>
-          <tr><td>Trained on raw captions</td>
-              <td>You submitted before pressing Save.</td></tr>
-        </table>
+      <!-- problems -->
+      <div class="chunk" id="problems">
+        <h3>When it goes wrong</h3>
+        <p>In rough order of how often it happens.</p>
+        <div class="tbl">
+          <table>
+            <tr><th>Symptom</th><th>Fix</th></tr>
+            <tr><td>Tailscale shows the device but the page times out</td>
+                <td>You are on an address that is not yours. Use the full name. If it will not resolve, run <code>tailscale status</code>: the machine is the line with my email on it, and its address is the first column.</td></tr>
+            <tr><td>A page will not load at all</td>
+                <td>Run <code>start.ps1</code>.</td></tr>
+            <tr><td><code>remote username contains invalid characters</code></td>
+                <td>Your OpenSSH is 9.6 or newer. Use the <code>-o "User='…'"</code> form, or the config file.</td></tr>
+            <tr><td><code>'Get-CimInstance' is not recognized</code></td>
+                <td>You are in cmd. Type <code>powershell</code>.</td></tr>
+            <tr><td>Job fails in about 30 seconds with <code>FileNotFoundError</code></td>
+                <td>The config points at something that is not there. Regenerate it from the page.</td></tr>
+            <tr><td>Job fails with CUDA out of memory</td>
+                <td>The captioning model still holds the GPU. Press "Free the GPU".</td></tr>
+            <tr><td>"loading joycaption…" never finishes</td>
+                <td>It was started by hand instead of via <code>start.ps1</code>. Re-run that with <code>-Restart</code>.</td></tr>
+            <tr><td>The previous-configs dropdown is empty</td>
+                <td>It is found by the name box at the top of the page. No name, no list.</td></tr>
+            <tr><td>Samples look blurry</td>
+                <td>Images under 1024 px were upscaled.</td></tr>
+            <tr><td>"nothing to do" when captioning</td>
+                <td>Everything already has a caption. Tick "redo existing".</td></tr>
+            <tr><td>It trained on the raw captions</td>
+                <td>You submitted before pressing Save.</td></tr>
+          </table>
+        </div>
       </div>
-    </section>
-
-    <!-- ─────────────────────────────── slides -->
-    <section id="slides">
-      <h2>Slides</h2>
-      <p class="sub">Day 1 — five sessions</p>
-      <p>The deck runs in the browser. It's a large single file with the sample grids embedded,
-        so give it a moment on first load.</p>
-      <ol>
-        <li>Overview — what we're doing and why</li>
-        <li>How the models work</li>
-        <li>Bricks — the counter-example, where a LoRA is the wrong tool</li>
-        <li>LoRA theory, and reading a sample grid</li>
-        <li>Launching training</li>
-      </ol>
-      <div class="links">
-        <a href="slides/day1.html">Open the Day 1 deck</a>
-      </div>
-    </section>
-
-    <!-- ─────────────────────────────── code -->
-    <section id="code">
-      <h2>The code</h2>
-      <p class="sub">Everything used on the day</p>
-      <p>The workshop kit — configs for all five base models, the captioning page, the queue,
-        the depth tools and the full documentation.</p>
-      <div class="links">
-        <a href="https://github.com/geojenks/lora-workshop" target="_blank">lora-workshop</a>
-        <a href="https://github.com/geojenks/procedural-bricks" target="_blank">procedural-bricks</a>
-        <a href="https://github.com/ostris/ai-toolkit" target="_blank">ai-toolkit</a>
-      </div>
-      <p style="margin-top:1.4rem">Training itself is <a href="https://github.com/ostris/ai-toolkit"
-        target="_blank">ai-toolkit</a>; the queue, the captioning page and the dashboard are
-        ours. <code>procedural-bricks</code> is the counter-example from session 3 — the
-        problem that looks like it wants a LoRA and doesn't.</p>
-      <p class="sub">The first two are private repositories: if the link 404s, ask George for
-        access rather than assuming it has moved.</p>
     </section>
 
     <footer>
-      Written for three makers over two days. Corrections welcome.
+      Written for the three of you. Tell me what is wrong with it and I will fix it.
     </footer>
 
   </div>
@@ -624,16 +742,18 @@ document.querySelectorAll('.copy').forEach(btn => {
 });
 
 // ── which section am I in ───────────────────────────────────────────────────
+// Observes the guide's chunks as well as the top-level sections, since most of the page
+// is now one section with four of them inside it.
 const links = [...document.querySelectorAll('.toc a')];
 const seen = new Map();
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => seen.set(e.target.id, e.isIntersecting));
-  // Topmost visible section wins, so scrolling up highlights what you're arriving at
+  // Topmost visible target wins, so scrolling up highlights what you're arriving at
   // rather than whatever happened to fire an event last.
   const active = links.find(a => seen.get(a.hash.slice(1)));
   links.forEach(a => a.classList.toggle('on', a === active));
 }, { rootMargin: '-15% 0px -75% 0px' });
-document.querySelectorAll('section').forEach(s => io.observe(s));
+document.querySelectorAll('section, .chunk').forEach(s => io.observe(s));
 </script>
 
 </body>
