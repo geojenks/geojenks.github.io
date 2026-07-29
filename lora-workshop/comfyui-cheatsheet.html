@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ComfyUI cheat sheet — LoRA Workshop</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .page-header {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.9rem 2rem;
+      background: var(--bio-accent);
+    }
+    .page-header a {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: rgba(240, 237, 232, 0.6); text-decoration: none; transition: color 0.2s;
+    }
+    .page-header a:hover { color: var(--text-light); }
+    .page-header h2 {
+      font-family: var(--serif); font-size: 1.1rem; font-weight: normal;
+      color: var(--text-light); margin: 0;
+    }
+    .page-header .sep { color: rgba(240, 237, 232, 0.3); font-size: 0.8rem; }
+
+    .wrap { max-width: 820px; margin: 0 auto; padding: 0 2rem 8rem; }
+    .lede { padding: 3.5rem 0 1.5rem; }
+    .lede h1 {
+      font-family: var(--serif); font-weight: normal;
+      font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -0.01em;
+      color: var(--bio-accent); margin-bottom: 1.4rem;
+    }
+    p { font-size: 0.97rem; line-height: 1.8; color: #555; margin-bottom: 1rem; }
+    .wrap a { color: var(--bio-accent); }
+
+    .toc {
+      position: sticky; top: 3.2rem; z-index: 15;
+      display: flex; flex-wrap: wrap; gap: 0 1.4rem;
+      padding: 0.85rem 0; margin-bottom: 1rem;
+      background: var(--bio-bg);
+      border-bottom: 1px solid rgba(44, 74, 110, 0.12);
+    }
+    .toc a {
+      font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.11em;
+      color: #999; text-decoration: none; transition: color 0.2s;
+      padding: 0.15rem 0; border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--bio-accent); }
+    .toc a.on { color: var(--bio-accent); border-bottom-color: var(--bio-accent); }
+
+    .chunk { padding-top: 2.6rem; }
+    .chunk > h3 {
+      font-family: var(--serif); font-weight: normal; font-size: 1.25rem;
+      color: var(--bio-accent); margin: 0 0 0.8rem;
+      padding-bottom: 0.4rem; border-bottom: 1px solid rgba(44, 74, 110, 0.15);
+      scroll-margin-top: 6rem;
+    }
+    h4 {
+      font-family: var(--serif); font-weight: normal; font-size: 1.08rem;
+      color: #333; margin: 1.8rem 0 0.5rem;
+    }
+    ol, ul { margin: 0 0 1rem 1.15rem; }
+    li { font-size: 0.97rem; line-height: 1.75; color: #555; margin-bottom: 0.35rem; }
+    strong { color: #333; font-weight: 600; }
+
+    .code {
+      position: relative;
+      background: rgba(44, 74, 110, 0.05);
+      border: 1px solid rgba(44, 74, 110, 0.1);
+      border-radius: 8px;
+      padding: 0.85rem 3.2rem 0.85rem 1rem;
+      margin: 0.6rem 0 1.2rem;
+      overflow-x: auto;
+    }
+    .code pre {
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.8rem; line-height: 1.7; color: #2f3d4f;
+      white-space: pre; margin: 0;
+    }
+    code {
+      font-family: 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 0.85em; color: var(--bio-accent);
+      background: rgba(44, 74, 110, 0.07);
+      padding: 0.12em 0.38em; border-radius: 3px;
+    }
+    .copy {
+      position: absolute; top: 0.5rem; right: 0.5rem;
+      font-family: var(--sans);
+      font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em;
+      background: none; cursor: pointer;
+      border: 1px solid rgba(44, 74, 110, 0.25); border-radius: 2px;
+      color: #8a9bb0; padding: 0.25em 0.6em;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .copy:hover { border-color: var(--bio-accent); color: var(--bio-accent); }
+    .copy.done { border-color: #6a9a6a; color: #6a9a6a; }
+
+    .tbl { width: 100%; overflow-x: auto; margin: 0.4rem 0 1.4rem; }
+    table { border-collapse: collapse; width: 100%; min-width: 30rem; }
+    th {
+      font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.11em;
+      color: #999; font-weight: normal; text-align: left;
+      padding: 0.5rem 0.8rem 0.5rem 0; border-bottom: 1px solid rgba(44, 74, 110, 0.2);
+      white-space: nowrap;
+    }
+    td {
+      font-size: 0.88rem; line-height: 1.65; color: #555; vertical-align: top;
+      padding: 0.6rem 0.8rem 0.6rem 0; border-bottom: 1px solid rgba(44, 74, 110, 0.09);
+    }
+    td:first-child { color: #333; }
+
+    .note {
+      border-left: 2px solid var(--bio-accent);
+      padding: 0.15rem 0 0.15rem 1rem;
+      margin: 1.2rem 0;
+    }
+    .note p { margin-bottom: 0; }
+
+    @media (max-width: 700px) {
+      .wrap { padding: 0 1.3rem 5rem; }
+      .page-header { padding: 0.9rem 1.3rem; }
+      .toc { gap: 0 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <a href="../">George Jenkinson</a>
+    <span class="sep">/</span>
+    <a href="./">LoRA Workshop</a>
+    <span class="sep">/</span>
+    <h2>ComfyUI cheat sheet</h2>
+  </header>
+
+  <div class="wrap">
+
+    <div class="lede">
+      <h1>ComfyUI cheat sheet — a graph, your LoRA, a picture out</h1>
+    </div>
+
+    <nav class="toc">
+      <a href="#the-three-habits">The three habits</a>
+      <a href="#the-pack">The pack</a>
+      <a href="#every-model-family-wires-up">Every model family</a>
+      <a href="#using-your-own-lora">Using your own LoRA</a>
+      <a href="#getting-your-images-back">Getting your images</a>
+      <a href="#when-a-workflow-wants-a">Missing nodes</a>
+      <a href="#your-own-install-afterwards">Your own install</a>
+      <a href="#where-to-get-more">Where to get more</a>
+      <a href="#when-it-goes-wrong">When it goes wrong</a>
+    </nav>
+
+    <p>The companion to the LoRA sheet. That one gets you a trained model; this one is what you do with it. Everything below works from a browser — no install needed for the workshop itself, and the last section is how to get your own copy running afterwards.</p>
+    <div class="tbl">
+    <table>
+    <tr><td>The shared ComfyUI</td><td><a href="http://desktop-sp62bqg.taild599ce.ts.net:8188">http://desktop-sp62bqg.taild599ce.ts.net:8188</a></td></tr>
+    <tr><td>Queue dashboard</td><td><a href="http://desktop-sp62bqg.taild599ce.ts.net:8770">http://desktop-sp62bqg.taild599ce.ts.net:8770</a></td></tr>
+    <tr><td>Output browser</td><td><a href="http://desktop-sp62bqg.taild599ce.ts.net:8772">http://desktop-sp62bqg.taild599ce.ts.net:8772</a></td></tr>
+    <tr><td>The workflow pack</td><td><code>lora-workshop/comfyui/</code></td></tr>
+    </table>
+    </div>
+    <p>Use that full name, not an IP — the box has a different <code>100.x</code> address for each person it&#x27;s shared with.</p>
+    <p><strong>One backend, one GPU.</strong> Your canvas is yours alone and you can rearrange it freely, but when three of us press Queue the jobs run one at a time. Waiting is the system working.</p>
+    <div class="chunk" id="the-three-habits">
+    <h3>1 · The three habits</h3>
+    <p><strong>Start from a graph that already runs.</strong> Never build from an empty canvas. Every workflow in <code>comfyui/</code> has been run and ships with its result inside it.</p>
+    <p><strong>Drag a PNG onto the canvas and the whole workflow comes back</strong> — every node, every value, every seed. That is how workflows are shared. It works on any image ComfyUI saved, including one you pull off the box next month.</p>
+    <p><strong>Change one thing at a time.</strong> Same as reading training grids: fix everything, vary one value, look. A graph where you changed four things and it broke tells you nothing.</p>
+    </div>
+    <div class="chunk" id="the-pack">
+    <h3>2 · The pack</h3>
+    <p>Drag any of these onto the canvas. Each one arrives with the picture it made.</p>
+    <div class="tbl">
+    <table>
+    <tr><th>File</th><th>What it is</th></tr>
+    <tr><td><code>01_sdxl_lora.png</code></td><td>SDXL + one <code>LoraLoader</code>. <strong>Start here.</strong></td></tr>
+    <tr><td><code>02_strength_grid.png</code></td><td>The same seed at five LoRA strengths, as one sheet</td></tr>
+    <tr><td><code>03_flux1_txt2img.png</code></td><td>Flux.1-dev — three loaders instead of one</td></tr>
+    <tr><td><code>04_flux2_klein.png</code></td><td>Flux.2-klein — different again</td></tr>
+    <tr><td><code>05_batch_depth.png</code></td><td>A folder of images → Depth-Anything-V2 depth maps</td></tr>
+    <tr><td><code>06_inpaint_sdxl.png</code></td><td>Inpainting, SDXL inpaint checkpoint</td></tr>
+    <tr><td><code>07_inpaint_flux_fill.png</code></td><td>The same photo and mask through Flux.1-Fill</td></tr>
+    <tr><td><code>08_tileable.png</code></td><td>A texture that genuinely tiles, plus an unblended 3x3 proof</td></tr>
+    <tr><td><code>09_stacked_loras.png</code></td><td>Two LoRAs: neither / A / B / both, one seed</td></tr>
+    </table>
+    </div>
+    <p><code>make_workflows.py</code> in that folder is what built them. Run it again after a new overnight run and it picks up the new LoRA automatically.</p>
+    </div>
+    <div class="chunk" id="every-model-family-wires-up">
+    <h3>3 · Every model family wires up differently</h3>
+    <p>This is the thing that catches everyone: you find a graph online, swap in the model you have, and it breaks. Not your fault — the left-hand end of the graph is family-specific.</p>
+    <div class="tbl">
+    <table>
+    <tr><th></th><th>Loaders</th><th>Steering</th></tr>
+    <tr><td><strong>SDXL / SD1.5</strong></td><td><code>CheckpointLoaderSimple</code> — one file, everything inside</td><td><code>cfg</code> 7.0</td></tr>
+    <tr><td><strong>Flux.1</strong></td><td><code>UNETLoader</code> + <code>DualCLIPLoader</code> (<code>clip_l</code> <strong>and</strong> <code>t5xxl</code>) + <code>VAELoader</code></td><td><code>cfg</code> <strong>1.0</strong> + <code>FluxGuidance</code> 3.5</td></tr>
+    <tr><td><strong>Flux.2-klein</strong></td><td><code>UNETLoader</code> + <code>CLIPLoader</code> (<code>qwen_3_4b</code>, type <code>flux2</code>) + its own <code>flux2-vae</code></td><td><code>cfg</code> 4.0</td></tr>
+    </table>
+    </div>
+    <p>Flux uses <strong>guidance, not CFG</strong>. Leave <code>cfg</code> at 1.0 and set <code>FluxGuidance</code> instead — doing it the SDXL way gives you sludge. And <strong>Flux.1-Fill wants guidance around 30</strong>, not 3.5; it looks broken until you set it.</p>
+    </div>
+    <div class="chunk" id="using-your-own-lora">
+    <h3>4 · Using your own LoRA</h3>
+    <p>It&#x27;s already in the dropdown — <code>extra_model_paths.yaml</code> points ComfyUI at the queue&#x27;s output, so a run appears the moment it finishes.</p>
+    <ul>
+    <li>Pick the <code>.safetensors</code>, <strong>not</strong> the <code>optimizer.pt</code> sitting next to it. That&#x27;s training state, and choosing it gets you a stack trace.</li>
+    <li>Every 250-step checkpoint is listed separately. <code>..._000003000.safetensors</code> is step 3000; the bare name is the final one — <strong>which is not necessarily the best one</strong>.</li>
+    <li><code>strength_model</code> scales the whole correction. It does <em>not</em> separate subject from style; it moves the trade between them. Train past where you want to sit, then dial down here.</li>
+    <li>Two LoRAs: chain a second <code>LoraLoader</code> onto the first. They must share a base architecture — two SDXL ones compose, an SDXL and a Flux one don&#x27;t.</li>
+    <li><strong>Every workflow in the pack already has a <code>LoraLoader</code> in it, bypassed</strong> (purple, and it does nothing). Select it and press <strong>Ctrl-B</strong> to switch it on, then pick your LoRA. You don&#x27;t have to work out where it goes or what to wire it between.</li>
+    <li>Match the family: the bypassed loader defaults to one of the overnight SDXL runs, so in the Flux graphs you&#x27;ll need to change it to a Flux LoRA before enabling it.</li>
+    </ul>
+    </div>
+    <div class="chunk" id="getting-your-images-back">
+    <h3>5 · Getting your images back</h3>
+    <p>Three ways, pick by how many you want.</p>
+    <p><strong>One image</strong> — right-click it in the ComfyUI browser → <strong>Save Image</strong>.</p>
+    <p><strong>A few, chosen by eye</strong> — browse the output folder like a directory and click what you want: <a href="http://desktop-sp62bqg.taild599ce.ts.net:8772">http://desktop-sp62bqg.taild599ce.ts.net:8772</a>. Newest first, nothing to install. (That&#x27;s <code>tools/serve_outputs.py</code>, running on the box. Read-only.)</p>
+    <p><strong>All of them, repeatedly</strong> — from your own laptop:</p>
+    <div class="code"><button class="copy">copy</button><pre>python tools/pull_outputs.py --since 3h
+python tools/pull_outputs.py --list          # show me first
+python tools/pull_outputs.py --out D:\mine   # somewhere specific</pre></div>
+    <p>Talks to the same HTTP API the browser does, so it needs nothing installed but Python and Tailscale. Already-downloaded files are skipped, so run it as often as you like. <strong>The PNGs keep their embedded workflow</strong>, so anything you pull down still rebuilds its graph.</p>
+    </div>
+    <div class="chunk" id="when-a-workflow-wants-a">
+    <h3>6 · When a workflow wants a node you haven&#x27;t got</h3>
+    <p>Red boxes on the canvas means missing custom nodes.</p>
+    <p><strong>Manager → Install Missing Custom Nodes.</strong> It reads the graph, works out which packs it needs, fetches them.</p>
+    <div class="note"><p>⚠️ <strong>Custom nodes load at startup, so installing one means a restart</strong> — which on the shared box drops everyone&#x27;s session. Don&#x27;t install anything on 8188 during the workshop. On your own machine, restart freely. If you need to experiment during a session, run a second ComfyUI on <code>--port 8189</code>.</p></div>
+    </div>
+    <div class="chunk" id="your-own-install-afterwards">
+    <h3>7 · Your own install, afterwards</h3>
+    <p>The box goes away; this doesn&#x27;t.</p>
+    <ol>
+    <li><strong>Desktop installer</strong> from <a href="https://comfy.org">https://comfy.org</a> if you want it to just work, or <code>git clone https://github.com/comfyanonymous/ComfyUI</code> if you want to see the parts.</li>
+    <li><strong>Install ComfyUI-Manager</strong> — <a href="https://github.com/ltdrdata/ComfyUI-Manager">https://github.com/ltdrdata/ComfyUI-Manager</a>. Do this before anything else; it&#x27;s how you install everything else safely.</li>
+    <li><strong>Point it at models you already have</strong> rather than downloading 20 GB again. Copy <code>comfyui/extra_model_paths.yaml</code> from this repo and edit the paths.</li>
+    </ol>
+    <h4>The models-on-another-drive trick</h4>
+    <p>Worth knowing even if you never leave one machine. ComfyUI reads <code>extra_model_paths.yaml</code> at startup and <strong>adds</strong> those folders to whatever is in <code>&lt;ComfyUI&gt;/models/</code>, so nothing that already worked stops working.</p>
+    <div class="code"><button class="copy">copy</button><pre>my_models:
+    base_path: D:\model backups
+    checkpoints: checkpoints
+    loras: loras
+    vae: vae</pre></div>
+    <p>Two things that will bite you:</p>
+    <ul>
+    <li><strong>Leave Windows paths unquoted.</strong> In YAML a double-quoted scalar treats <code>\</code> as an escape, so <code>&quot;D:\model backups&quot;</code> silently becomes something else entirely.</li>
+    <li><strong>ComfyUI searches these folders recursively.</strong> Point <code>checkpoints:</code> at a big mixed archive and you get every CLIP weight and sub-VAE in the checkpoint dropdown — on the box that was 84 entries of which 19 were loadable. Either keep a clean folder, or use <code>tools/link_checkpoints.ps1</code>, which hardlinks just the real checkpoints into one place (no disk cost, originals untouched).</li>
+    </ul>
+    <p>Restart ComfyUI after editing the file. New <em>model files</em> are picked up without a restart; changes to <em>this file</em> are not.</p>
+    </div>
+    <div class="chunk" id="where-to-get-more">
+    <h3>8 · Where to get more</h3>
+    <ul>
+    <li><strong>Official examples</strong> — <a href="https://comfyanonymous.github.io/ComfyUI_examples/">https://comfyanonymous.github.io/ComfyUI_examples/</a> — every workflow as a drag-in PNG. The best library there is.</li>
+    <li><strong>r/comfyui</strong> — where workflows actually circulate.</li>
+    <li><strong>Custom-node docs</strong> — <a href="https://docs.comfy.org">https://docs.comfy.org</a> — paste these at an LLM with a plain-English description and it will scaffold a working node. A custom node is a small Python class: declare inputs, declare outputs, write the function.</li>
+    </ul>
+    </div>
+    <div class="chunk" id="when-it-goes-wrong">
+    <h3>9 · When it goes wrong</h3>
+    <div class="tbl">
+    <table>
+    <tr><th>Symptom</th><th>Cause</th></tr>
+    <tr><td>Every dropdown is empty</td><td><code>extra_model_paths.yaml</code> isn&#x27;t being read, or the paths are quoted</td></tr>
+    <tr><td>Red boxes on a downloaded graph</td><td>missing custom nodes → Manager → Install Missing</td></tr>
+    <tr><td>Flux output is grey sludge</td><td>you left <code>cfg</code> at 7 — Flux wants 1.0 plus <code>FluxGuidance</code></td></tr>
+    <tr><td>Inpaint result ignores the mask</td><td>wrong checkpoint — you need an <strong>inpaint</strong> model</td></tr>
+    <tr><td>Flux Fill result looks washed out</td><td>guidance too low; Fill wants ~30</td></tr>
+    <tr><td>LoRA does nothing</td><td>you picked <code>optimizer.pt</code>, or the LoRA&#x27;s base doesn&#x27;t match the checkpoint</td></tr>
+    <tr><td>&quot;Prompt outputs failed validation&quot;</td><td>a filename in a dropdown no longer exists — re-pick it</td></tr>
+    <tr><td>Everything suddenly comes out tiled</td><td>you ran <code>SeamlessTile</code> in &quot;Modify in place&quot; mode; it patched the cached model. <strong>Free model and node cache</strong>, or restart</td></tr>
+    <tr><td><code>NoneType object is not callable</code></td><td>a custom node broken against this ComfyUI version. <code>SeamlessTile</code>&#x27;s &quot;Make a copy&quot; mode is one; use &quot;Modify in place&quot;</td></tr>
+    <tr><td>A big model seems to hang on first use</td><td>it isn&#x27;t. Flux.1-dev is 22 GB plus a 9 GB T5 read off disk — GPU sits at 0% for minutes. Load it once before you need it</td></tr>
+    <tr><td>Your queue never starts</td><td>someone else&#x27;s job is running. One GPU.</td></tr>
+    </table>
+    </div>
+    </div>
+
+  </div>
+
+<script>
+// Same two behaviours as the guide: commands go from screen to terminal without being
+// retyped, and the nav says which section you are in.
+document.querySelectorAll('.copy').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const text = btn.parentElement.querySelector('pre').innerText;
+    try { await navigator.clipboard.writeText(text); }
+    catch (e) {
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove();
+    }
+    btn.textContent = 'copied'; btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('done'); }, 1400);
+  });
+});
+
+const links = new Map();
+document.querySelectorAll('.toc a').forEach(a => links.set(a.getAttribute('href').slice(1), a));
+const seen = new Set();
+const spy = new IntersectionObserver((entries) => {
+  entries.forEach(e => e.isIntersecting ? seen.add(e.target.id) : seen.delete(e.target.id));
+  // the highest section still on screen, not the last one to fire
+  const top = [...links.keys()].find(id => seen.has(id));
+  links.forEach((a, id) => a.classList.toggle('on', id === top));
+}, { rootMargin: '-25% 0px -65% 0px' });
+document.querySelectorAll('.chunk').forEach(c => spy.observe(c));
+</script>
+
+</body>
+</html>
