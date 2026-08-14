@@ -39,7 +39,7 @@
     .rest-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(4, calc((100vh - 3.2rem) / 2));
+      grid-template-rows: repeat(5, calc((100vh - 3.2rem) / 2));
     }
     .rest-grid .quad:last-child:nth-child(odd) {
       grid-column: 1 / -1;
@@ -68,6 +68,7 @@
     .tag-hobby    { border-color: rgba(200,140,80,0.5)  !important; color: rgba(230,175,120,0.9) !important; }
     .tag-creative { border-color: rgba(180,120,220,0.5) !important; color: rgba(210,160,245,0.9) !important; }
     .tag-workshop { border-color: rgba(120,200,160,0.5) !important; color: rgba(160,230,195,0.9) !important; }
+    .tag-hike     { border-color: rgba(215,225,240,0.5) !important; color: rgba(235,242,252,0.92) !important; }
 
     .quad-desc {
       font-size: 0.82rem;
@@ -289,7 +290,7 @@
     @media (max-width: 760px) {
       .rest-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(8, 45vh);
+        grid-template-rows: repeat(9, 45vh);
       }
       .rest-grid .quad:last-child:nth-child(odd) {
         grid-column: auto;
@@ -311,7 +312,20 @@
 
   <section class="rest-grid">
 
-    <!-- 1. Crokinole -->
+    <!-- 1. La Cloche Silhouette -->
+    <a class="quad" href="https://geojenks.github.io/la-cloche-silhouette/"
+       style="--base: #12242e; --hover: #0a161e; --img: url('images/lacloche.jpg'); --pos: center 45%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="tag-hike">Hike</span>
+        </div>
+        <span class="quad-label">La Cloche Silhouette</span>
+        <span class="quad-sub">Killarney Provincial Park &nbsp;·&nbsp; 6 days &nbsp;·&nbsp; 77.5 km</span>
+        <p class="quad-desc">Six days around Killarney's white quartzite ridges. An interactive map of the loop — day-coloured route, elevation scrubber, and the photos, videos, and voice notes recorded along the trail.</p>
+      </div>
+    </a>
+
+    <!-- 2. Crokinole -->
     <div class="quad"
          style="--base: #2a1e10; --hover: #1a1208; --img: url('images/crokinole.jpeg'); --pos: center 40%;">
       <div class="quad-content">
