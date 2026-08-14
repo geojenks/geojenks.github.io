@@ -39,7 +39,7 @@
     .pub-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(7, calc((100vh - 3.2rem) / 2));
+      grid-template-rows: repeat(8, calc((100vh - 3.2rem) / 2));
     }
 
     /* Div-based quad: needs explicit pointer and hover wired in */
@@ -197,7 +197,7 @@
     @media (max-width: 760px) {
       .pub-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(14, 50vh);
+        grid-template-rows: repeat(15, 50vh);
       }
       .quad::before { opacity: 0.45; }
     }
@@ -212,6 +212,24 @@
   </header>
 
   <section class="pub-grid">
+
+    <!-- 0. Digitally Reintegrating Losses (GCH 2026) -->
+    <div class="quad pub-card"
+         style="--base: #1e3a30; --hover: #0f2520; --img: url('images/gch2026_reintegration.jpg'); --pos: center 50%;">
+      <div class="quad-content">
+        <div class="quad-tags">
+          <span class="pub-type conference">Conference</span>
+          <span class="pub-year">2026</span>
+          <span class="pub-role first-author">First author</span>
+        </div>
+        <span class="quad-label">Digitally Reintegrating Losses in Heritage Embroidery with Model-Independent Stitch Priors and Surface-Normal Verification</span>
+        <span class="quad-sub">GCH 2026 &nbsp;·&nbsp; Eurographics Workshop on Graphics and Cultural Heritage</span>
+        <p class="quad-desc">Jenkinson GP, Aure Calvet X</p>
+        <div class="pub-links">
+          <a href="files/GCH2026_reintegrating_losses_preprint.pdf" target="_blank" class="pub-link">Pre-print ↗</a>
+        </div>
+      </div>
+    </div>
 
     <!-- 1. Tactile Embroidery Reproduction (2025) -->
     <div class="quad pub-card"
