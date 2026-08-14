@@ -9,6 +9,8 @@ author_profile: true
 
 You can also find my articles on [my Google Scholar profile](https://scholar.google.com/citations?user=sZlkcJIAAAAJ&hl=en")
 
+**GP Jenkinson**, Xavier Aure Calvet ["Digitally Reintegrating Losses in Heritage Embroidery with Model-Independent Stitch Priors and Surface-Normal Verification"](/files/GCH2026_reintegrating_losses_preprint.pdf) (pre-print) **Eurographics Workshop on Graphics and Cultural Heritage (GCH) 2026**
+
 **GP Jenkinson**, Myrsini Samaroudi, Xavier Aure Calvet [Tactile Embroidery Reproduction Exploiting Machine Vision for Visually Impaired Engagement](https://doi.org/10.2312/dh.20253349) Digital Heritage International Congress (2025)
 
 **GP Jenkinson**, AT Conn, A Tzemanaki ["Coil-Tac: Coiled Capacitor Mechanism with Liquid Metal for Tactile Sensing"](https://doi.org/10.1109/LRA.2025.3558655) IEEE Robotics and Automation Letters, 2025
