@@ -19,6 +19,8 @@
   --wave-ring:    var(--bio-accent);    /* dashed finger ring, 3D view */
   --wave-axis:    var(--bio-accent);    /* rotation axis and arrowhead, 3D view */
   --wave-fade:    var(--bio-bg);        /* colour the ball is faded toward */
+  --wave-flat-fade: var(--wave-fade);   /* the same, ring view only */
+  --wave-flat-mix:  0.72;               /* share of the ball's own colour kept, ring view (as the 3D view) */
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -31,7 +33,9 @@
     --wave-gore-2: #3f9068;
     --wave-gore-3: #a8743f;
     --wave-gore-4: #7a58b0;
-    --wave-fade:   #d9d1c4;             /* the ring view's ball is pastel, as in light mode */
+    --wave-fade:   #d9d1c4;             /* a light fade, so the 3D ball stands out */
+    --wave-flat-fade: #5a6272;          /* ring view: a softer ball, so the fingers stay the focus */
+    --wave-flat-mix:  0.55;
   }
 }
 

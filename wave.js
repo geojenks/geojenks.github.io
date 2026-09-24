@@ -186,9 +186,11 @@
     PAL.ring    = tok('--wave-ring', '#2c4a6e');     // dashed ring guide, 3D view
     PAL.axis    = tok('--wave-axis', '#2c4a6e');     // rotation axis, 3D view
     PAL.fade    = tok('--wave-fade', '#f7f4f0');     // what the ball fades toward
+    PAL.flatFade = tok('--wave-flat-fade', '#f7f4f0'); // the same, ring view only
+    PAL.flatMix = parseFloat(cs.getPropertyValue('--wave-flat-mix')) || 0.28;  // share of ball colour kept, ring view
     if (matchMedia('(forced-colors: active)').matches) {
       // high contrast: draw in the system's own colours
-      PAL.bg = PAL.fade = parseCol('Canvas'); PAL.acc = parseCol('CanvasText');
+      PAL.bg = PAL.fade = PAL.flatFade = parseCol('Canvas'); PAL.acc = parseCol('CanvasText');
       PAL.finger = PAL.trail = PAL.outline = PAL.ring = PAL.axis = PAL.acc;
       PAL.lift = PAL.guide = parseCol('GrayText');
       PAL.shadow = [...PAL.acc.slice(0, 3), 0.12];
@@ -221,7 +223,8 @@
       const sh = opts.flat ? 1 : 0.5 + 0.5 * Math.max(0, dot(nw, L));
       let col = (f.col == null ? PAL.cream : PAL.gores[f.col]).slice(0, 3).map(v => v * sh + (opts.flat ? 0 : 18 * (1 - sh)));
       // fade toward the page colour (opaque, so quad seams never show)
-      if (opts.fade) col = col.map((v, k) => v * opts.fade + PAL.fade[k] * (1 - opts.fade));
+      const to = opts.to || PAL.fade;
+      if (opts.fade) col = col.map((v, k) => v * opts.fade + to[k] * (1 - opts.fade));
       col = col.map(Math.round);
       g.beginPath();
       f.c.forEach((cn, k) => {
@@ -272,7 +275,7 @@
     const proj = (p) => [cx + R * dot(p, e1), cy - R * dot(p, e2)];
 
     // object: the same ball, softened so the fingers stay the focus
-    drawSphere(g, view, proj, R, { fade: 0.28, flat: true });
+    drawSphere(g, view, proj, R, { fade: PAL.flatMix, to: PAL.flatFade, flat: true });
     g.beginPath(); g.arc(cx, cy, R, 0, TAU);
     g.strokeStyle = rgba(PAL.outline, 0.18); g.lineWidth = 1; g.stroke();
 
