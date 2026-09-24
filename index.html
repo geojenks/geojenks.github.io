@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <title>George Jenkinson</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="wave.css">
+  <link rel="stylesheet" href="embroider.css">
+  <link rel="stylesheet" href="headshot.css">
 </head>
 <body>
 
@@ -14,7 +19,17 @@
     <!-- Left: text -->
     <div class="bio-inner">
       <div class="bio-header">
-        <img class="bio-photo" src="images/Jenkinson_github.jpeg" alt="George Jenkinson">
+        <div class="stitch-avatar-wrap">
+          <button class="stitch-avatar" type="button" aria-haspopup="dialog" aria-controls="stitch-focus"
+                  aria-label="Portrait of George Jenkinson. Open it to re-stitch it in embroidery">
+            <img src="images/Jenkinson_github.jpeg" alt="">
+            <canvas aria-hidden="true"></canvas>
+            <span class="stitch-badge" aria-hidden="true">
+              <svg viewBox="0 0 20 20" width="15" height="15"><path d="M15.5 3.5 5 14M13.4 3.3l3.3 3.3M5 14l-1.6 2.6L6 15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 16.5c2.5.6 5.5-.3 7-2.6" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="1.6 1.8"/></svg>
+            </span>
+          </button>
+          <span class="stitch-hint" aria-hidden="true">Re-stitch me</span>
+        </div>
         <div>
           <h1>George Jenkinson</h1>
           <p class="bio-role">Postdoctoral Researcher &nbsp;·&nbsp; University of Bath</p>
@@ -38,31 +53,64 @@
 
     <a class="scroll-hint" href="#grid" aria-label="Scroll to explore">&#8964;</a>
 
-    <!-- Right: animation -->
+    <!-- Right: animation (ring view + 3D view) -->
     <div class="bio-canvas-wrap">
-      <canvas id="wave-canvas"></canvas>
-      <!-- Controls -->
+      <button class="wave-icon-btn wave-close" id="wave-close" type="button" aria-label="Close" title="Close">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg>
+      </button>
+      <div class="wave-view wave-view-flat">
+        <canvas id="wave-canvas" aria-label="Fingers around an object, seen down the ring's axis"></canvas>
+      </div>
+      <div class="wave-view wave-view-3d">
+        <canvas id="wave-3d" aria-label="The same grasp in 3D; drag to tilt the finger ring"></canvas>
+      </div>
+      <div class="view-label">
+        <span>Drag to tilt the ring</span>
+        <span class="wave-tilt" id="wave-tilt" title="Tilt of the finger ring's axis from vertical, in degrees: roll (about x), then pitch (about y)">roll 7° · pitch 10°</span>
+        <button id="ctrl-reset-axis" type="button">Reset</button>
+      </div>
       <div class="controls">
+        <div class="gait-row">
+          <span>Gait</span>
+          <div class="seg">
+            <button type="button" data-gait="cup" class="on">Cup</button>
+            <button type="button" data-gait="pinch">Pinch</button>
+            <button type="button" data-gait="hybrid">Hybrid</button>
+          </div>
+          <button class="wave-icon-btn wave-expand" id="wave-expand" type="button" aria-label="Expand the wave demo to full screen" title="Expand">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2.5h4v4M13.5 2.5 9 7M6.5 13.5h-4v-4M2.5 13.5 7 9"/></svg>
+          </button>
+        </div>
         <div class="control-row">
-          <label for="ctrl-freq">Speed</label>
-          <input type="range" id="ctrl-freq" min="0.02" max="0.6" step="0.01" value="0.18">
+          <label for="ctrl-speed">Speed</label>
+          <button class="step" type="button" data-step="down" aria-controls="ctrl-speed" aria-label="Speed down" tabindex="-1"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6h7"/></svg></button>
+          <div class="speed-track"><input type="range" id="ctrl-speed" min="-0.5" max="0.5" step="0.01" value="0.18"></div>
+          <button class="step" type="button" data-step="up" aria-controls="ctrl-speed" aria-label="Speed up" tabindex="-1"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6h7M6 2.5v7"/></svg></button>
+          <span class="ctrl-val" id="ctrl-speed-val">+0.18</span>
         </div>
         <div class="control-row">
           <label for="ctrl-duty">Contact</label>
-          <input type="range" id="ctrl-duty" min="0.1" max="0.9" step="0.01" value="0.55">
+          <button class="step" type="button" data-step="down" aria-controls="ctrl-duty" aria-label="Contact down" tabindex="-1"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6h7"/></svg></button>
+          <input type="range" id="ctrl-duty" min="0.1" max="0.9" step="0.01" value="0.55" title="Share of each cycle a finger spends in contact">
+          <button class="step" type="button" data-step="up" aria-controls="ctrl-duty" aria-label="Contact up" tabindex="-1"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6h7M6 2.5v7"/></svg></button>
+          <span class="ctrl-val" id="ctrl-duty-val">55%</span>
         </div>
         <div class="control-row">
           <label for="ctrl-n">Fingers</label>
+          <button class="step" type="button" data-step="down" aria-controls="ctrl-n" aria-label="Fingers down" tabindex="-1"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6h7"/></svg></button>
           <input type="range" id="ctrl-n" min="4" max="32" step="1" value="18">
-          <span class="ctrl-val" id="val-n">18</span>
+          <button class="step" type="button" data-step="up" aria-controls="ctrl-n" aria-label="Fingers up" tabindex="-1"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6h7M6 2.5v7"/></svg></button>
+          <span class="ctrl-val" id="ctrl-n-val">18</span>
         </div>
-        <div class="control-row">
+        <div class="control-row" id="row-peaks">
           <label for="ctrl-peaks">Peaks</label>
+          <button class="step" type="button" data-step="down" aria-controls="ctrl-peaks" aria-label="Peaks down" tabindex="-1"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6h7"/></svg></button>
           <input type="range" id="ctrl-peaks" min="1" max="4" step="1" value="1">
-          <span class="ctrl-val" id="val-peaks">1</span>
+          <button class="step" type="button" data-step="up" aria-controls="ctrl-peaks" aria-label="Peaks up" tabindex="-1"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6h7M6 2.5v7"/></svg></button>
+          <span class="ctrl-val" id="ctrl-peaks-val">1</span>
         </div>
       </div>
-      <p class="canvas-caption">Exploring the use of waves to control in-hand manipulation</p>
+      <p class="canvas-caption" id="wave-caption">Exploring the use of waves to control in-hand manipulation</p>
     </div>
 
   </section>
@@ -104,6 +152,35 @@
 
   </section>
 
+
+  <!-- ── RE-STITCH VIEW (opened from the headshot) ── -->
+  <div class="stitch-focus" id="stitch-focus" role="dialog" aria-modal="true" aria-labelledby="stitch-focus-title" hidden>
+    <button class="stitch-focus-close" type="button" aria-label="Close">
+      <svg viewBox="0 0 20 20" width="18" height="18"><path d="M5 5l10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+    </button>
+    <div class="stitch-focus-body">
+      <div class="stitch-focus-portrait">
+        <div class="embroider" data-src="images/headshot-stitch/" data-auto="off" data-park="0.88"
+             data-alt="Portrait of George Jenkinson, re-stitched region by region in embroidery textures"></div>
+      </div>
+      <div class="stitch-text">
+        <p class="stitch-kicker">Digitally reintegrating losses</p>
+        <h2 id="stitch-focus-title">Re-stitch me</h2>
+        <p>
+          Generative fills for losses in 17th-century embroidery, steered by
+          models trained on individual stitch types: satin stitch, French knots
+          and silk purl. Each region of this photo has been filled several
+          ways. Click a patch to try another, or drag the divider to compare
+          with the photograph.
+        </p>
+        <p class="stitch-note">Placeholder textures for now, not model output.</p>
+        <a class="stitch-link" href="https://geojenks.github.io/digitally-reintegrating-losses/">The project page &rarr;</a>
+      </div>
+    </div>
+  </div>
+
   <script src="wave.js"></script>
+  <script src="embroider.js"></script>
+  <script src="headshot.js"></script>
 </body>
 </html>

@@ -1,0 +1,194 @@
+/* The headshot next to the name stitches itself, then opens a focused
+   re-stitch view. Colours come from theme.css. */
+
+/* ── the avatar ── */
+/* the bigger headshot needs a little more width so the name stays on one line */
+.bio-inner { max-width: 580px; }
+
+.stitch-avatar-wrap {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.stitch-avatar {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  padding: 0;
+  border: 3px solid var(--photo-ring);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 2px 12px var(--shadow);
+  cursor: pointer;
+  overflow: visible;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.stitch-avatar:hover { transform: scale(1.04); box-shadow: 0 4px 18px var(--shadow); }
+.stitch-avatar:focus-visible { outline: 2px solid var(--bio-accent); outline-offset: 3px; }
+
+.stitch-avatar img,
+.stitch-avatar canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+}
+.stitch-avatar img { object-fit: cover; object-position: center 45%; }
+.stitch-avatar canvas { opacity: 0; transition: opacity 0.3s ease; }
+.stitch-avatar.is-live canvas { opacity: 1; }
+
+/* a one-off ring that spreads out when the stitching finishes */
+.stitch-avatar::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid var(--bio-accent);
+  opacity: 0;
+  pointer-events: none;
+}
+.stitch-avatar.is-stitched::after { animation: stitch-ping 1.6s ease-out 0.2s 2; }
+@keyframes stitch-ping {
+  0%   { opacity: 0.7; transform: scale(1); }
+  100% { opacity: 0;   transform: scale(1.35); }
+}
+
+/* needle badge, lower right */
+.stitch-badge {
+  position: absolute;
+  right: -2px;
+  bottom: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--bio-accent);
+  color: var(--bio-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 6px var(--shadow);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+.stitch-avatar.is-stitched .stitch-badge { opacity: 1; transform: scale(1); }
+
+.stitch-hint {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--bio-accent);
+  opacity: 0;
+  transition: opacity 0.5s ease 0.3s;
+  white-space: nowrap;
+}
+.stitch-avatar-wrap.is-stitched .stitch-hint { opacity: 1; }
+
+/* ── the focused view ── */
+.stitch-text { flex: 0 1 420px; }
+.stitch-kicker {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-soft);
+  margin-bottom: 0.4rem;
+}
+.stitch-text h2 {
+  font-family: var(--serif);
+  font-weight: normal;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--bio-accent);
+  margin-bottom: 1rem;
+}
+.stitch-text p { font-size: 0.97rem; line-height: 1.8; color: var(--text-body); margin-bottom: 1rem; }
+.stitch-text .stitch-note { font-size: 0.72rem; color: var(--text-faint); letter-spacing: 0.03em; }
+.stitch-link {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--bio-accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+}
+.stitch-link:hover { border-bottom-color: var(--bio-accent); }
+
+.stitch-focus {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--bio-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 2rem 2rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.stitch-focus[hidden] { display: none; }
+.stitch-focus.is-open { opacity: 1; }
+
+.stitch-focus-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5rem;
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+}
+.stitch-focus-portrait {
+  flex: 0 0 auto;
+  /* sized by height so the whole portrait plus its buttons fits the screen */
+  width: min(calc((100dvh - 9rem) * var(--ar, 0.79)), 52vw, 560px);
+}
+.stitch-focus .stitch-text { flex: 0 1 400px; }
+
+.stitch-focus-close {
+  position: fixed;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--bio-bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.stitch-focus-close:hover { color: var(--bio-accent); border-color: var(--bio-accent); }
+.stitch-focus-close:focus-visible { outline: 2px solid var(--bio-accent); outline-offset: 2px; }
+
+body.is-focus-locked { overflow: hidden; }
+
+/* narrow screens: headshot above the name, so the name keeps to one line */
+@media (max-width: 480px) {
+  .bio-header { flex-direction: column; align-items: flex-start; gap: 0.9rem; }
+}
+
+@media (max-width: 760px), (max-aspect-ratio: 1/1) {
+  .stitch-avatar { width: 104px; height: 104px; }
+  .stitch-badge { width: 26px; height: 26px; }
+  .stitch-focus { align-items: flex-start; padding: 4rem 1rem 2rem; }
+  .stitch-focus-body { flex-direction: column; gap: 1.6rem; }
+  .stitch-focus-portrait { width: min(100%, calc((100dvh - 12rem) * var(--ar, 0.79)), 460px); }
+  .stitch-focus .stitch-text { flex: none; max-width: 460px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stitch-avatar, .stitch-badge, .stitch-hint, .stitch-focus, .stitch-avatar canvas { transition: none; }
+  .stitch-avatar.is-stitched::after { animation: none; }
+}

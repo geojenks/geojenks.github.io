@@ -1,0 +1,112 @@
+/* Colour tokens with light/dark following the system, plus forced-colours
+   (Windows high contrast) sanity. Loaded straight after style.css; the other
+   stylesheets and the canvases (via getComputedStyle) read these tokens.
+   Light values are exactly the current site's colours. */
+
+:root {
+  color-scheme: light dark;
+  --bio-bg:      #f7f4f0;
+  --bio-accent:  #2c4a6e;
+  --text-dark:   #1a1a1a;
+  --text-body:   #555;
+  --text-muted:  #888;
+  --text-soft:   #999;
+  --text-faint:  #bbb;
+  --text-ghost:  #ccc;
+  --surface:     #efeae3;             /* the slightly darker band / stage behind images */
+  --line:        rgba(44, 74, 110, 0.1);
+  --line-strong: rgba(44, 74, 110, 0.2);
+  --tint:        rgba(44, 74, 110, 0.05);
+  --shadow:      rgba(44, 74, 110, 0.15);
+  --photo-ring:  #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bio-bg:      #141922;             /* deep ink blue rather than black */
+    --bio-accent:  #9db8d9;
+    --text-dark:   #ebe7e0;
+    --text-body:   #bfbcb6;
+    --text-muted:  #8f949c;
+    --text-soft:   #878c94;
+    --text-faint:  #6b717b;
+    --text-ghost:  #505765;
+    --surface:     #1c222d;
+    --line:        rgba(157, 184, 217, 0.14);
+    --line-strong: rgba(157, 184, 217, 0.26);
+    --tint:        rgba(157, 184, 217, 0.06);
+    --shadow:      rgba(0, 0, 0, 0.5);
+    --photo-ring:  #2e3a4c;
+  }
+}
+
+/* ── re-point style.css's literal colours at the tokens ── */
+body                      { color: var(--text-dark); background: var(--bio-bg); }
+.bio-photo                { border-color: var(--photo-ring); box-shadow: 0 2px 12px var(--shadow); }
+.bio-role                 { color: var(--text-soft); }
+.bio-tagline              { color: var(--text-body); }
+.bio-text                 { color: var(--text-body); }
+.bio-footer               { color: var(--text-faint); }
+.scroll-hint              { color: var(--text-ghost); }
+.canvas-caption           { color: var(--text-faint); }
+.controls                 { background: var(--tint); border-color: var(--line); }
+.control-row label        { color: var(--text-muted); }
+.control-row input[type=range] { background: var(--line-strong); }
+a                         { color: var(--bio-accent); }
+
+/* ── dark mode: a little warmth and movement so the first screen isn't a black box.
+   Soft glows behind the text and the widget, a fine grain, and a travelling wave
+   drawn as running stitches along the bottom, drifting slowly. ── */
+.bio-inner { position: relative; }            /* keep text above the decoration */
+
+@media (prefers-color-scheme: dark) {
+  .bio {
+    overflow: clip;                          /* the threads hang below the fold */
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse 55% 60% at 24% 38%, rgba(217, 170, 120, 0.075), transparent 70%),
+      radial-gradient(ellipse 45% 60% at 76% 46%, rgba(120, 160, 220, 0.11), transparent 70%),
+      linear-gradient(180deg, #141922 0%, #171d28 100%);
+  }
+  .bio::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -78px;                           /* the threads' middle sits ~40px above the fold */
+    height: 240px;
+    background: url("stitch-wave.svg") repeat-x 0 100% / 1200px 240px;
+    pointer-events: none;
+    /* slow drift, 1px per step, so it repaints only ten times a second */
+    animation: stitch-drift 120s steps(1200) infinite;
+    /* fade out towards the top so the stitches sit low */
+    -webkit-mask-image: linear-gradient(to top, #000 60%, transparent 92%);
+    mask-image: linear-gradient(to top, #000 60%, transparent 92%);
+  }
+  /* side by side: keep the threads out from under the widget and its caption */
+  @media (min-width: 761px) {
+    .bio::before {
+      -webkit-mask-image: linear-gradient(to top, #000 60%, transparent 92%),
+                          linear-gradient(to right, #000 44%, transparent 54%, transparent 90%, #000 99%);
+      -webkit-mask-composite: source-in;
+      mask-image: linear-gradient(to top, #000 60%, transparent 92%),
+                  linear-gradient(to right, #000 44%, transparent 54%, transparent 90%, #000 99%);
+      mask-composite: intersect;
+    }
+  }
+  /* the controls sit on a solid panel */
+  .bio-canvas-wrap:not(.is-focus) .controls { background: #1a202a; }
+}
+@keyframes stitch-drift { to { background-position: -1200px 100%; } }
+@media (prefers-reduced-motion: reduce) { .bio::before { animation: none; } }
+
+/* the quad grid is photographic and already dark; only its text needs no change */
+
+/* ── Windows high contrast / forced colours: let the system palette win ── */
+@media (forced-colors: active) {
+  .controls, .seg button { border: 1px solid CanvasText; }
+  .seg button.on { forced-color-adjust: none; background: Highlight; color: HighlightText; }
+  .control-row input[type=range] { forced-color-adjust: auto; }
+  .scroll-hint { color: LinkText; }
+  .bio::before { display: none; }
+}

@@ -1,0 +1,143 @@
+/* embroider.css -- styles for embroider.js. Uses the site's tokens from style.css
+   (--bio-accent, --sans) with fallbacks so it also works on its own. */
+
+.embroider {
+  width: 100%;
+  font-family: var(--sans, 'Helvetica Neue', Arial, sans-serif);
+}
+
+.emb-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--surface, #ebe6de);
+  box-shadow: 0 2px 12px var(--shadow, rgba(44, 74, 110, 0.15));
+  touch-action: pan-y;               /* vertical page scroll still works on the image */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.emb-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.embroider.is-loading .emb-canvas { opacity: 0; }
+.emb-canvas { transition: opacity 0.4s ease; }
+
+/* divider: a wide invisible strip with a thin line and a round grip */
+.emb-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 36px;
+  margin-left: -18px;
+  cursor: ew-resize;
+  touch-action: none;
+  outline: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.emb-divider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 0 0 0.5px rgba(44, 74, 110, 0.25), 0 0 8px rgba(0, 0, 0, 0.18);
+}
+.embroider.is-wiping .emb-divider { opacity: 1; }
+.embroider.is-ready .emb-divider { opacity: 1; pointer-events: auto; }
+
+.emb-grip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+  border-radius: 50%;
+  background: #fff;
+  color: #2c4a6e;
+  box-shadow: 0 1px 6px rgba(20, 35, 55, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.4);
+  transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1), opacity 0.25s ease, box-shadow 0.2s ease;
+}
+.emb-grip svg { display: block; }
+.embroider.is-ready .emb-grip { opacity: 1; transform: scale(1); }
+.embroider.is-ready .emb-divider:hover .emb-grip,
+.embroider.is-dragging .emb-grip { transform: scale(1.12); }
+.emb-divider:focus-visible .emb-grip {
+  box-shadow: 0 0 0 3px rgba(44, 74, 110, 0.45), 0 1px 6px rgba(20, 35, 55, 0.25);
+}
+
+/* caption + buttons, in the site's small-caps caption style */
+.emb-bar {
+  margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+.emb-caption {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-faint, #bbb);
+  text-align: center;
+}
+.emb-buttons {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.embroider.is-ready .emb-buttons { opacity: 1; }
+.embroider.is-failed .emb-bar { display: none; }
+.emb-sep { color: var(--text-ghost, #ccc); font-size: 0.7rem; }
+.emb-btn {
+  font: inherit;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-soft, #aaa);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  padding: 0 0 1px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.emb-btn:hover,
+.emb-btn:focus-visible {
+  color: var(--bio-accent, #2c4a6e);
+  border-bottom-color: currentColor;
+  outline: none;
+}
+
+.emb-sr {                             /* screen-reader-only status line */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .emb-canvas, .emb-divider, .emb-grip, .emb-buttons { transition: none; }
+}
