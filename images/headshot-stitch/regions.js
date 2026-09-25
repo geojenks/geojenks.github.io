@@ -10,19 +10,49 @@ window.REGIONS = {
  "regions": [
   {
    "stitch": "french_knot",
-   "region": 2,
+   "region": 1,
    "bbox": [
-    0,
-    93,
+    685,
+    170,
     812,
-    1024
+    263
    ],
    "files": [
-    "french_knot_colour_2_v0.webp",
-    "french_knot_colour_2_v1.webp",
-    "french_knot_colour_2_v2.webp",
-    "french_knot_colour_2_v3.webp",
-    "french_knot_colour_2_v4.webp"
+    "french_knot_r1_v0.webp",
+    "french_knot_r1_v1.webp",
+    "french_knot_r1_v2.webp"
+   ],
+   "layer": "colour_2"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 2,
+   "bbox": [
+    570,
+    175,
+    698,
+    300
+   ],
+   "files": [
+    "french_knot_r2_v0.webp",
+    "french_knot_r2_v1.webp",
+    "french_knot_r2_v2.webp"
+   ],
+   "layer": "colour_2"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 3,
+   "bbox": [
+    616,
+    373,
+    736,
+    500
+   ],
+   "files": [
+    "french_knot_r3_v0.webp",
+    "french_knot_r3_v1.webp",
+    "french_knot_r3_v2.webp"
    ],
    "layer": "colour_2"
   },
@@ -31,72 +61,560 @@ window.REGIONS = {
    "region": 4,
    "bbox": [
     0,
-    93,
+    433,
+    260,
+    856
+   ],
+   "files": [
+    "french_knot_r4_v0.webp",
+    "french_knot_r4_v1.webp",
+    "french_knot_r4_v2.webp"
+   ],
+   "layer": "colour_2"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 5,
+   "bbox": [
+    607,
+    812,
     812,
     1024
    ],
    "files": [
-    "french_knot_colour_4_v0.webp",
-    "french_knot_colour_4_v1.webp",
-    "french_knot_colour_4_v2.webp",
-    "french_knot_colour_4_v3.webp",
-    "french_knot_colour_4_v4.webp"
+    "french_knot_r5_v0.webp",
+    "french_knot_r5_v1.webp",
+    "french_knot_r5_v2.webp"
    ],
-   "layer": "colour_4"
+   "layer": "colour_2"
   },
   {
    "stitch": "french_knot",
    "region": 6,
    "bbox": [
-    0,
-    362,
-    812,
-    840
+    114,
+    833,
+    229,
+    926
    ],
    "files": [
-    "french_knot_colour_6_v0.webp",
-    "french_knot_colour_6_v1.webp",
-    "french_knot_colour_6_v2.webp",
-    "french_knot_colour_6_v3.webp",
-    "french_knot_colour_6_v4.webp"
+    "french_knot_r6_v0.webp",
+    "french_knot_r6_v1.webp",
+    "french_knot_r6_v2.webp"
    ],
-   "layer": "colour_6"
+   "layer": "colour_2"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 7,
+   "bbox": [
+    215,
+    906,
+    442,
+    983
+   ],
+   "files": [
+    "french_knot_r7_v0.webp",
+    "french_knot_r7_v1.webp",
+    "french_knot_r7_v2.webp"
+   ],
+   "layer": "colour_2"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 8,
+   "bbox": [
+    0,
+    95,
+    300,
+    278
+   ],
+   "files": [
+    "french_knot_r8_v0.webp",
+    "french_knot_r8_v1.webp",
+    "french_knot_r8_v2.webp"
+   ],
+   "layer": "colour_3"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 9,
+   "bbox": [
+    262,
+    114,
+    627,
+    322
+   ],
+   "files": [
+    "french_knot_r9_v0.webp",
+    "french_knot_r9_v1.webp",
+    "french_knot_r9_v2.webp"
+   ],
+   "layer": "colour_3"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 10,
+   "bbox": [
+    107,
+    176,
+    309,
+    325
+   ],
+   "files": [
+    "french_knot_r10_v0.webp",
+    "french_knot_r10_v1.webp",
+    "french_knot_r10_v2.webp"
+   ],
+   "layer": "colour_3"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 11,
+   "bbox": [
+    0,
+    314,
+    69,
+    420
+   ],
+   "files": [
+    "french_knot_r11_v0.webp",
+    "french_knot_r11_v1.webp",
+    "french_knot_r11_v2.webp"
+   ],
+   "layer": "colour_3"
   },
   {
    "stitch": "french_knot",
    "region": 12,
    "bbox": [
     0,
-    336,
-    812,
-    950
+    744,
+    240,
+    1024
    ],
    "files": [
-    "french_knot_colour_12_v0.webp",
-    "french_knot_colour_12_v1.webp",
-    "french_knot_colour_12_v2.webp",
-    "french_knot_colour_12_v3.webp",
-    "french_knot_colour_12_v4.webp"
+    "french_knot_r12_v0.webp",
+    "french_knot_r12_v1.webp",
+    "french_knot_r12_v2.webp"
+   ],
+   "layer": "colour_3"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 13,
+   "bbox": [
+    121,
+    161,
+    314,
+    250
+   ],
+   "files": [
+    "french_knot_r13_v0.webp",
+    "french_knot_r13_v1.webp",
+    "french_knot_r13_v2.webp"
+   ],
+   "layer": "colour_4"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 14,
+   "bbox": [
+    607,
+    270,
+    719,
+    491
+   ],
+   "files": [
+    "french_knot_r14_v0.webp",
+    "french_knot_r14_v1.webp",
+    "french_knot_r14_v2.webp"
+   ],
+   "layer": "colour_4"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 15,
+   "bbox": [
+    692,
+    281,
+    812,
+    378
+   ],
+   "files": [
+    "french_knot_r15_v0.webp",
+    "french_knot_r15_v1.webp",
+    "french_knot_r15_v2.webp"
+   ],
+   "layer": "colour_4"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 16,
+   "bbox": [
+    44,
+    286,
+    223,
+    410
+   ],
+   "files": [
+    "french_knot_r16_v0.webp",
+    "french_knot_r16_v1.webp",
+    "french_knot_r16_v2.webp"
+   ],
+   "layer": "colour_4"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 17,
+   "bbox": [
+    287,
+    659,
+    579,
+    856
+   ],
+   "files": [
+    "french_knot_r17_v0.webp",
+    "french_knot_r17_v1.webp",
+    "french_knot_r17_v2.webp"
+   ],
+   "layer": "colour_4"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 18,
+   "bbox": [
+    330,
+    809,
+    800,
+    1024
+   ],
+   "files": [
+    "french_knot_r18_v0.webp",
+    "french_knot_r18_v1.webp",
+    "french_knot_r18_v2.webp"
+   ],
+   "layer": "colour_4"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 19,
+   "bbox": [
+    61,
+    850,
+    146,
+    945
+   ],
+   "files": [
+    "french_knot_r19_v0.webp",
+    "french_knot_r19_v1.webp",
+    "french_knot_r19_v2.webp"
+   ],
+   "layer": "colour_4"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 20,
+   "bbox": [
+    0,
+    95,
+    393,
+    367
+   ],
+   "files": [
+    "french_knot_r20_v0.webp",
+    "french_knot_r20_v1.webp",
+    "french_knot_r20_v2.webp"
+   ],
+   "layer": "colour_5"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 21,
+   "bbox": [
+    541,
+    148,
+    812,
+    243
+   ],
+   "files": [
+    "french_knot_r21_v0.webp",
+    "french_knot_r21_v1.webp",
+    "french_knot_r21_v2.webp"
+   ],
+   "layer": "colour_5"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 22,
+   "bbox": [
+    0,
+    613,
+    113,
+    797
+   ],
+   "files": [
+    "french_knot_r22_v0.webp",
+    "french_knot_r22_v1.webp",
+    "french_knot_r22_v2.webp"
+   ],
+   "layer": "colour_5"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 23,
+   "bbox": [
+    628,
+    882,
+    764,
+    975
+   ],
+   "files": [
+    "french_knot_r23_v0.webp",
+    "french_knot_r23_v1.webp",
+    "french_knot_r23_v2.webp"
+   ],
+   "layer": "colour_5"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 24,
+   "bbox": [
+    149,
+    902,
+    524,
+    1024
+   ],
+   "files": [
+    "french_knot_r24_v0.webp",
+    "french_knot_r24_v1.webp",
+    "french_knot_r24_v2.webp"
+   ],
+   "layer": "colour_5"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 25,
+   "bbox": [
+    584,
+    179,
+    812,
+    390
+   ],
+   "files": [
+    "french_knot_r25_v0.webp",
+    "french_knot_r25_v1.webp",
+    "french_knot_r25_v2.webp"
    ],
    "layer": "colour_12"
   },
   {
-   "stitch": "silk_purl",
-   "region": 7,
+   "stitch": "french_knot",
+   "region": 26,
    "bbox": [
-    0,
-    103,
+    19,
+    342,
+    215,
+    425
+   ],
+   "files": [
+    "french_knot_r26_v0.webp",
+    "french_knot_r26_v1.webp",
+    "french_knot_r26_v2.webp"
+   ],
+   "layer": "colour_12"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 27,
+   "bbox": [
+    656,
+    936,
     812,
     1024
    ],
    "files": [
-    "silk_purl_colour_7_v0.webp",
-    "silk_purl_colour_7_v1.webp",
-    "silk_purl_colour_7_v2.webp",
-    "silk_purl_colour_7_v3.webp",
-    "silk_purl_colour_7_v4.webp"
+    "french_knot_r27_v0.webp",
+    "french_knot_r27_v1.webp",
+    "french_knot_r27_v2.webp"
+   ],
+   "layer": "colour_12"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 28,
+   "bbox": [
+    168,
+    475,
+    409,
+    769
+   ],
+   "files": [
+    "french_knot_r28_v0.webp",
+    "french_knot_r28_v1.webp",
+    "french_knot_r28_v2.webp"
+   ],
+   "layer": "colour_13"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 29,
+   "bbox": [
+    442,
+    398,
+    559,
+    464
+   ],
+   "files": [
+    "french_knot_r29_v0.webp",
+    "french_knot_r29_v1.webp",
+    "french_knot_r29_v2.webp"
+   ],
+   "layer": "colour_14"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 30,
+   "bbox": [
+    358,
+    535,
+    501,
+    616
+   ],
+   "files": [
+    "french_knot_r30_v0.webp",
+    "french_knot_r30_v1.webp",
+    "french_knot_r30_v2.webp"
+   ],
+   "layer": "colour_14"
+  },
+  {
+   "stitch": "french_knot",
+   "region": 31,
+   "bbox": [
+    280,
+    612,
+    602,
+    871
+   ],
+   "files": [
+    "french_knot_r31_v0.webp",
+    "french_knot_r31_v1.webp",
+    "french_knot_r31_v2.webp"
+   ],
+   "layer": "colour_14"
+  },
+  {
+   "stitch": "silk_purl",
+   "region": 1,
+   "bbox": [
+    689,
+    356,
+    812,
+    549
+   ],
+   "files": [
+    "silk_purl_r1_v0.webp",
+    "silk_purl_r1_v1.webp",
+    "silk_purl_r1_v2.webp"
    ],
    "layer": "colour_7"
+  },
+  {
+   "stitch": "silk_purl",
+   "region": 2,
+   "bbox": [
+    0,
+    384,
+    196,
+    633
+   ],
+   "files": [
+    "silk_purl_r2_v0.webp",
+    "silk_purl_r2_v1.webp",
+    "silk_purl_r2_v2.webp"
+   ],
+   "layer": "colour_7"
+  },
+  {
+   "stitch": "silk_purl",
+   "region": 3,
+   "bbox": [
+    581,
+    525,
+    812,
+    799
+   ],
+   "files": [
+    "silk_purl_r3_v0.webp",
+    "silk_purl_r3_v1.webp",
+    "silk_purl_r3_v2.webp"
+   ],
+   "layer": "colour_7"
+  },
+  {
+   "stitch": "silk_purl",
+   "region": 4,
+   "bbox": [
+    632,
+    339,
+    812,
+    436
+   ],
+   "files": [
+    "silk_purl_r4_v0.webp",
+    "silk_purl_r4_v1.webp",
+    "silk_purl_r4_v2.webp"
+   ],
+   "layer": "colour_15"
+  },
+  {
+   "stitch": "silk_purl",
+   "region": 5,
+   "bbox": [
+    693,
+    380,
+    812,
+    600
+   ],
+   "files": [
+    "silk_purl_r5_v0.webp",
+    "silk_purl_r5_v1.webp",
+    "silk_purl_r5_v2.webp"
+   ],
+   "layer": "colour_15"
+  },
+  {
+   "stitch": "silk_purl",
+   "region": 6,
+   "bbox": [
+    530,
+    725,
+    812,
+    878
+   ],
+   "files": [
+    "silk_purl_r6_v0.webp",
+    "silk_purl_r6_v1.webp",
+    "silk_purl_r6_v2.webp"
+   ],
+   "layer": "colour_15"
+  },
+  {
+   "stitch": "silk_purl",
+   "region": 8,
+   "bbox": [
+    530,
+    644,
+    754,
+    828
+   ],
+   "files": [
+    "silk_purl_r8_v0.webp",
+    "silk_purl_r8_v1.webp",
+    "silk_purl_r8_v2.webp"
+   ],
+   "layer": "colour_16"
   },
   {
    "stitch": "satin",
@@ -105,86 +623,140 @@ window.REGIONS = {
     0,
     0,
     812,
-    196
+    197
    ],
    "files": [
-    "satin_colour_1_v0.webp",
-    "satin_colour_1_v1.webp",
-    "satin_colour_1_v2.webp",
-    "satin_colour_1_v3.webp",
-    "satin_colour_1_v4.webp"
+    "satin_r1_v0.webp",
+    "satin_r1_v1.webp",
+    "satin_r1_v2.webp"
    ],
    "layer": "colour_1"
   },
   {
    "stitch": "satin",
+   "region": 2,
+   "bbox": [
+    154,
+    135,
+    449,
+    582
+   ],
+   "files": [
+    "satin_r2_v0.webp",
+    "satin_r2_v1.webp",
+    "satin_r2_v2.webp"
+   ],
+   "layer": "colour_6"
+  },
+  {
+   "stitch": "satin",
    "region": 3,
    "bbox": [
-    0,
-    138,
-    812,
-    1024
+    192,
+    771,
+    293,
+    936
    ],
    "files": [
-    "satin_colour_3_v0.webp",
-    "satin_colour_3_v1.webp",
-    "satin_colour_3_v2.webp",
-    "satin_colour_3_v3.webp",
-    "satin_colour_3_v4.webp"
+    "satin_r3_v0.webp",
+    "satin_r3_v1.webp",
+    "satin_r3_v2.webp"
    ],
-   "layer": "colour_3"
+   "layer": "colour_6"
   },
   {
    "stitch": "satin",
-   "region": 5,
+   "region": 4,
    "bbox": [
-    152,
-    138,
-    458,
-    934
+    255,
+    335,
+    615,
+    685
    ],
    "files": [
-    "satin_colour_5_v0.webp",
-    "satin_colour_5_v1.webp",
-    "satin_colour_5_v2.webp",
-    "satin_colour_5_v3.webp",
-    "satin_colour_5_v4.webp"
-   ],
-   "layer": "colour_5"
-  },
-  {
-   "stitch": "satin",
-   "region": 8,
-   "bbox": [
-    215,
-    351,
-    679,
-    915
-   ],
-   "files": [
-    "satin_colour_8_v0.webp",
-    "satin_colour_8_v1.webp",
-    "satin_colour_8_v2.webp",
-    "satin_colour_8_v3.webp",
-    "satin_colour_8_v4.webp"
+    "satin_r4_v0.webp",
+    "satin_r4_v1.webp",
+    "satin_r4_v2.webp"
    ],
    "layer": "colour_8"
   },
   {
    "stitch": "satin",
-   "region": 9,
+   "region": 5,
    "bbox": [
-    186,
-    245,
+    578,
+    455,
     689,
-    928
+    636
    ],
    "files": [
-    "satin_colour_9_v0.webp",
-    "satin_colour_9_v1.webp",
-    "satin_colour_9_v2.webp",
-    "satin_colour_9_v3.webp",
-    "satin_colour_9_v4.webp"
+    "satin_r5_v0.webp",
+    "satin_r5_v1.webp",
+    "satin_r5_v2.webp"
+   ],
+   "layer": "colour_8"
+  },
+  {
+   "stitch": "satin",
+   "region": 6,
+   "bbox": [
+    266,
+    541,
+    401,
+    655
+   ],
+   "files": [
+    "satin_r6_v0.webp",
+    "satin_r6_v1.webp",
+    "satin_r6_v2.webp"
+   ],
+   "layer": "colour_8"
+  },
+  {
+   "stitch": "satin",
+   "region": 7,
+   "bbox": [
+    227,
+    610,
+    493,
+    816
+   ],
+   "files": [
+    "satin_r7_v0.webp",
+    "satin_r7_v1.webp",
+    "satin_r7_v2.webp"
+   ],
+   "layer": "colour_8"
+  },
+  {
+   "stitch": "satin",
+   "region": 8,
+   "bbox": [
+    422,
+    363,
+    589,
+    466
+   ],
+   "files": [
+    "satin_r8_v0.webp",
+    "satin_r8_v1.webp",
+    "satin_r8_v2.webp"
+   ],
+   "layer": "colour_9"
+  },
+  {
+   "stitch": "satin",
+   "region": 9,
+   "bbox": [
+    276,
+    378,
+    385,
+    454
+   ],
+   "files": [
+    "satin_r9_v0.webp",
+    "satin_r9_v1.webp",
+    "satin_r9_v2.webp"
    ],
    "layer": "colour_9"
   },
@@ -192,35 +764,143 @@ window.REGIONS = {
    "stitch": "satin",
    "region": 10,
    "bbox": [
-    117,
-    133,
-    745,
-    933
+    265,
+    463,
+    651,
+    820
    ],
    "files": [
-    "satin_colour_10_v0.webp",
-    "satin_colour_10_v1.webp",
-    "satin_colour_10_v2.webp",
-    "satin_colour_10_v3.webp",
-    "satin_colour_10_v4.webp"
+    "satin_r10_v0.webp",
+    "satin_r10_v1.webp",
+    "satin_r10_v2.webp"
    ],
-   "layer": "colour_10"
+   "layer": "colour_9"
   },
   {
    "stitch": "satin",
    "region": 11,
    "bbox": [
-    267,
-    365,
-    646,
+    283,
+    744,
+    568,
     915
    ],
    "files": [
-    "satin_colour_11_v0.webp",
-    "satin_colour_11_v1.webp",
-    "satin_colour_11_v2.webp",
-    "satin_colour_11_v3.webp",
-    "satin_colour_11_v4.webp"
+    "satin_r11_v0.webp",
+    "satin_r11_v1.webp",
+    "satin_r11_v2.webp"
+   ],
+   "layer": "colour_9"
+  },
+  {
+   "stitch": "satin",
+   "region": 12,
+   "bbox": [
+    406,
+    223,
+    635,
+    541
+   ],
+   "files": [
+    "satin_r12_v0.webp",
+    "satin_r12_v1.webp",
+    "satin_r12_v2.webp"
+   ],
+   "layer": "colour_10"
+  },
+  {
+   "stitch": "satin",
+   "region": 13,
+   "bbox": [
+    607,
+    469,
+    783,
+    616
+   ],
+   "files": [
+    "satin_r13_v0.webp",
+    "satin_r13_v1.webp",
+    "satin_r13_v2.webp"
+   ],
+   "layer": "colour_10"
+  },
+  {
+   "stitch": "satin",
+   "region": 14,
+   "bbox": [
+    275,
+    816,
+    408,
+    934
+   ],
+   "files": [
+    "satin_r14_v0.webp",
+    "satin_r14_v1.webp",
+    "satin_r14_v2.webp"
+   ],
+   "layer": "colour_10"
+  },
+  {
+   "stitch": "satin",
+   "region": 15,
+   "bbox": [
+    222,
+    135,
+    525,
+    428
+   ],
+   "files": [
+    "satin_r15_v0.webp",
+    "satin_r15_v1.webp",
+    "satin_r15_v2.webp"
+   ],
+   "layer": "colour_11"
+  },
+  {
+   "stitch": "satin",
+   "region": 16,
+   "bbox": [
+    163,
+    448,
+    345,
+    637
+   ],
+   "files": [
+    "satin_r16_v0.webp",
+    "satin_r16_v1.webp",
+    "satin_r16_v2.webp"
+   ],
+   "layer": "colour_11"
+  },
+  {
+   "stitch": "satin",
+   "region": 17,
+   "bbox": [
+    258,
+    605,
+    397,
+    713
+   ],
+   "files": [
+    "satin_r17_v0.webp",
+    "satin_r17_v1.webp",
+    "satin_r17_v2.webp"
+   ],
+   "layer": "colour_11"
+  },
+  {
+   "stitch": "satin",
+   "region": 18,
+   "bbox": [
+    216,
+    747,
+    328,
+    936
+   ],
+   "files": [
+    "satin_r18_v0.webp",
+    "satin_r18_v1.webp",
+    "satin_r18_v2.webp"
    ],
    "layer": "colour_11"
   }
