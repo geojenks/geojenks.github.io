@@ -16,7 +16,7 @@ body { font-family: var(--sans); color: var(--text-dark); background: var(--bio-
 /* ── Bio section ── */
 .bio {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;               /* grows rather than clipping when the text wraps */
   display: flex;
   flex-direction: row;
   align-items: center;
