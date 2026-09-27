@@ -192,3 +192,8 @@ body.is-focus-locked { overflow: hidden; }
   .stitch-avatar, .stitch-badge, .stitch-hint, .stitch-focus, .stitch-avatar canvas { transition: none; }
   .stitch-avatar.is-stitched::after { animation: none; }
 }
+
+/* very short windows, side-by-side layout: a smaller headshot so the page fits one screen */
+@media (min-width: 761px) and (max-height: 600px) {
+  .stitch-avatar { width: 100px; height: 100px; }
+}

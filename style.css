@@ -21,8 +21,10 @@ body { font-family: var(--sans); color: var(--text-dark); background: var(--bio-
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 4rem;
-  padding: 4rem 6rem 2rem 6rem;
+  /* spacing shrinks with the window so the section fits one screen; text sizes
+     stay in rem, so browser zoom still enlarges the text */
+  gap: clamp(1.75rem, 4vw, 4rem);
+  padding: clamp(1.25rem, 6vh, 4rem) clamp(1.5rem, 5vw, 6rem) clamp(1rem, 3vh, 2rem);
   background: var(--bio-bg);
 }
 
@@ -91,6 +93,20 @@ body { font-family: var(--sans); color: var(--text-dark); background: var(--bio-
   color: #bbb;
   margin-top: 1.8rem;
   letter-spacing: 0.03em;
+}
+
+/* short windows, side-by-side layout: tighter vertical spacing */
+@media (min-width: 761px) and (max-height: 820px) {
+  .bio-header  { margin-bottom: 1rem; }
+  .bio-tagline { margin-bottom: 1.1rem; }
+  .bio-text    { line-height: 1.62; margin-bottom: 0.75rem; }
+  .bio-footer  { margin-top: 1rem; }
+}
+@media (min-width: 761px) and (max-height: 660px) {
+  .bio         { gap: 1.5rem; }
+  .bio-tagline { margin-bottom: 0.8rem; line-height: 1.45; }
+  .bio-text    { line-height: 1.5; margin-bottom: 0.6rem; }
+  .bio-footer  { margin-top: 0.6rem; }
 }
 
 .scroll-hint {
