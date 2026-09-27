@@ -19,7 +19,12 @@
   var WIPE_MS = 1500;
   var FADE_MS = 200;       // crossfade when a region changes variant
   var PULSE_MS = 1900;     // one-off "you can click this" pulse after the wipe
-  var REDUCED = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  // reduced motion: the system setting, or the Motion option in a11y.js (a class on
+  // <html>); checked each time, so a change takes effect without a reload
+  var MOTION_MQ = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  function reduced() {
+    return !!(MOTION_MQ && MOTION_MQ.matches) || document.documentElement.classList.contains('a11y-motion-reduce');
+  }
 
   // regions.js writes a global; load one at a time so several widgets don't clobber it
   var scriptQueue = Promise.resolve();
@@ -210,14 +215,14 @@
 
   Embroider.prototype.maybeWipe = function () {
     if (this.phase !== 'photo' || !this.ready0) return;
-    if (REDUCED) { this.finishWipe(); return; }
+    if (reduced()) { this.finishWipe(); return; }
     if (!this.armed || now() - this.armT < WAIT_MS - 30) return;
     this.startWipe();
   };
 
   Embroider.prototype.startWipe = function () {
     if (this.phase !== 'photo' || !this.ready0) return;
-    if (REDUCED) { this.finishWipe(); return; }
+    if (reduced()) { this.finishWipe(); return; }
     this.phase = 'wipe';
     this.root.classList.add('is-wiping');
     this.wipeT0 = now();
@@ -237,7 +242,7 @@
     this.root.classList.remove('is-wiping');
     this.root.classList.add('is-ready');
     this.preloadAll();
-    if (!REDUCED) {
+    if (!reduced()) {
       var i = this.pulseTarget();
       if (i >= 0) this.flash = { i: i, t0: now() + 250, dur: PULSE_MS, n: 2 };
     }
@@ -455,7 +460,7 @@
       var from = r.idx;
       r.idx = k;
       self.fades = self.fades.filter(function (f) { return f.i !== i; });
-      if (!REDUCED) self.fades.push({ i: i, from: from, t0: now() });
+      if (!reduced()) self.fades.push({ i: i, from: from, t0: now() });
       self.compose();
       self.tick();
       if (announce) self.live.textContent = r.stitch.replace(/_/g, ' ') + ' region ' + r.region +

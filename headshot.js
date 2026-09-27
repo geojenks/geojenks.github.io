@@ -16,7 +16,12 @@
   var FADE_MS = 450;
   var IDLE_MS = 2200;       // once stitched, re-stitch one patch every 2.2-3.7 s until first opened
   var IDLE_JITTER_MS = 1500;
-  var REDUCED = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  // reduced motion: the system setting, or the Motion option in a11y.js (a class on
+  // <html>); checked each time, so a change takes effect without a reload
+  var MOTION_MQ = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  function reduced() {
+    return !!(MOTION_MQ && MOTION_MQ.matches) || document.documentElement.classList.contains('a11y-motion-reduce');
+  }
 
   function now() { return performance.now(); }
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
@@ -85,14 +90,14 @@
     function reveal(instant) {
       if (state !== 'photo' || !inst.ready0) return;
       btn.classList.add('is-live');
-      if (instant || REDUCED) { finish(); return; }
+      if (instant || reduced()) { finish(); return; }
       state = 'revealing';
       var total = schedule();
       t0 = now();
       var loop = function () {
         raf = 0;
         if (state !== 'revealing') return;
-        if (now() - t0 >= total) { finish(); return; }
+        if (now() - t0 >= total || reduced()) { finish(); return; }
         draw();
         raf = requestAnimationFrame(loop);
       };
@@ -108,11 +113,12 @@
       wrap.classList.add('is-stitched');
       btn.setAttribute('aria-label', 'Portrait of George Jenkinson, stitched in embroidery. Open it to re-stitch it yourself');
       draw();
-      if (!REDUCED && !isOpen) showOff();
+      if (!isOpen) showOff();
     }
 
     // after stitching, keep re-stitching a patch now and then so it reads as alive,
-    // until it is first opened; paused while off screen or in a background tab
+    // until it is first opened; paused while off screen, in a background tab or
+    // while motion is reduced
     var idleOn = false, idleLast = -1, onScreen = true;
 
     function idlePicks() {
@@ -131,7 +137,7 @@
 
     function idleStep() {
       if (!idleOn) return;
-      if (!isOpen && onScreen && !document.hidden) {
+      if (!isOpen && onScreen && !document.hidden && !reduced()) {
         var picks = idlePicks().filter(function (i) { return i !== idleLast; });
         if (picks.length) {
           var i = picks[Math.floor(Math.random() * picks.length)], r = inst.regions[i];
@@ -163,7 +169,7 @@
     var prev = document.createElement('canvas'), pctx = prev.getContext('2d'), xf = 0;
     node.addEventListener('embroider:compose', function () {
       if (state !== 'stitched') return;
-      if (REDUCED || isOpen || !cv.width) { draw(); return; }
+      if (reduced() || isOpen || !cv.width) { draw(); return; }
       prev.width = cv.width; prev.height = cv.height;
       pctx.drawImage(cv, 0, 0);
       var ts = now();
@@ -210,7 +216,7 @@
       isOpen = false;
       dialog.classList.remove('is-open');
       document.body.classList.remove('is-focus-locked');
-      setTimeout(function () { if (!isOpen) dialog.hidden = true; }, REDUCED ? 0 : 250);
+      setTimeout(function () { if (!isOpen) dialog.hidden = true; }, reduced() ? 0 : 250);
       if (!fromHistory && history.state && history.state.stitchFocus) history.back();
       (lastFocus && lastFocus.focus ? lastFocus : btn).focus();
     }

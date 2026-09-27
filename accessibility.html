@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility — George Jenkinson</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── Accessibility page ── */
+    .page-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 2rem;
+      background: var(--bio-accent);
+    }
+    .page-header a {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(240, 237, 232, 0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .page-header a:hover { color: var(--text-light); }
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: normal;
+      color: var(--text-light);
+      margin: 0;
+    }
+    .page-header .sep { color: rgba(240, 237, 232, 0.3); font-size: 0.8rem; }
+
+    /* ── The statement ── */
+    .statement {
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+      color: #333;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .statement h2 {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: normal;
+      color: var(--bio-accent);
+      margin: 2.2rem 0 0.6rem;
+    }
+    .statement p { margin-bottom: 0.9rem; }
+    .statement ul { margin: 0 0 0.9rem 1.25rem; }
+    .statement li { margin-bottom: 0.45rem; }
+    .statement strong { color: var(--text-dark); }
+    .statement a { color: var(--bio-accent); text-underline-offset: 2px; }
+    .statement .lead { font-size: 1.1rem; color: var(--text-dark); }
+    .statement .reviewed { margin-top: 2.5rem; font-size: 0.85rem; color: #595959; }
+
+    @media (max-width: 760px) {
+      .page-header { padding: 0.9rem 1.25rem; }
+      .statement { padding: 1.75rem 1.25rem 3rem; }
+    }
+  </style>
+  <link rel="stylesheet" href="a11y.css">
+  <script src="a11y.js"></script>
+</head>
+<body>
+
+  <header class="page-header">
+    <a href="index.html">← George Jenkinson</a>
+    <span class="sep">/</span>
+    <h1>Accessibility</h1>
+  </header>
+
+  <main class="statement">
+
+    <p class="lead">My research has a particular focus on assistive technology, so I want
+      this site to work for as many people as possible. This page says what it does
+      to help, and where it still falls short.</p>
+
+    <h2>Options on every page</h2>
+    <p>Every page has a round button in the top right corner. It opens a panel with
+      these options:</p>
+    <ul>
+      <li><strong>Text size:</strong> Default, Large or Larger. Large makes the text
+        about a fifth bigger, Larger about a third. Your browser's own zoom still
+        works as well.</li>
+      <li><strong>Contrast:</strong> High gives black or white text on plain
+        backgrounds, stronger lines and underlined links. Text on the picture tiles
+        moves onto a solid dark panel.</li>
+      <li><strong>Theme:</strong> System, Light or Dark. This is on the home page
+        only, for now. System follows your device.</li>
+      <li><strong>Motion:</strong> System or Reduce. Reduce stops the animations
+        straight away: the moving wave diagram, the headshot re-stitching itself and
+        the drifting threads in dark mode. System follows your device.</li>
+      <li><strong>Readable font:</strong> switches to Atkinson Hyperlegible, a
+        typeface designed for readers with low vision, with a little more spacing.</li>
+      <li><strong>Plain view:</strong> hides the wave diagram and the stitching, and
+        turns the picture tiles into plain text without photographs.</li>
+      <li><strong>Reset all</strong> puts everything back to the defaults.</li>
+    </ul>
+    <p>Your choices apply on every page. They are saved in this browser only, and
+      are not sent to me or anyone else. The one exception is the readable font: when
+      you turn it on, your browser downloads it from Google Fonts.</p>
+
+    <h2>Your device's settings</h2>
+    <ul>
+      <li><strong>Reduced motion:</strong> if your device asks for less motion, the
+        animations stay still.</li>
+      <li><strong>Dark mode:</strong> the home page follows your device's light or
+        dark setting. The other pages are light only, for now.</li>
+      <li><strong>Forced colours</strong> (such as Windows contrast themes): the site
+        lets your colours take over, and hides the decoration.</li>
+    </ul>
+
+    <h2>Using a keyboard</h2>
+    <ul>
+      <li>The first thing you reach with Tab is a "Skip to content" link.</li>
+      <li>The controls are real buttons, links and sliders, so they work with Tab,
+        Enter, Space and the arrow keys.</li>
+      <li>Escape closes the options panel and the pop-up windows.</li>
+    </ul>
+
+    <h2>The animations</h2>
+    <p>The wave diagram and the embroidered headshot on the home page are extras. You
+      don't need them to use the site. The headshot has a text label, and the diagram
+      has a caption and labelled controls. Plain view hides both.</p>
+
+    <h2>Known problems</h2>
+    <ul>
+      <li>Light and dark themes are on the home page only.</li>
+      <li>Some publication thumbnails are placeholders, and a few are missing.</li>
+      <li>Most videos on the Publications page are YouTube embeds. YouTube's player
+        has its own captions and keyboard controls, which I don't control. The other
+        videos, and the video and radio clips on the In the Media page, play from this
+        site and have no captions or transcripts yet.</li>
+      <li>The video and audio players start playing as soon as they open. They, and
+        the text pop-ups on the "…the Rest" page, close with Escape, but they don't yet
+        move keyboard focus into themselves, and screen readers aren't told they are
+        dialogs.</li>
+      <li>Text over photographs can be hard to read in places. The worst is the
+        ARTEMIS tile on the Projects page, which has a light image. High contrast or
+        Plain view fixes this.</li>
+      <li>Some small text is paler than it should be: the line with my email address
+        on the home page, and the link back to the home page in the header of the
+        other pages. High contrast fixes this.</li>
+      <li>Some links open in a new tab without saying so.</li>
+    </ul>
+
+    <h2>Standards</h2>
+    <p>I aim to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA.
+      The site has not been formally audited, so I don't claim that it meets them.</p>
+
+    <h2>Reporting a problem</h2>
+    <p>If something doesn't work for you, please tell me: gj525 (at) bath.ac.uk.
+      It helps to know which page, what you were trying to do, and what you use to
+      browse (for example a screen reader or zoom), if you're happy to say.</p>
+
+    <p class="reviewed">Last reviewed 27 September 2026.</p>
+
+  </main>
+
+</body>
+</html>

@@ -253,6 +253,7 @@
       c3.width = Math.round(W3 * dpr); c3.height = Math.round(H3 * dpr);
     }
     resetTrails();
+    still();                // resizing clears the canvases
   }
 
   // ── Trails (ring view) ───────────────────────────────────────
@@ -506,7 +507,11 @@
   const tau = () => -Math.cos(Math.PI * P.duty);
 
   // ── Loop ─────────────────────────────────────────────────────
-  let last = null, running = false, onScreen = true, focused = false;
+  // Reduced motion (the a11y-motion-reduce class on <html>, which a11y.js sets
+  // from its Motion option or the system setting): no loop, just a still
+  // frame, redrawn when the visitor changes something.
+  const reduced = () => document.documentElement.classList.contains('a11y-motion-reduce');
+  let last = null, running = false, onScreen = true, focused = false, stillQueued = false;
   function frame(ts) {
     const dt = last == null ? 0 : Math.min(0.05, (ts - last) / 1000);
     last = ts;
@@ -530,14 +535,27 @@
 
     drawRing(F);
     draw3D(F);
-    if (onScreen || focused) requestAnimationFrame(frame);
+    if ((onScreen || focused) && !reduced()) requestAnimationFrame(frame);
     else { running = false; last = null; }
   }
   function run() {
     if (running) return;
+    if (reduced()) { still(); return; }
     running = true;
     requestAnimationFrame(frame);
   }
+  // one frame without moving on, when the loop isn't running under reduced motion
+  function still() {
+    if (running || stillQueued || !reduced()) return;
+    stillQueued = true;
+    requestAnimationFrame(() => {
+      stillQueued = false;
+      if (!running) { const F = fingers(tau()); drawRing(F); draw3D(F); }
+    });
+  }
+  const widget = c2.closest('.bio-canvas-wrap') || c2.parentNode;
+  ['input', 'click', 'dblclick'].forEach(t => widget.addEventListener(t, still));
+  if (c3) c3.addEventListener('pointermove', () => { if (c3.classList.contains('dragging')) still(); });
 
   // pause when scrolled out of view (never while in focus mode)
   const io = new IntersectionObserver(es => {
@@ -561,6 +579,12 @@
     if (mq.addEventListener) mq.addEventListener('change', recolour);
     else if (mq.addListener) mq.addListener(recolour);
   });
+  // the same for a11y.js's options, which set classes and data-theme on <html>;
+  // the Motion option also stops or restarts the loop
+  new MutationObserver(() => {
+    recolour();
+    if (!reduced() && (onScreen || focused)) run();
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'data-theme'] });
 
   // ── Expand to focus ─────────────────────────────────────────
   // The widget itself becomes a fixed, full-viewport layer (.is-focus on

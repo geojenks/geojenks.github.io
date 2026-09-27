@@ -45,7 +45,8 @@
     .project-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(3, calc((100vh - 3.2rem) / 2));
+      /* rows grow rather than clip when the text is enlarged or zoomed */
+      grid-template-rows: repeat(3, minmax(calc((100vh - 3.2rem) / 2), auto));
     }
 
     /* Last item: if odd count, span full width */
@@ -121,7 +122,7 @@
     @media (max-width: 760px) {
       .project-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 45vh);
+        grid-template-rows: repeat(5, minmax(45vh, auto));
       }
       .project-grid .quad:last-child:nth-child(odd) {
         grid-column: auto;
@@ -129,6 +130,8 @@
       .quad::before { opacity: 0.45; }
     }
   </style>
+  <link rel="stylesheet" href="a11y.css">
+  <script src="a11y.js"></script>
 </head>
 <body>
 

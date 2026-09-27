@@ -21,6 +21,15 @@
   --photo-ring:  #fff;
 }
 
+/* A chosen theme (the Theme option in a11y.js, which sets data-theme on <html>).
+   The dark values are written once, in the @media (prefers-color-scheme: dark)
+   blocks below and in wave.css: for Light or Dark, a11y.js rewrites those blocks'
+   media conditions to "not all" or "all", and puts them back for System. A
+   selector can't be combined with a media query, so doing this in CSS alone
+   would mean a second copy of every dark value under [data-theme="dark"]. */
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"]  { color-scheme: dark; }
+
 @media (prefers-color-scheme: dark) {
   :root {
     --bio-bg:      #141922;             /* deep ink blue rather than black */

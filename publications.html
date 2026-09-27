@@ -39,7 +39,8 @@
     .pub-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(8, calc((100vh - 3.2rem) / 2));
+      /* rows grow rather than clip when the text is enlarged or zoomed */
+      grid-template-rows: repeat(8, minmax(calc((100vh - 3.2rem) / 2), auto));
     }
 
     /* Div-based quad: needs explicit pointer and hover wired in */
@@ -197,11 +198,13 @@
     @media (max-width: 760px) {
       .pub-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(15, 50vh);
+        grid-template-rows: repeat(15, minmax(50vh, auto));
       }
       .quad::before { opacity: 0.45; }
     }
   </style>
+  <link rel="stylesheet" href="a11y.css">
+  <script src="a11y.js"></script>
 </head>
 <body>
 

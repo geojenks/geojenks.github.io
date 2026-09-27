@@ -39,7 +39,8 @@
     .rest-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(5, calc((100vh - 3.2rem) / 2));
+      /* rows grow rather than clip when the text is enlarged or zoomed */
+      grid-template-rows: repeat(5, minmax(calc((100vh - 3.2rem) / 2), auto));
     }
     .rest-grid .quad:last-child:nth-child(odd) {
       grid-column: 1 / -1;
@@ -290,7 +291,7 @@
     @media (max-width: 760px) {
       .rest-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(9, 45vh);
+        grid-template-rows: repeat(9, minmax(45vh, auto));
       }
       .rest-grid .quad:last-child:nth-child(odd) {
         grid-column: auto;
@@ -301,6 +302,8 @@
       .ai-gallery { grid-template-columns: 1fr; }
     }
   </style>
+  <link rel="stylesheet" href="a11y.css">
+  <script src="a11y.js"></script>
 </head>
 <body>
 

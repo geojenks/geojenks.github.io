@@ -22,6 +22,7 @@
   --wave-flat-fade: var(--wave-fade);   /* the same, ring view only */
   --wave-flat-mix:  0.72;               /* share of the ball's own colour kept, ring view (as the 3D view) */
 }
+/* also switched on or off by the Theme option in a11y.js (see theme.css) */
 @media (prefers-color-scheme: dark) {
   :root {
     --wave-lift:   #7a746c;
